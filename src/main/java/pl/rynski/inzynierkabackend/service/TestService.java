@@ -3,6 +3,7 @@ package pl.rynski.inzynierkabackend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.model.FieldOfStudy;
 import pl.rynski.inzynierkabackend.dao.model.Module;
@@ -16,6 +17,7 @@ import pl.rynski.inzynierkabackend.repository.ModuleRepository;
 public class TestService {
     private final FieldOfStudyRepository fieldOfStudyRepository;
     private final ModuleRepository moduleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @EventListener(ApplicationReadyEvent.class)
     public void test() {
@@ -39,5 +41,6 @@ public class TestService {
 /*        fieldOfStudy.removeModule(module);
         moduleRepository.save(module);*/
         fieldOfStudyRepository.delete(fieldOfStudy);
+        System.out.println(passwordEncoder.encode("string"));
     }
 }
