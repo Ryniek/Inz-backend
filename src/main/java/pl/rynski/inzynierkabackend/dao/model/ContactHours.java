@@ -30,4 +30,7 @@ public class ContactHours {
 
     @OneToOne(mappedBy = "contactHours", fetch = FetchType.LAZY)
     private Subject subject;
+
+    @OneToOne(mappedBy = "contactHours", fetch = FetchType.LAZY)
+    private SubjectIdea subjectIdea;
 }

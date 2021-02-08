@@ -29,6 +29,7 @@ public class TestService {
         fieldOfStudy.setName("Test");
         fieldOfStudy.setStudyType(StudyType.CIVIL);
         fieldOfStudy.setStudyDegree(StudyDegree.FIRST_FULL);
+        fieldOfStudy.setYears("2010/2014");
         fieldOfStudyRepository.save(fieldOfStudy);
         Module module = new Module();
         module.setName("Test");

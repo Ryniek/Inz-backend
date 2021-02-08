@@ -28,6 +28,9 @@ public class FieldOfStudy {
     @Enumerated(EnumType.STRING)
     private StudyDegree studyDegree;
 
+    @Column(name = "years", nullable = false)
+    private String years;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
@@ -42,6 +45,14 @@ public class FieldOfStudy {
             inverseJoinColumns= @JoinColumn(name = "educational_outcomes_id", referencedColumnName = "id")
     )
     private Set<EducationalOutcomes> educationalOutcomes = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "field_of_study_outcomes_idea",
+            joinColumns = @JoinColumn(name = "field_of_study_id", referencedColumnName = "id"),
+            inverseJoinColumns= @JoinColumn(name = "educational_outcomes_idea_id", referencedColumnName = "id")
+    )
+    private Set<EducationalOutcomesIdea> educationalOutcomesIdeas = new HashSet<>();
 
     //pomocnie dodawania obiektow do relacji dajemy przy many to many gdzie chcemy
     public void addOutcomes(EducationalOutcomes outcomes) {
@@ -63,5 +74,15 @@ public class FieldOfStudy {
     public void removeModule(Module module) {
         modules.remove(module);
         module.setFieldOfStudy(null);
+    }
+
+    public void addOutcomesIdea(EducationalOutcomesIdea outcomesIdea) {
+        this.educationalOutcomesIdeas.add(outcomesIdea);
+        outcomesIdea.getFieldOfStudies().add(this);
+    }
+
+    public void removeOutcomesIdea(EducationalOutcomesIdea outcomesIdea) {
+        this.educationalOutcomesIdeas.remove(outcomesIdea);
+        outcomesIdea.getFieldOfStudies().remove(this);
     }
 }

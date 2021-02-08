@@ -43,6 +43,12 @@ public class Subject {
     @JoinColumn(name = "non_contact_hours_id", referencedColumnName = "id")
     private NonContactHours nonContactHours;
 
+    @OneToMany(mappedBy = "subject")
+    private Set<SubjectIdea> subjectIdeas = new HashSet<>();
+
+    @ManyToMany(mappedBy = "subjects")
+    private Set<ModuleIdea> moduleIdeas = new HashSet<>();
+
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "subject_outcomes",
@@ -50,6 +56,14 @@ public class Subject {
             inverseJoinColumns= @JoinColumn(name = "educational_outcomes_id", referencedColumnName = "id")
     )
     private Set<EducationalOutcomes> educationalOutcomes = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "subject_outcomes_idea",
+            joinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "id"),
+            inverseJoinColumns= @JoinColumn(name = "educational_outcomes_idea_id", referencedColumnName = "id")
+    )
+    private Set<EducationalOutcomesIdea> educationalOutcomesIdeas = new HashSet<>();
 
     public void addOutcomes(EducationalOutcomes outcomes) {
         this.educationalOutcomes.add(outcomes);
@@ -59,5 +73,15 @@ public class Subject {
     public void removeOutcomes(EducationalOutcomes outcomes) {
         this.educationalOutcomes.remove(outcomes);
         outcomes.getSubjects().remove(this);
+    }
+
+    public void addOutcomesIdea(EducationalOutcomesIdea outcomesIdea) {
+        this.educationalOutcomesIdeas.add(outcomesIdea);
+        outcomesIdea.getSubjects().add(this);
+    }
+
+    public void removeOutcomesIdea(EducationalOutcomesIdea outcomesIdea) {
+        this.educationalOutcomesIdeas.remove(outcomesIdea);
+        outcomesIdea.getSubjects().remove(this);
     }
 }
