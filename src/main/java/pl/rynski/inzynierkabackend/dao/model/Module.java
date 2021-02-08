@@ -31,4 +31,10 @@ public class Module {
 
     @OneToMany(mappedBy = "module")
     private Set<Subject> subjects = new HashSet<>();
+
+    @OneToMany(mappedBy = "module")
+    private Set<SubjectIdea> subjectIdeas = new HashSet<>();
+
+    @OneToMany(mappedBy = "module")
+    private Set<ModuleIdea> moduleIdeas = new HashSet<>();
 }

@@ -29,4 +29,7 @@ public class Tutor {
 
     @OneToMany(mappedBy = "tutor")
     private Set<Subject> subjects = new HashSet<>();
+
+    @OneToMany(mappedBy = "tutor")
+    private Set<SubjectIdea> subjectIdeas = new HashSet<>();
 }

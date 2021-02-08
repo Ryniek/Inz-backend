@@ -37,4 +37,21 @@ public class EducationalOutcomes {
 
     @ManyToMany(mappedBy = "educationalOutcomes")
     private Set<FieldOfStudy> fieldOfStudies = new HashSet<>();
+
+    @OneToMany(mappedBy = "educationalOutcomes")
+    private Set<SubjectIdeaOutcomes> subjectIdeaOutcomes = new HashSet<>();
+
+    @OneToMany(mappedBy = "educationalOutcomes")
+    private Set<EducationalOutcomesIdea> educationalOutcomesIdeas = new HashSet<>();
+
+    //pomocnicze do one to many, jak chcemy dodać to dodajemy z dwóch stron i zapisujemy środkową encją
+    public void addSubjectIdeaOutcomes(SubjectIdeaOutcomes subjectIdeaOutcome) {
+        subjectIdeaOutcomes.add(subjectIdeaOutcome);
+        subjectIdeaOutcome.setEducationalOutcomes(this);
+    }
+
+    public void removeSubjectIdeaOutcomes(SubjectIdeaOutcomes subjectIdeaOutcome) {
+        subjectIdeaOutcomes.remove(subjectIdeaOutcome);
+        subjectIdeaOutcome.setEducationalOutcomes(null);
+    }
 }

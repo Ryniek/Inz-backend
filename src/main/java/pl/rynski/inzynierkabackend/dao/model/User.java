@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -28,4 +30,13 @@ public class User {
     @JoinColumn(name = "role_id", nullable = false)
     @JsonBackReference
     private UserRole userRole;
+
+    @OneToMany(mappedBy = "user")
+    private Set<SubjectIdea> subjectIdeas = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<ModuleIdea> moduleIdeas = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<EducationalOutcomesIdea> educationalOutcomesIdeas = new HashSet<>();
 }
