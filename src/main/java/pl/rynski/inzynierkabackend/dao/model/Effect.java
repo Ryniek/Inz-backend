@@ -55,14 +55,4 @@ public class Effect {
         subjectIdeaEffects.remove(subjectIdeaEffect);
         subjectIdeaEffect.setEffect(null);
     }
-
-    public static Effect fromDto(EffectDto dto) {
-        Effect result = new Effect();
-        result.setCode(dto.getCode());
-        result.setContent(dto.getContent());
-        result.setType(dto.getType());
-        result.setForSubject(dto.getForSubject());
-        result.setForMajor(dto.getForMajor());
-        return result;
-    }
 }

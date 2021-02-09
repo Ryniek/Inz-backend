@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -52,13 +53,16 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException {
+
+        UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
         String token = JWT.create()
-                .withSubject(((UserPrincipal) auth.getPrincipal()).getUsername())
-                .withClaim("role", ((UserPrincipal) auth.getPrincipal()).getAuthorities().iterator().next().toString())
+                .withSubject(principal.getUsername())
+                .withClaim("role", principal.getAuthorities().iterator().next().toString())
                 .withExpiresAt(new Date(System.currentTimeMillis() + jwtValidity))
                 .sign(Algorithm.HMAC512(jwtSecret.getBytes()));
-
-        res.getWriter().write(token);
+        JwtResponse response = new JwtResponse(token, principal.getUsername(), principal.getAuthorities().stream().map(Object::toString).collect(Collectors.toList()));
+        res.setContentType("application/json");
+        res.getWriter().write(new ObjectMapper().writeValueAsString(response));
         res.getWriter().flush();
     }
 }

@@ -25,7 +25,7 @@ public class Module {
     private Set<MajorModule> majorModules = new HashSet<>();
 
     //TODO Tutaj też rozważyć EAGER
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "module_subject",
             joinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"),
@@ -33,7 +33,7 @@ public class Module {
     )
     private Set<Subject> subjects = new HashSet<>();
 
-    //pomocnicze do Many to Many
+    //pomocnicze do Many to Many - dajemy gdzie chcemy ale zapisujemy przez zarzadzajaca
     public void addSubject(Subject subject) {
         this.subjects.add(subject);
         subject.getModules().add(this);

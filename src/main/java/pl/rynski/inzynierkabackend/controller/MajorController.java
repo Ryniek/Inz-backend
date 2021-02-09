@@ -27,4 +27,10 @@ public class MajorController {
     public ResponseEntity<?> toggleMajorVisibility(@PathVariable Long majorId) {
         return ResponseEntity.status(HttpStatus.OK).body(majorService.toggleMajorVisibility(majorId));
     }
+
+    @DeleteMapping("/{majorId}")
+    public ResponseEntity<?> deleteMajor(@PathVariable Long majorId) {
+        majorService.deleteMajor(majorId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

@@ -21,10 +21,4 @@ public class Department {
 
     @OneToMany(mappedBy = "department", orphanRemoval = true)
     private Set<Major> majors = new HashSet<>();
-
-    public static Department fromDto(DepartmentDto dto) {
-        Department result = new Department();
-        result.setName(dto.getName());
-        return result;
-    }
 }

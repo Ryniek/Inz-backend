@@ -34,7 +34,7 @@ public class MajorService {
         Department department = departmentRepository.findById(dto.getDepartmentId())
                 .orElseThrow(() -> new ResourceNotFoundException("Department", "id", dto.getDepartmentId()));
         List<Effect> effects = effectRepository.findByIdsAndForMajor(dto.getEffects());
-        Major major = Major.fromDto(dto);
+        Major major = MajorDto.fromDto(dto);
         major.setDepartment(department);
         major.setEffects(new HashSet<>(effects));
         return MajorResponse.toResponse(majorRepository.save(major));
@@ -45,5 +45,11 @@ public class MajorService {
                 .orElseThrow(() -> new ResourceNotFoundException("Major", "id", majorId));
         major.setHidden(!major.getHidden());
         return MajorResponse.toResponse(majorRepository.save(major));
+    }
+
+    public void deleteMajor(Long majorId) {
+        majorRepository.delete(majorRepository.findById(majorId).orElseThrow(() -> {
+            throw new ResourceNotFoundException("Major", "id", majorId);
+        }));
     }
 }

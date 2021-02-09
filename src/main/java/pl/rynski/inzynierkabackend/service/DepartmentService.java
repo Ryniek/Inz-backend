@@ -22,7 +22,7 @@ public class DepartmentService {
     }
 
     public DepartmentResponse addDepartment(DepartmentDto dto) {
-        Department department = Department.fromDto(dto);
+        Department department = DepartmentDto.fromDto(dto);
         return DepartmentResponse.toResponse(departmentRepository.save(department));
     }
 
