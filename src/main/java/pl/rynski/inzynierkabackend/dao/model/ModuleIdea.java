@@ -45,8 +45,8 @@ public class ModuleIdea {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "module_id", referencedColumnName = "id")
-    private Module module;
+    @JoinColumn(name = "field_module_id", referencedColumnName = "id")
+    private FieldModule fieldModule;
 
     //Stworzone nowe przedmioty do modułu
     @OneToMany(mappedBy = "moduleIdea")
@@ -57,18 +57,18 @@ public class ModuleIdea {
     @JoinTable(
             name = "module_idea_subject",
             joinColumns = @JoinColumn(name = "module_idea_id", referencedColumnName = "id"),
-            inverseJoinColumns= @JoinColumn(name = "subject_id", referencedColumnName = "id")
+            inverseJoinColumns= @JoinColumn(name = "field_module_subject_id", referencedColumnName = "id")
     )
-    private Set<Subject> subjects = new HashSet<>();
+    private Set<FieldModuleSubject> fieldModuleSubjects = new HashSet<>();
 
     //pomocne dodawania obiektow do relacji dajemy przy many to many gdzie chcemy
-    public void addSubject(Subject subject) {
-        this.subjects.add(subject);
-        subject.getModuleIdeas().add(this);
+    public void addFieldModuleSubject(FieldModuleSubject fieldModuleSubject) {
+        this.fieldModuleSubjects.add(fieldModuleSubject);
+        fieldModuleSubject.getModuleIdeas().add(this);
     }
 
-    public void removeSubject(Subject subject) {
-        this.subjects.remove(subject);
-        subject.getModuleIdeas().remove(this);
+    public void removeieldModuleSubject(FieldModuleSubject fieldModuleSubject) {
+        this.fieldModuleSubjects.remove(fieldModuleSubject);
+        fieldModuleSubject.getModuleIdeas().remove(this);
     }
 }

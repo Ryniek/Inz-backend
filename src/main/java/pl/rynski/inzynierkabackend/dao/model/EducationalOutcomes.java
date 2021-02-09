@@ -33,7 +33,7 @@ public class EducationalOutcomes {
     private Boolean forField;
 
     @ManyToMany(mappedBy = "educationalOutcomes")
-    private Set<Subject> subjects = new HashSet<>();
+    private Set<FieldModuleSubject> fieldModuleSubjects = new HashSet<>();
 
     @ManyToMany(mappedBy = "educationalOutcomes")
     private Set<FieldOfStudy> fieldOfStudies = new HashSet<>();

@@ -26,7 +26,7 @@ public class NonContactHours {
     private Integer pwp;
 
     @OneToOne(mappedBy = "nonContactHours", fetch = FetchType.LAZY)
-    private Subject subject;
+    private FieldModuleSubject fieldModuleSubject;
 
     @OneToOne(mappedBy = "nonContactHours", fetch = FetchType.LAZY)
     private SubjectIdea subjectIdea;

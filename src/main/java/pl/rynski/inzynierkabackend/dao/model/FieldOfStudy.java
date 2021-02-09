@@ -2,7 +2,6 @@ package pl.rynski.inzynierkabackend.dao.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.rynski.inzynierkabackend.dao.model.enums.StudyDegree;
 import pl.rynski.inzynierkabackend.dao.model.enums.StudyType;
 
 import javax.persistence.*;
@@ -17,26 +16,25 @@ public class FieldOfStudy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, unique = true, columnDefinition = "VARCHAR(250)")
+    @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(250)")
     private String name;
 
     @Column(name = "study_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private StudyType studyType;
 
-    @Column(name = "study_degree", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private StudyDegree studyDegree;
-
     @Column(name = "years", nullable = false)
     private String years;
+
+    @Column(name = "hidden", nullable = false)
+    private Boolean hidden;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
     @OneToMany(mappedBy = "fieldOfStudy")
-    private Set<Module> modules = new HashSet<>();
+    private Set<FieldModule> fieldModules = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -66,14 +64,14 @@ public class FieldOfStudy {
     }
 
     //pomocnicze dajemy tam gdzie one to many
-    public void addModule(Module module) {
-        modules.add(module);
-        module.setFieldOfStudy(this);
+    public void addFieldModule(FieldModule fieldModule) {
+        fieldModules.add(fieldModule);
+        fieldModule.setFieldOfStudy(this);
     }
 
-    public void removeModule(Module module) {
-        modules.remove(module);
-        module.setFieldOfStudy(null);
+    public void removeFieldModule(FieldModule fieldModule) {
+        fieldModules.remove(fieldModule);
+        fieldModule.setFieldOfStudy(null);
     }
 
     public void addOutcomesIdea(EducationalOutcomesIdea outcomesIdea) {

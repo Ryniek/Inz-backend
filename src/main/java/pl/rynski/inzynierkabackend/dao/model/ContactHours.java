@@ -29,7 +29,7 @@ public class ContactHours {
     private Integer project;
 
     @OneToOne(mappedBy = "contactHours", fetch = FetchType.LAZY)
-    private Subject subject;
+    private FieldModuleSubject fieldModuleSubject;
 
     @OneToOne(mappedBy = "contactHours", fetch = FetchType.LAZY)
     private SubjectIdea subjectIdea;
