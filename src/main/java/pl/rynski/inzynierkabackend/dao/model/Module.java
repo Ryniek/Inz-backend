@@ -24,6 +24,7 @@ public class Module {
     @OneToMany(mappedBy = "module")
     private Set<FieldModule> fieldModules = new HashSet<>();
 
+    //TODO Tutaj też rozważyć EAGER
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "module_subject",

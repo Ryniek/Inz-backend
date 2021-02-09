@@ -52,6 +52,7 @@ public class ModuleIdea {
     @OneToMany(mappedBy = "moduleIdea")
     private Set<SubjectIdea> subjectIdeas = new HashSet<>();
 
+    //TODO To rozkminic. Moze tu lepiej zrobic nowa tabele na te dane(propozycja nauczyciela, ects)
     //Wybrane istniejące przedmioty do modułu
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(

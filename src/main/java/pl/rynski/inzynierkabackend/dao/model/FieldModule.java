@@ -19,6 +19,7 @@ public class FieldModule {
     @JoinColumn(name = "field_of_study_id", referencedColumnName = "id")
     private FieldOfStudy fieldOfStudy;
 
+    //TODO tutaj rozważyć EAGER
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "module_id", referencedColumnName = "id")
     private Module module;
