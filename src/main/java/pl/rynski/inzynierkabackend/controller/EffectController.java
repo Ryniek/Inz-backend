@@ -12,21 +12,21 @@ import pl.rynski.inzynierkabackend.service.EffectService;
 @RequiredArgsConstructor
 public class EffectController {
 
-    private final EffectService eduOutcomesService;
+    private final EffectService effectService;
 
     @GetMapping
-    public ResponseEntity<?> getEduOutcomes() {
-        return ResponseEntity.status(HttpStatus.OK).body(eduOutcomesService.getEduOutcomes());
+    public ResponseEntity<?> getEffects(@RequestParam Boolean forSubject) {
+        return ResponseEntity.status(HttpStatus.OK).body(effectService.getEffects(forSubject));
     }
 
     @PostMapping
-    public ResponseEntity<?> addEduOutcomes(@RequestBody EffectDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(eduOutcomesService.addEduOutcomes(dto));
+    public ResponseEntity<?> addEffect(@RequestBody EffectDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(effectService.addEffect(dto));
     }
 
-    @DeleteMapping("/{outcomeId}")
-    public ResponseEntity<?> deleteDepartment(@PathVariable Long outcomeId) {
-        eduOutcomesService.deleteDepartment(outcomeId);
+    @DeleteMapping("/{effectId}")
+    public ResponseEntity<?> deleteEffect(@PathVariable Long effectId) {
+        effectService.deleteEffect(effectId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

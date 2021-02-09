@@ -9,7 +9,7 @@ public class EffectDto {
     private String content;
     private EffectType type;
     private Boolean forSubject;
-    private Boolean forField;
+    private Boolean forMajor;
 
     //TODO walidacja czy forSubject i forField sa rozne
 }

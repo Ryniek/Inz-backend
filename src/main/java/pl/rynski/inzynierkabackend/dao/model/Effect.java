@@ -62,7 +62,7 @@ public class Effect {
         result.setContent(dto.getContent());
         result.setType(dto.getType());
         result.setForSubject(dto.getForSubject());
-        result.setForMajor(dto.getForField());
+        result.setForMajor(dto.getForMajor());
         return result;
     }
 }

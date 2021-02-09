@@ -68,20 +68,14 @@ VALUES (1, 1),(1, 2),(2, 3),(3, 4),(4, 5),(5, 6),(6, 7),(7, 8),(8, 9),
        (9, 10),(10, 11),(11, 12);
 
 INSERT INTO contact_hours (id, lecture, exercise, laboratory, seminar, project)
-VALUES (1, 1, 29, 0, 0, 0),
-       (2, 10, 15, 10, 0, 0),
-       (3, 10, 14, 0, 0, 0),
-       (4, 10, 20, 0, 0, 0),
-       (5, 5, 25, 0, 0, 0),
-       (6, 10, 20, 5, 0, 0);
+VALUES (1, 1, 29, 0, 0, 0), (2, 10, 15, 10, 0, 0), (3, 10, 14, 0, 0, 0), (4, 10, 20, 0, 0, 0), (5, 5, 25, 0, 0, 0),(6, 10, 20, 5, 0, 0),
+       (7, 1, 29, 0, 0, 0), (8, 10, 15, 10, 0, 0), (9, 10, 14, 0, 0, 0), (10, 10, 20, 0, 0, 0), (11, 5, 25, 0, 0, 0),(12, 10, 20, 5, 0, 0),
+       (13, 10, 20, 5, 0, 0),(14, 10, 20, 5, 0, 0),(15, 10, 20, 5, 0, 0),(16, 10, 20, 5, 0, 0);
 
 INSERT INTO non_contact_hours (id, consultation, exam, pwt, pwp)
-VALUES (1, 5, 0, 8, 20),
-       (2, 10, 4, 0, 10),
-       (3, 10, 4, 0, 5),
-       (4, 10, 4, 0, 5),
-       (5, 10, 4, 0, 5),
-       (6, 10, 4, 0, 5);
+VALUES (1, 5, 0, 8, 20),(2, 10, 4, 0, 10),(3, 10, 4, 0, 5),(4, 10, 4, 0, 5),(5, 10, 4, 0, 5),(6, 10, 4, 0, 5),
+       (7, 5, 0, 8, 20),(8, 10, 4, 0, 10),(9, 10, 4, 0, 5),(10, 10, 4, 0, 5),(11, 10, 4, 0, 5),(12, 10, 4, 0, 5),
+       (13, 10, 4, 0, 5),(14, 10, 4, 0, 5),(15, 10, 4, 0, 5),(16, 10, 4, 0, 5);
 
 INSERT INTO effect (id, code, content, type, for_subject, for_major)
 VALUES (1, 'W1', 'Ma elementarną  wiedzę z prawa gospodarczego i prawa autorskiego oraz wiedzę w zakresie inżynierskich  uwarunkowań działań o charakterze ekonomiczno-zarządczym.', 'KNOWLEDGE', true, false),
@@ -89,20 +83,27 @@ VALUES (1, 'W1', 'Ma elementarną  wiedzę z prawa gospodarczego i prawa autorsk
        (3, 'U1', 'Potrafi posługiwać się językiem obcym na poziomie B2 (ESOKJ RD) oraz umie posługiwać się językiem angielskim specjalistycznym dla informatyki', 'SKILLS', true, false),
        (4, 'U2', 'Potrafi pozyskiwać informacje z dokumentacji, literatury, Internetu oraz innych wiarygodnych źródeł w języku polskim i angielskim, integrować je, dokonywać ich interpretacji oraz wyciągać wnioski i formułować opinie', 'SKILLS', true, false),
        (5, 'K1', 'Rozumie potrzebę dbania o ciągły rozwój intelektualny i fizyczny,  zdaje sobie sprawę z konieczności uczenia się przez całe życie i adaptowania swojej wiedzy do zmian cywilizacyjnych.', 'SOCIAL', true, false),
-       (6, 'K2', 'Rozumie znaczenie społecznego oddziaływania informatyki, w tym technik komunikacyjnych i mobilności oraz posiada potrzebę informowania społeczeństwa o rozwoju i osiągnięciach informatyki.', 'SOCIAL', true, false);
+       (6, 'K2', 'Rozumie znaczenie społecznego oddziaływania informatyki, w tym technik komunikacyjnych i mobilności oraz posiada potrzebę informowania społeczeństwa o rozwoju i osiągnięciach informatyki.', 'SOCIAL', true, false),
+       (7, 'N1_W02', 'Ma wiedzę ogólną o biosferze, fizyce atmosfery i oceanów, zna zasady i specyfikę wykonywania pomiarów hydrometeorologicznych', 'KNOWLEDGE', false, true),
+       (8, 'N1_W03', 'Ma podstawową wiedzę w zakresie właściwości fizykochemicznych transportowanych ładunków i ich charakterystyki. ', 'KNOWLEDGE', false, true);
+
 
 INSERT INTO major_module (id, major_id, module_id, tutor_id)
-VALUES (1, 1, 1, 1), (2, 1, 2, 2), (3, 1, 3, 3), (4, 1, 8, 4), (5, 1, 9, 5);
+VALUES (1, 1, 1, 1), (2, 1, 2, 2), (3, 1, 3, 3), (4, 1, 8, 4), (5, 1, 9, 5),
+       (6, 5, 1, 1), (7, 5, 2, 2), (8, 5, 3, 3), (9, 5, 8, 4), (10, 5, 9, 5);
 
 INSERT INTO major_module_subject (id, ects, semester, major_module_id, subject_id, tutor_id, contact_hours_id, non_contact_hours_id)
-VALUES (1, 5, 1, 1, 1, 2, 1, 1), (2, 4, 2, 1, 1, 2, 2, 2), (3, 1, 3, 1, 2, 2, 3, 3),
-       (4, 8, 1, 2, 3, 3, 4, 4), (5, 4, 2, 2, 3, 3, 5, 5),
-       (6, 3, 5, 3, 4, 5, 6, 6),
-       (7, 8, 6, 4, 9, 6, 7, 7),
-       (8, 10, 7, 5, 10, 7, 8, 8);
+VALUES (1, 5, 1, 1, 1, 2, 1, 1), (2, 4, 2, 1, 1, 2, 2, 2), (3, 1, 3, 1, 2, 2, 3, 3), (4, 8, 1, 2, 3, 3, 4, 4),
+       (5, 4, 2, 2, 3, 3, 5, 5), (6, 3, 5, 3, 4, 5, 6, 6), (7, 8, 6, 4, 9, 6, 7, 7), (8, 10, 7, 5, 10, 7, 8, 8),
+       (9, 5, 1, 6, 1, 2, 9, 9), (10, 4, 2, 6, 1, 2, 10, 10), (11, 1, 3, 6, 2, 2, 11, 11), (12, 8, 1, 7, 3, 3, 12, 12),
+       (13, 4, 2, 7, 3, 3, 13, 13), (14, 3, 5, 8, 4, 5, 14, 14), (15, 8, 6, 9, 9, 6, 15, 15), (16, 10, 7, 10, 10, 7, 16, 16);
 
 INSERT INTO major_subject_effect (major_module_subject_id, effect_id, connection_strength)
-VALUES (1, 1, 2), (4, 2, 3), (2, 2, 2), (3, 3, 3), (4, 4, 3), (5, 5, 1), (6, 5, 1), (7, 6, 2), (8, 6, 3);
+VALUES (1, 1, 2), (4, 2, 3), (2, 2, 2), (3, 3, 3), (4, 4, 3), (5, 5, 1), (6, 5, 1), (7, 6, 2), (8, 6, 3),
+       (9, 1, 2), (10, 2, 3), (11, 2, 2), (12, 3, 3), (13, 4, 3), (14, 5, 1), (15, 5, 1), (16, 6, 2), (16, 4, 3);
+
+INSERT INTO major_effect (major_id, effect_id)
+VALUES (1, 7), (5, 8);
 
 
 

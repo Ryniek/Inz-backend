@@ -19,7 +19,7 @@ public class Department {
     @Column(name = "name", nullable = false, unique = true, columnDefinition = "VARCHAR(250)")
     private String name;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department", orphanRemoval = true)
     private Set<Major> majors = new HashSet<>();
 
     public static Department fromDto(DepartmentDto dto) {
