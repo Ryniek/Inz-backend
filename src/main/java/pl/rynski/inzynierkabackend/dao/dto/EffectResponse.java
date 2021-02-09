@@ -11,16 +11,16 @@ public class EffectResponse {
     private String content;
     private EffectType type;
     private Boolean forSubject;
-    private Boolean forField;
+    private Boolean forMajor;
 
-    public static EffectResponse toResponse(Effect outcomes) {
+    public static EffectResponse toResponse(Effect effect) {
         EffectResponse result = new EffectResponse();
-        result.setId(outcomes.getId());
-        result.setCode(outcomes.getCode());
-        result.setContent(outcomes.getContent());
-        result.setType(outcomes.getType());
-        result.setForSubject(outcomes.getForSubject());
-        result.setForField(outcomes.getForMajor());
+        result.setId(effect.getId());
+        result.setCode(effect.getCode());
+        result.setContent(effect.getContent());
+        result.setType(effect.getType());
+        result.setForSubject(effect.getForSubject());
+        result.setForMajor(effect.getForMajor());
         return result;
     }
 }

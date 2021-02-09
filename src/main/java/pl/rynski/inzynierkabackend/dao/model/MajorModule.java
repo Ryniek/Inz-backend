@@ -28,7 +28,7 @@ public class MajorModule {
     @JoinColumn(name = "tutor_id", referencedColumnName = "id")
     private Tutor tutor;
 
-    @OneToMany(mappedBy = "majorModule")
+    @OneToMany(mappedBy = "majorModule", orphanRemoval = true)
     private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
 
     @OneToMany(mappedBy = "majorModule")

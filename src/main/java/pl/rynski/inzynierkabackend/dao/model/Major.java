@@ -2,6 +2,7 @@ package pl.rynski.inzynierkabackend.dao.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.rynski.inzynierkabackend.dao.dto.MajorDto;
 import pl.rynski.inzynierkabackend.dao.model.enums.StudyType;
 
 import javax.persistence.*;
@@ -33,7 +34,7 @@ public class Major {
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
-    @OneToMany(mappedBy = "major")
+    @OneToMany(mappedBy = "major", orphanRemoval = true)
     private Set<MajorModule> majorModules = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -44,6 +45,7 @@ public class Major {
     )
     private Set<Effect> effects = new HashSet<>();
 
+    //TODO tutaj chyba trza bedzie zmienic strone zarzadzajaca
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "major_effect_idea",
@@ -82,5 +84,14 @@ public class Major {
     public void removeEffectIdea(EffectIdea effectIdea) {
         this.effectIdeas.remove(effectIdea);
         effectIdea.getMajors().remove(this);
+    }
+
+    public static Major fromDto(MajorDto dto) {
+        Major major = new Major();
+        major.setName(dto.getName());
+        major.setStudyType(dto.getStudyType());
+        major.setYears(dto.getYears());
+        major.setHidden(dto.getHidden());
+        return major;
     }
 }

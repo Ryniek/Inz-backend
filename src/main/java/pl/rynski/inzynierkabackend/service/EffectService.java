@@ -15,21 +15,21 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EffectService {
 
-    private final EffectRepository eduOutcomesRepo;
+    private final EffectRepository effectRepository;
 
-    public List<EffectResponse> getEduOutcomes() {
-        List<Effect> educationalOutcomes = eduOutcomesRepo.findAll();
-        return educationalOutcomes.stream().map(EffectResponse::toResponse).collect(Collectors.toList());
+    public List<EffectResponse> getEffects(Boolean forSubject) {
+        List<Effect> effects = effectRepository.findAllByForSubject(forSubject);
+        return effects.stream().map(EffectResponse::toResponse).collect(Collectors.toList());
     }
 
-    public EffectResponse addEduOutcomes(EffectDto dto) {
+    public EffectResponse addEffect(EffectDto dto) {
         Effect effect = Effect.fromDto(dto);
-        return EffectResponse.toResponse(eduOutcomesRepo.save(effect));
+        return EffectResponse.toResponse(effectRepository.save(effect));
     }
 
-    public void deleteDepartment(Long id) {
-        eduOutcomesRepo.delete(eduOutcomesRepo.findById(id).orElseThrow(() -> {
-            throw new ResourceNotFoundException("Educational outcomes", "id", id);
+    public void deleteEffect(Long id) {
+        effectRepository.delete(effectRepository.findById(id).orElseThrow(() -> {
+            throw new ResourceNotFoundException("Effect", "id", id);
         }));
     }
 }

@@ -22,7 +22,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private AuthenticationManager authenticationManager;
     //TODO wstrzyknac
     private String jwtSecret = "test123";
-    private Long jwtValidity = 100000L;
+    private Long jwtValidity = 10000000L;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
