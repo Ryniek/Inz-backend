@@ -10,17 +10,17 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class FieldModule {
+public class MajorModule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "field_of_study_id", referencedColumnName = "id")
-    private FieldOfStudy fieldOfStudy;
+    @JoinColumn(name = "major_id", referencedColumnName = "id")
+    private Major major;
 
     //TODO tutaj rozważyć EAGER
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "module_id", referencedColumnName = "id")
     private Module module;
 
@@ -28,12 +28,12 @@ public class FieldModule {
     @JoinColumn(name = "tutor_id", referencedColumnName = "id")
     private Tutor tutor;
 
-    @OneToMany(mappedBy = "fieldModule")
-    private Set<FieldModuleSubject> fieldModuleSubjects = new HashSet<>();
+    @OneToMany(mappedBy = "majorModule")
+    private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
 
-    @OneToMany(mappedBy = "fieldModule")
+    @OneToMany(mappedBy = "majorModule")
     private Set<SubjectIdea> subjectIdeas = new HashSet<>();
 
-    @OneToMany(mappedBy = "fieldModule")
+    @OneToMany(mappedBy = "majorModule")
     private Set<ModuleIdea> moduleIdeas = new HashSet<>();
 }

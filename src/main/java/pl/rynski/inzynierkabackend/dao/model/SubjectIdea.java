@@ -55,8 +55,8 @@ public class SubjectIdea {
     private NonContactHours nonContactHours;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "field_module_id", referencedColumnName = "id")
-    private FieldModule fieldModule;
+    @JoinColumn(name = "major_module_id", referencedColumnName = "id")
+    private MajorModule majorModule;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tutor_id", referencedColumnName = "id")
@@ -68,24 +68,24 @@ public class SubjectIdea {
 
     //Jezeli modyfikujemy istniejacy, gdy exising == true
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "field_module_subject_id", referencedColumnName = "id")
-    private FieldModuleSubject fieldModuleSubject;
+    @JoinColumn(name = "major_module_subject_id", referencedColumnName = "id")
+    private MajorModuleSubject majorModuleSubject;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "module_idea_id", referencedColumnName = "id")
     private ModuleIdea moduleIdea;
 
     @OneToMany(mappedBy = "subjectIdea")
-    private Set<SubjectIdeaOutcomes> subjectIdeaOutcomes = new HashSet<>();
+    private Set<SubjectIdeaEffect> subjectIdeaEffects = new HashSet<>();
 
     //pomocnicze do one to many, jak chcemy dodać to dodajemy z dwóch stron i zapisujemy środkową encją
-    public void addSubjectIdeaOutcomes(SubjectIdeaOutcomes subjectIdeaOutcome) {
-        subjectIdeaOutcomes.add(subjectIdeaOutcome);
-        subjectIdeaOutcome.setSubjectIdea(this);
+    public void addSubjectIdeaEffect(SubjectIdeaEffect subjectIdeaEffect) {
+        subjectIdeaEffects.add(subjectIdeaEffect);
+        subjectIdeaEffect.setSubjectIdea(this);
     }
 
-    public void removeSubjectIdeaOutcomes(SubjectIdeaOutcomes subjectIdeaOutcome) {
-        subjectIdeaOutcomes.remove(subjectIdeaOutcome);
-        subjectIdeaOutcome.setSubjectIdea(null);
+    public void removeSubjectIdeaEffect(SubjectIdeaEffect subjectIdeaEffect) {
+        subjectIdeaEffects.remove(subjectIdeaEffect);
+        subjectIdeaEffect.setSubjectIdea(null);
     }
 }

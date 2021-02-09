@@ -15,14 +15,14 @@ public class Module {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(250)")
+    @Column(name = "name", nullable = false, unique = true, columnDefinition = "VARCHAR(250)")
     private String name;
 
     @Column(name = "specialized")
     private Boolean specialized;
 
     @OneToMany(mappedBy = "module")
-    private Set<FieldModule> fieldModules = new HashSet<>();
+    private Set<MajorModule> majorModules = new HashSet<>();
 
     //TODO Tutaj też rozważyć EAGER
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -33,7 +33,7 @@ public class Module {
     )
     private Set<Subject> subjects = new HashSet<>();
 
-    //pomocnicze
+    //pomocnicze do Many to Many
     public void addSubject(Subject subject) {
         this.subjects.add(subject);
         subject.getModules().add(this);
@@ -42,5 +42,16 @@ public class Module {
     public void removeSubject(Subject subject) {
         this.subjects.remove(subject);
         subject.getModules().remove(this);
+    }
+
+    //pomocnicze dajemy tam gdzie one to many
+    public void addMajorModule(MajorModule majorModule) {
+        majorModules.add(majorModule);
+        majorModule.setModule(this);
+    }
+
+    public void removeMajorModule(MajorModule majorModule) {
+        majorModules.remove(majorModule);
+        majorModule.setModule(null);
     }
 }

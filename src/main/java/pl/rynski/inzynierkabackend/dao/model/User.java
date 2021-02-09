@@ -38,5 +38,5 @@ public class User {
     private Set<ModuleIdea> moduleIdeas = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
-    private Set<EducationalOutcomesIdea> educationalOutcomesIdeas = new HashSet<>();
+    private Set<EffectIdea> effectIdeas = new HashSet<>();
 }

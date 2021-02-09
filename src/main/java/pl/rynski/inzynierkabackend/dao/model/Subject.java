@@ -15,7 +15,7 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(250)")
+    @Column(name = "name", nullable = false, unique = true, columnDefinition = "VARCHAR(250)")
     private String name;
 
     @Column(name = "subject_code", nullable = false, columnDefinition = "VARCHAR(20)")
@@ -25,5 +25,16 @@ public class Subject {
     private Set<Module> modules = new HashSet<>();
 
     @OneToMany(mappedBy = "subject")
-    private Set<FieldModuleSubject> fieldModuleSubjects = new HashSet<>();
+    private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
+
+    //pomocnicze dajemy tam gdzie one to many
+    public void addMajorModuleSubject(MajorModuleSubject majorModuleSubject) {
+        majorModuleSubjects.add(majorModuleSubject);
+        majorModuleSubject.setSubject(this);
+    }
+
+    public void removeMajorModuleSubject(MajorModuleSubject majorModuleSubject) {
+        majorModuleSubjects.remove(majorModuleSubject);
+        majorModuleSubject.setSubject(null);
+    }
 }
