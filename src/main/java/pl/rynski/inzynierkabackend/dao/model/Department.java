@@ -2,6 +2,7 @@ package pl.rynski.inzynierkabackend.dao.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.rynski.inzynierkabackend.dao.dto.DepartmentDto;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -20,4 +21,10 @@ public class Department {
 
     @OneToMany(mappedBy = "department")
     private Set<FieldOfStudy> fieldOfStudies = new HashSet<>();
+
+    public static Department fromDto(DepartmentDto dto) {
+        Department result = new Department();
+        result.setName(dto.getName());
+        return result;
+    }
 }

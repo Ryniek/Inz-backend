@@ -2,6 +2,7 @@ package pl.rynski.inzynierkabackend.dao.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.rynski.inzynierkabackend.dao.dto.EduOutcomesDto;
 import pl.rynski.inzynierkabackend.dao.model.enums.EducationalOutcomesType;
 
 import javax.persistence.*;
@@ -33,7 +34,7 @@ public class EducationalOutcomes {
     private Boolean forField;
 
     @ManyToMany(mappedBy = "educationalOutcomes")
-    private Set<Subject> subjects = new HashSet<>();
+    private Set<FieldModuleSubject> fieldModuleSubjects = new HashSet<>();
 
     @ManyToMany(mappedBy = "educationalOutcomes")
     private Set<FieldOfStudy> fieldOfStudies = new HashSet<>();
@@ -53,5 +54,15 @@ public class EducationalOutcomes {
     public void removeSubjectIdeaOutcomes(SubjectIdeaOutcomes subjectIdeaOutcome) {
         subjectIdeaOutcomes.remove(subjectIdeaOutcome);
         subjectIdeaOutcome.setEducationalOutcomes(null);
+    }
+
+    public static EducationalOutcomes fromDto(EduOutcomesDto dto) {
+        EducationalOutcomes result = new EducationalOutcomes();
+        result.setCode(dto.getCode());
+        result.setContent(dto.getContent());
+        result.setType(dto.getType());
+        result.setForSubject(dto.getForSubject());
+        result.setForField(dto.getForField());
+        return result;
     }
 }

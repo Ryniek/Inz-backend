@@ -55,8 +55,8 @@ public class SubjectIdea {
     private NonContactHours nonContactHours;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "module_id", referencedColumnName = "id")
-    private Module module;
+    @JoinColumn(name = "field_module_id", referencedColumnName = "id")
+    private FieldModule fieldModule;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tutor_id", referencedColumnName = "id")
@@ -68,8 +68,8 @@ public class SubjectIdea {
 
     //Jezeli modyfikujemy istniejacy, gdy exising == true
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subject_id", referencedColumnName = "id")
-    private Subject subject;
+    @JoinColumn(name = "field_module_subject_id", referencedColumnName = "id")
+    private FieldModuleSubject fieldModuleSubject;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "module_idea_id", referencedColumnName = "id")

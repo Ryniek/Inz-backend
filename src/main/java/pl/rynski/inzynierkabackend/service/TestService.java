@@ -7,7 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.model.FieldOfStudy;
 import pl.rynski.inzynierkabackend.dao.model.Module;
-import pl.rynski.inzynierkabackend.dao.model.enums.StudyDegree;
 import pl.rynski.inzynierkabackend.dao.model.enums.StudyType;
 import pl.rynski.inzynierkabackend.repository.FieldOfStudyRepository;
 import pl.rynski.inzynierkabackend.repository.ModuleRepository;
@@ -19,7 +18,7 @@ public class TestService {
     private final ModuleRepository moduleRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @EventListener(ApplicationReadyEvent.class)
+    //@EventListener(ApplicationReadyEvent.class)
     public void test() {
         //Jesli rekordu wgl nie ma, to trzeba dodać .save albo zrobić cascade=PERSIST po stronie zarzadzajacej i doda sie samo
         //Jeśli rekord jest, to wystarczy użyć metody pomocniczej i zapisać encję przez strone zarządającą
@@ -29,14 +28,14 @@ public class TestService {
         // że usuwa wszystkie rekordy co sa w liscie jak usuniemy rekord zawierajacy ta liste
         FieldOfStudy fieldOfStudy = new FieldOfStudy();
         fieldOfStudy.setName("Test");
-        fieldOfStudy.setStudyType(StudyType.CIVIL);
-        fieldOfStudy.setStudyDegree(StudyDegree.FIRST_FULL);
+        fieldOfStudy.setStudyType(StudyType.FIRST_FULL);
         fieldOfStudy.setYears("2010/2014");
+        fieldOfStudy.setHidden(false);
         fieldOfStudyRepository.save(fieldOfStudy);
         Module module = new Module();
         module.setName("Test");
         module.setSpecialized(true);
-        fieldOfStudy.addModule(module);
+        //fieldOfStudy.addModule(module);
         moduleRepository.save(module);
 /*        fieldOfStudy.removeModule(module);
         moduleRepository.save(module);*/

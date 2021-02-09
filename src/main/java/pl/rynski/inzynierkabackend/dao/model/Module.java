@@ -15,26 +15,32 @@ public class Module {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, unique = true, columnDefinition = "VARCHAR(250)")
+    @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(250)")
     private String name;
 
     @Column(name = "specialized")
     private Boolean specialized;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "field_of_study_id", referencedColumnName = "id")
-    private FieldOfStudy fieldOfStudy;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tutor_id", referencedColumnName = "id")
-    private Tutor tutor;
-
     @OneToMany(mappedBy = "module")
+    private Set<FieldModule> fieldModules = new HashSet<>();
+
+    //TODO Tutaj też rozważyć EAGER
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "module_subject",
+            joinColumns = @JoinColumn(name = "module_id", referencedColumnName = "id"),
+            inverseJoinColumns= @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    )
     private Set<Subject> subjects = new HashSet<>();
 
-    @OneToMany(mappedBy = "module")
-    private Set<SubjectIdea> subjectIdeas = new HashSet<>();
+    //pomocnicze
+    public void addSubject(Subject subject) {
+        this.subjects.add(subject);
+        subject.getModules().add(this);
+    }
 
-    @OneToMany(mappedBy = "module")
-    private Set<ModuleIdea> moduleIdeas = new HashSet<>();
+    public void removeSubject(Subject subject) {
+        this.subjects.remove(subject);
+        subject.getModules().remove(this);
+    }
 }

@@ -55,7 +55,7 @@ public class EducationalOutcomesIdea {
     private EducationalOutcomes educationalOutcomes;
 
     @ManyToMany(mappedBy = "educationalOutcomesIdeas")
-    private Set<Subject> subjects = new HashSet<>();
+    private Set<FieldModuleSubject> fieldModuleSubjects = new HashSet<>();
 
     @ManyToMany(mappedBy = "educationalOutcomesIdeas")
     private Set<FieldOfStudy> fieldOfStudies = new HashSet<>();
