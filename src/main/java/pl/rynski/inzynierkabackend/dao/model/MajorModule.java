@@ -19,7 +19,6 @@ public class MajorModule {
     @JoinColumn(name = "major_id", referencedColumnName = "id")
     private Major major;
 
-    //TODO tutaj rozważyć EAGER
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "module_id", referencedColumnName = "id")
     private Module module;

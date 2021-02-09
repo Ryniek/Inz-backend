@@ -85,13 +85,4 @@ public class Major {
         this.effectIdeas.remove(effectIdea);
         effectIdea.getMajors().remove(this);
     }
-
-    public static Major fromDto(MajorDto dto) {
-        Major major = new Major();
-        major.setName(dto.getName());
-        major.setStudyType(dto.getStudyType());
-        major.setYears(dto.getYears());
-        major.setHidden(dto.getHidden());
-        return major;
-    }
 }

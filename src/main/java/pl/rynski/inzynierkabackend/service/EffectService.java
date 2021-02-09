@@ -23,7 +23,7 @@ public class EffectService {
     }
 
     public EffectResponse addEffect(EffectDto dto) {
-        Effect effect = Effect.fromDto(dto);
+        Effect effect = EffectDto.fromDto(dto);
         return EffectResponse.toResponse(effectRepository.save(effect));
     }
 
