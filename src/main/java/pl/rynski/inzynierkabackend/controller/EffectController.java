@@ -4,15 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.rynski.inzynierkabackend.dao.dto.EduOutcomesDto;
-import pl.rynski.inzynierkabackend.service.EducationalOutcomesService;
+import pl.rynski.inzynierkabackend.dao.dto.EffectDto;
+import pl.rynski.inzynierkabackend.service.EffectService;
 
 @RestController
-@RequestMapping("/outcomes")
+@RequestMapping("/effect")
 @RequiredArgsConstructor
-public class EducationalOutcomesController {
+public class EffectController {
 
-    private final EducationalOutcomesService eduOutcomesService;
+    private final EffectService eduOutcomesService;
 
     @GetMapping
     public ResponseEntity<?> getEduOutcomes() {
@@ -20,7 +20,7 @@ public class EducationalOutcomesController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addEduOutcomes(@RequestBody EduOutcomesDto dto) {
+    public ResponseEntity<?> addEduOutcomes(@RequestBody EffectDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(eduOutcomesService.addEduOutcomes(dto));
     }
 

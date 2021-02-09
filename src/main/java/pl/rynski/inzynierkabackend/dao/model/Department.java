@@ -20,7 +20,7 @@ public class Department {
     private String name;
 
     @OneToMany(mappedBy = "department")
-    private Set<FieldOfStudy> fieldOfStudies = new HashSet<>();
+    private Set<Major> majors = new HashSet<>();
 
     public static Department fromDto(DepartmentDto dto) {
         Department result = new Department();

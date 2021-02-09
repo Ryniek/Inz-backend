@@ -1,20 +1,18 @@
 package pl.rynski.inzynierkabackend.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.rynski.inzynierkabackend.dao.model.FieldOfStudy;
+import pl.rynski.inzynierkabackend.dao.model.Major;
 import pl.rynski.inzynierkabackend.dao.model.Module;
 import pl.rynski.inzynierkabackend.dao.model.enums.StudyType;
-import pl.rynski.inzynierkabackend.repository.FieldOfStudyRepository;
+import pl.rynski.inzynierkabackend.repository.MajorRepository;
 import pl.rynski.inzynierkabackend.repository.ModuleRepository;
 
 @Service
 @RequiredArgsConstructor
 public class TestService {
-    private final FieldOfStudyRepository fieldOfStudyRepository;
+    private final MajorRepository majorRepository;
     private final ModuleRepository moduleRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -26,12 +24,12 @@ public class TestService {
         //Nie mamy tutaj cascade=PERSISTS wiec dodajemy recznie
         //Orphan removal na stronie nie zarzadzajacej(tylko tam mozna, gdzie jest lista) daje to,
         // że usuwa wszystkie rekordy co sa w liscie jak usuniemy rekord zawierajacy ta liste
-        FieldOfStudy fieldOfStudy = new FieldOfStudy();
-        fieldOfStudy.setName("Test");
-        fieldOfStudy.setStudyType(StudyType.FIRST_FULL);
-        fieldOfStudy.setYears("2010/2014");
-        fieldOfStudy.setHidden(false);
-        fieldOfStudyRepository.save(fieldOfStudy);
+        Major major = new Major();
+        major.setName("Test");
+        major.setStudyType(StudyType.FIRST_FULL);
+        major.setYears("2010/2014");
+        major.setHidden(false);
+        majorRepository.save(major);
         Module module = new Module();
         module.setName("Test");
         module.setSpecialized(true);
@@ -39,7 +37,7 @@ public class TestService {
         moduleRepository.save(module);
 /*        fieldOfStudy.removeModule(module);
         moduleRepository.save(module);*/
-        fieldOfStudyRepository.delete(fieldOfStudy);
+        majorRepository.delete(major);
         System.out.println(passwordEncoder.encode("string"));
     }
 }

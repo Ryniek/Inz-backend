@@ -25,11 +25,12 @@ public class Tutor {
     private String degree;
 
     @OneToMany(mappedBy = "tutor")
-    private Set<FieldModule> modules = new HashSet<>();
+    private Set<MajorModule> modules = new HashSet<>();
 
     @OneToMany(mappedBy = "tutor")
-    private Set<FieldModuleSubject> fieldModuleSubjects = new HashSet<>();
+    private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
 
     @OneToMany(mappedBy = "tutor")
     private Set<SubjectIdea> subjectIdeas = new HashSet<>();
+
 }

@@ -10,7 +10,7 @@ INSERT INTO department (id, name)
 VALUES (1, 'Wydział Mechaniczno-Elektryczny'),
        (2, 'Wydział Nawigacji i Uzbrojenia Okrętowego');
 
-INSERT INTO field_of_study (id, name, study_type, years, hidden, department_id)
+INSERT INTO major (id, name, study_type, years, hidden, department_id)
 VALUES (1, 'Informatyka', 'FIRST_FULL', '2020/2021', false, 1),
        (2, 'Informatyka', 'MILITARY', '2020/2021', false, 1),
        (3, 'Mechanika i budowa maszyn', 'FIRST_FULL', '2020/2021', false, 1),
@@ -83,7 +83,7 @@ VALUES (1, 5, 0, 8, 20),
        (5, 10, 4, 0, 5),
        (6, 10, 4, 0, 5);
 
-INSERT INTO educational_outcomes (id, code, content, type, for_subject, for_field)
+INSERT INTO effect (id, code, content, type, for_subject, for_major)
 VALUES (1, 'W1', 'Ma elementarną  wiedzę z prawa gospodarczego i prawa autorskiego oraz wiedzę w zakresie inżynierskich  uwarunkowań działań o charakterze ekonomiczno-zarządczym.', 'KNOWLEDGE', true, false),
        (2, 'W2', 'Ma uporządkowaną wiedzę z matematyki i metod jej stosowania,  zna podstawowe prawa i twierdzenia matematyki, w tym matematyki dyskretnej i metod probabilistycznych', 'KNOWLEDGE', true, false),
        (3, 'U1', 'Potrafi posługiwać się językiem obcym na poziomie B2 (ESOKJ RD) oraz umie posługiwać się językiem angielskim specjalistycznym dla informatyki', 'SKILLS', true, false),
@@ -91,15 +91,18 @@ VALUES (1, 'W1', 'Ma elementarną  wiedzę z prawa gospodarczego i prawa autorsk
        (5, 'K1', 'Rozumie potrzebę dbania o ciągły rozwój intelektualny i fizyczny,  zdaje sobie sprawę z konieczności uczenia się przez całe życie i adaptowania swojej wiedzy do zmian cywilizacyjnych.', 'SOCIAL', true, false),
        (6, 'K2', 'Rozumie znaczenie społecznego oddziaływania informatyki, w tym technik komunikacyjnych i mobilności oraz posiada potrzebę informowania społeczeństwa o rozwoju i osiągnięciach informatyki.', 'SOCIAL', true, false);
 
-INSERT INTO field_module (id, field_of_study_id, module_id, tutor_id)
+INSERT INTO major_module (id, major_id, module_id, tutor_id)
 VALUES (1, 1, 1, 1), (2, 1, 2, 2), (3, 1, 3, 3), (4, 1, 8, 4), (5, 1, 9, 5);
 
-INSERT INTO field_module_subject (id, ects, semester, field_module_id, subject_id, tutor_id, contact_hours_id, non_contact_hours_id)
+INSERT INTO major_module_subject (id, ects, semester, major_module_id, subject_id, tutor_id, contact_hours_id, non_contact_hours_id)
 VALUES (1, 5, 1, 1, 1, 2, 1, 1), (2, 4, 2, 1, 1, 2, 2, 2), (3, 1, 3, 1, 2, 2, 3, 3),
        (4, 8, 1, 2, 3, 3, 4, 4), (5, 4, 2, 2, 3, 3, 5, 5),
        (6, 3, 5, 3, 4, 5, 6, 6),
        (7, 8, 6, 4, 9, 6, 7, 7),
        (8, 10, 7, 5, 10, 7, 8, 8);
+
+INSERT INTO major_subject_effect (major_module_subject_id, effect_id, connection_strength)
+VALUES (1, 1, 2), (4, 2, 3), (2, 2, 2), (3, 3, 3), (4, 4, 3), (5, 5, 1), (6, 5, 1), (7, 6, 2), (8, 6, 3);
 
 
 

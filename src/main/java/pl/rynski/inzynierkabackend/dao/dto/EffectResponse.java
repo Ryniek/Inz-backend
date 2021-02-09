@@ -1,26 +1,26 @@
 package pl.rynski.inzynierkabackend.dao.dto;
 
 import lombok.Data;
-import pl.rynski.inzynierkabackend.dao.model.EducationalOutcomes;
-import pl.rynski.inzynierkabackend.dao.model.enums.EducationalOutcomesType;
+import pl.rynski.inzynierkabackend.dao.model.Effect;
+import pl.rynski.inzynierkabackend.dao.model.enums.EffectType;
 
 @Data
-public class EduOutcomesResponse {
+public class EffectResponse {
     private Long id;
     private String code;
     private String content;
-    private EducationalOutcomesType type;
+    private EffectType type;
     private Boolean forSubject;
     private Boolean forField;
 
-    public static EduOutcomesResponse toResponse(EducationalOutcomes outcomes) {
-        EduOutcomesResponse result = new EduOutcomesResponse();
+    public static EffectResponse toResponse(Effect outcomes) {
+        EffectResponse result = new EffectResponse();
         result.setId(outcomes.getId());
         result.setCode(outcomes.getCode());
         result.setContent(outcomes.getContent());
         result.setType(outcomes.getType());
         result.setForSubject(outcomes.getForSubject());
-        result.setForField(outcomes.getForField());
+        result.setForField(outcomes.getForMajor());
         return result;
     }
 }

@@ -4,25 +4,24 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
 @Setter
 @Embeddable
-public class SubjectIdeaOutcomesId implements Serializable {
+public class SubjectIdeaEffectId implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long subjectIdeaId;
-    private Long educationalOutcomesId;
+    private Long effectId;
 
-    public SubjectIdeaOutcomesId() {
+    public SubjectIdeaEffectId() {
     }
 
-    public SubjectIdeaOutcomesId(Long subjectIdeaId, Long educationalOutcomesId) {
+    public SubjectIdeaEffectId(Long subjectIdeaId, Long effectId) {
         super();
         this.subjectIdeaId = subjectIdeaId;
-        this.educationalOutcomesId = educationalOutcomesId;
+        this.effectId = effectId;
     }
 
     @Override
@@ -32,7 +31,7 @@ public class SubjectIdeaOutcomesId implements Serializable {
         result = prime * result
                 + ((subjectIdeaId == null) ? 0 : subjectIdeaId.hashCode());
         result = prime * result
-                + ((educationalOutcomesId == null) ? 0 : educationalOutcomesId.hashCode());
+                + ((effectId == null) ? 0 : effectId.hashCode());
         return result;
     }
 
@@ -44,7 +43,7 @@ public class SubjectIdeaOutcomesId implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        SubjectIdeaOutcomesId other = (SubjectIdeaOutcomesId) obj;
-        return Objects.equals(getSubjectIdeaId(), other.getSubjectIdeaId()) && Objects.equals(getEducationalOutcomesId(), other.getEducationalOutcomesId());
+        SubjectIdeaEffectId other = (SubjectIdeaEffectId) obj;
+        return Objects.equals(getSubjectIdeaId(), other.getSubjectIdeaId()) && Objects.equals(getEffectId(), other.getEffectId());
     }
 }

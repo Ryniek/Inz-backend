@@ -1,13 +1,13 @@
 package pl.rynski.inzynierkabackend.dao.dto;
 
 import lombok.Data;
-import pl.rynski.inzynierkabackend.dao.model.enums.EducationalOutcomesType;
+import pl.rynski.inzynierkabackend.dao.model.enums.EffectType;
 
 @Data
-public class EduOutcomesDto {
+public class EffectDto {
     private String code;
     private String content;
-    private EducationalOutcomesType type;
+    private EffectType type;
     private Boolean forSubject;
     private Boolean forField;
 
