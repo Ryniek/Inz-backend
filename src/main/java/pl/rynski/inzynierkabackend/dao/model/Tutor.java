@@ -33,4 +33,14 @@ public class Tutor {
     @OneToMany(mappedBy = "tutor")
     private Set<SubjectIdea> subjectIdeas = new HashSet<>();
 
+    //pomocnicze dajemy tam gdzie one to many
+    public void addMajorModule(MajorModule majorModule) {
+        modules.add(majorModule);
+        majorModule.setTutor(this);
+    }
+
+    public void removeMajorModule(MajorModule majorModule) {
+        modules.remove(majorModule);
+        majorModule.setTutor(null);
+    }
 }
