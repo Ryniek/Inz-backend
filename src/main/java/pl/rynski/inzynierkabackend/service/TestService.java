@@ -12,6 +12,7 @@ import pl.rynski.inzynierkabackend.repository.ModuleRepository;
 @Service
 @RequiredArgsConstructor
 public class TestService {
+
     private final MajorRepository majorRepository;
     private final ModuleRepository moduleRepository;
     private final PasswordEncoder passwordEncoder;

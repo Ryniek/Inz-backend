@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class MajorService {
+
     private final MajorRepository majorRepository;
     private final DepartmentRepository departmentRepository;
     private final EffectRepository effectRepository;

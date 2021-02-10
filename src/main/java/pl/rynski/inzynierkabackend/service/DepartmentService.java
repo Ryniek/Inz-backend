@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class DepartmentService {
+
     private final DepartmentRepository departmentRepository;
 
     public List<DepartmentResponse> getDepartments() {

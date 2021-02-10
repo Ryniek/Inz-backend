@@ -19,7 +19,7 @@ public class MajorModule {
     @JoinColumn(name = "major_id", referencedColumnName = "id")
     private Major major;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "module_id", referencedColumnName = "id")
     private Module module;
 

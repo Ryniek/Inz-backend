@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.dto.ModuleDto;
 import pl.rynski.inzynierkabackend.dao.dto.ModuleResponse;
 import pl.rynski.inzynierkabackend.dao.dto.SubjectDto;
-import pl.rynski.inzynierkabackend.dao.dto.SubjectResponse;
 import pl.rynski.inzynierkabackend.dao.model.Module;
 import pl.rynski.inzynierkabackend.dao.model.Subject;
 import pl.rynski.inzynierkabackend.exception.ResourceNotFoundException;
@@ -19,6 +18,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ModuleService {
+
     private final ModuleRepository moduleRepository;
     private final SubjectRepository subjectRepository;
 
