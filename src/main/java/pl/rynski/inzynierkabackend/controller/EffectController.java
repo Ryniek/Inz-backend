@@ -27,10 +27,10 @@ public class EffectController {
         return ResponseEntity.status(HttpStatus.CREATED).body(effectService.addEffect(dto));
     }
 
-    @Operation(summary = "Delete effect")
+/*    @Operation(summary = "Delete effect")
     @DeleteMapping("/{effectId}")
     public ResponseEntity<?> deleteEffect(@PathVariable Long effectId) {
         effectService.deleteEffect(effectId);
         return ResponseEntity.status(HttpStatus.OK).build();
-    }
+    }*/
 }

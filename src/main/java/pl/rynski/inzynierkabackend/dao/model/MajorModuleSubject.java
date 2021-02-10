@@ -33,11 +33,11 @@ public class MajorModuleSubject {
     @JoinColumn(name = "tutor_id", referencedColumnName = "id")
     private Tutor tutor;
 
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "contact_hours_id", referencedColumnName = "id")
     private ContactHours contactHours;
 
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "non_contact_hours_id", referencedColumnName = "id")
     private NonContactHours nonContactHours;
 
@@ -48,7 +48,7 @@ public class MajorModuleSubject {
     @ManyToMany(mappedBy = "majorModuleSubjects")
     private Set<ModuleIdea> moduleIdeas = new HashSet<>();
 
-    @OneToMany(mappedBy = "majorModuleSubject", orphanRemoval = true)
+    @OneToMany(mappedBy = "majorModuleSubject", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<MajorSubjectEffect> majorSubjectEffects = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)

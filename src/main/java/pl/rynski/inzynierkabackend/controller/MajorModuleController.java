@@ -26,4 +26,11 @@ public class MajorModuleController {
     public ResponseEntity<?> assingModuleToMajor(@RequestBody MajorModuleDto majorModuleDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(majorModuleService.assingModuleToMajor(majorModuleDto));
     }
+
+    @Operation(summary = "Delete module assigned to the major with all related data")
+    @DeleteMapping("/{majorModuleId}")
+    public ResponseEntity<?> deleteMajorModule(@PathVariable Long majorModuleId) {
+        majorModuleService.deleteMajorModule(majorModuleId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

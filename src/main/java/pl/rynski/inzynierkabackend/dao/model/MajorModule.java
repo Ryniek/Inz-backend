@@ -35,4 +35,15 @@ public class MajorModule {
 
     @OneToMany(mappedBy = "majorModule")
     private Set<ModuleIdea> moduleIdeas = new HashSet<>();
+
+    //pomocnicze dajemy tam gdzie one to many
+    public void addModuleSubject(MajorModuleSubject moduleSubject) {
+        majorModuleSubjects.add(moduleSubject);
+        moduleSubject.setMajorModule(this);
+    }
+
+    public void removeModuleSubject(MajorModuleSubject moduleSubject) {
+        majorModuleSubjects.remove(moduleSubject);
+        moduleSubject.setMajorModule(null);
+    }
 }

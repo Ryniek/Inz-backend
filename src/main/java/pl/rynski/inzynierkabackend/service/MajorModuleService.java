@@ -3,7 +3,7 @@ package pl.rynski.inzynierkabackend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.dto.MajorModuleDto;
-import pl.rynski.inzynierkabackend.dao.dto.MajorModuleResponse;
+import pl.rynski.inzynierkabackend.dao.dto.response.MajorModuleResponse;
 import pl.rynski.inzynierkabackend.dao.model.Major;
 import pl.rynski.inzynierkabackend.dao.model.MajorModule;
 import pl.rynski.inzynierkabackend.dao.model.Module;
@@ -26,7 +26,6 @@ public class MajorModuleService {
     private final ModuleRepository moduleRepository;
     private final TutorRepository tutorRepository;
 
-    //TODO Tu trzeba będzie dodać liste subjectow do odpowiedzi
     public List<MajorModuleResponse> getModulesByMajor(Long majorId) {
         Major major = majorRepository.findById(majorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Major", "id", majorId));
@@ -36,6 +35,7 @@ public class MajorModuleService {
     }
 
     public MajorModuleResponse assingModuleToMajor(MajorModuleDto majorModuleDto) {
+        //TODO sprawdzic czy modul o takim id nie jest juz przypisany, jesli jest to zwrocic jakas odpowiedz
         Major major = majorRepository.findById(majorModuleDto.getMajorId())
                 .orElseThrow(() -> new ResourceNotFoundException("Major", "id", majorModuleDto.getMajorId()));
         Module module = moduleRepository.findById(majorModuleDto.getModuleId())
@@ -44,5 +44,11 @@ public class MajorModuleService {
                 .orElseThrow(() -> new ResourceNotFoundException("Tutor", "id", majorModuleDto.getTutorId()));
         MajorModule result = majorModuleRepository.save(MajorModuleDto.fromDto(major, module, tutor));
         return MajorModuleResponse.toResponse(result);
+    }
+
+    public void deleteMajorModule(Long majorModuleId) {
+        majorModuleRepository.delete(majorModuleRepository.findById(majorModuleId).orElseThrow(() -> {
+            throw new ResourceNotFoundException("MajorModule", "id", majorModuleId);
+        }));
     }
 }

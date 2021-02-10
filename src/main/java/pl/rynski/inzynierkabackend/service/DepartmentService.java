@@ -3,7 +3,7 @@ package pl.rynski.inzynierkabackend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.dto.DepartmentDto;
-import pl.rynski.inzynierkabackend.dao.dto.DepartmentResponse;
+import pl.rynski.inzynierkabackend.dao.dto.response.DepartmentResponse;
 import pl.rynski.inzynierkabackend.dao.model.Department;
 import pl.rynski.inzynierkabackend.exception.ResourceNotFoundException;
 import pl.rynski.inzynierkabackend.repository.DepartmentRepository;

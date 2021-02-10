@@ -3,7 +3,7 @@ package pl.rynski.inzynierkabackend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.dto.EffectDto;
-import pl.rynski.inzynierkabackend.dao.dto.EffectResponse;
+import pl.rynski.inzynierkabackend.dao.dto.response.EffectResponse;
 import pl.rynski.inzynierkabackend.dao.model.Effect;
 import pl.rynski.inzynierkabackend.exception.ResourceNotFoundException;
 import pl.rynski.inzynierkabackend.repository.EffectRepository;

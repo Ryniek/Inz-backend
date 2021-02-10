@@ -3,7 +3,7 @@ package pl.rynski.inzynierkabackend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.dto.MajorDto;
-import pl.rynski.inzynierkabackend.dao.dto.MajorResponse;
+import pl.rynski.inzynierkabackend.dao.dto.response.MajorResponse;
 import pl.rynski.inzynierkabackend.dao.model.Department;
 import pl.rynski.inzynierkabackend.dao.model.Effect;
 import pl.rynski.inzynierkabackend.dao.model.Major;
