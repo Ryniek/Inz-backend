@@ -40,7 +40,7 @@ public class SubjectIdea {
     @Column(name = "resources_needed", columnDefinition = "TEXT")
     private String resourcesNeeded;
 
-    @Column(name = "semester", nullable = false)
+    @Column(name = "semester")
     private Integer semester;
 
     @Column(name = "ects")
