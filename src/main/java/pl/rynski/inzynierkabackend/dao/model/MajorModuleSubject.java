@@ -68,4 +68,14 @@ public class MajorModuleSubject {
         this.effectIdeas.remove(effectIdea);
         effectIdea.getMajorModuleSubjects().remove(this);
     }
+
+    public void addSubjectIdea(SubjectIdea subjectIdea) {
+        this.subjectIdeas.add(subjectIdea);
+        subjectIdea.setMajorModuleSubject(this);
+    }
+
+    public void removeSubjectIdea(SubjectIdea subjectIdea) {
+        this.subjectIdeas.remove(subjectIdea);
+        subjectIdea.setMajorModuleSubject(null);
+    }
 }
