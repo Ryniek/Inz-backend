@@ -18,6 +18,7 @@ public class ModuleSubjectResponse {
     private NonContactHoursResponse nonContactHours;
     private List<SubjectEffectResponse> effects = new ArrayList<>();
 
+
     public static ModuleSubjectResponse toResponse(MajorModuleSubject moduleSubject) {
         ModuleSubjectResponse result = new ModuleSubjectResponse();
         result.setId(moduleSubject.getId());

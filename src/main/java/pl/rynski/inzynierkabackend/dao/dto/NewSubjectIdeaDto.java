@@ -35,10 +35,12 @@ public class NewSubjectIdeaDto {
         result.setContactHours(ContactHoursDto.fromDto(dto.getContactHours()));
         result.setNonContactHours(NonContactHoursDto.fromDto(dto.getNonContactHours()));
         result.setSendingTime(DateUtils.getCurrentDateTime());
-        majorModule.addSubjectIdea(result);
+        if(majorModule != null) majorModule.addSubjectIdea(result);
         tutor.addSubjectIdea(result);
-        result.setSubjectIdeaEffects(effects);
-        effects.forEach(effect -> effect.setSubjectIdea(result));
+        if(!effects.isEmpty()) {
+            result.setSubjectIdeaEffects(effects);
+            effects.forEach(effect -> effect.setSubjectIdea(result));
+        }
         return result;
     }
 }

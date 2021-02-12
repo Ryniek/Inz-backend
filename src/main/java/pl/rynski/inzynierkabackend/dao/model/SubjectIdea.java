@@ -71,6 +71,7 @@ public class SubjectIdea {
     @JoinColumn(name = "major_module_subject_id", referencedColumnName = "id")
     private MajorModuleSubject majorModuleSubject;
 
+    //TODO wyswietlac te przy all SubjectIdea ktore maja moduleIdea == null
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "module_idea_id", referencedColumnName = "id")
     private ModuleIdea moduleIdea;

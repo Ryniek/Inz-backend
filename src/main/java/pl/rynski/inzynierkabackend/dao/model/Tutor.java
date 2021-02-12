@@ -33,6 +33,9 @@ public class Tutor {
     @OneToMany(mappedBy = "tutor")
     private Set<SubjectIdea> subjectIdeas = new HashSet<>();
 
+    @OneToMany(mappedBy = "tutor")
+    private Set<ModuleIdea> moduleIdeas = new HashSet<>();
+
     //pomocnicze dajemy tam gdzie one to many
     public void addMajorModule(MajorModule majorModule) {
         modules.add(majorModule);
@@ -63,5 +66,15 @@ public class Tutor {
     public void removeSubjectIdea(SubjectIdea subjectIdea) {
         subjectIdeas.remove(subjectIdea);
         subjectIdea.setTutor(null);
+    }
+
+    public void addModuleIdea(ModuleIdea moduleIdea) {
+        moduleIdeas.add(moduleIdea);
+        moduleIdea.setTutor(this);
+    }
+
+    public void removeModuleIdea(ModuleIdea moduleIdea) {
+        moduleIdeas.remove(moduleIdea);
+        moduleIdea.setTutor(null);
     }
 }

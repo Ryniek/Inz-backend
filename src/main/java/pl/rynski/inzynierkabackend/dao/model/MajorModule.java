@@ -30,10 +30,10 @@ public class MajorModule {
     @OneToMany(mappedBy = "majorModule", orphanRemoval = true)
     private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
 
-    @OneToMany(mappedBy = "majorModule")
+    @OneToMany(mappedBy = "majorModule", orphanRemoval = true)
     private Set<SubjectIdea> subjectIdeas = new HashSet<>();
 
-    @OneToMany(mappedBy = "majorModule")
+    @OneToMany(mappedBy = "majorModule", orphanRemoval = true)
     private Set<ModuleIdea> moduleIdeas = new HashSet<>();
 
     //pomocnicze dajemy tam gdzie one to many
@@ -56,5 +56,16 @@ public class MajorModule {
     public void removeSubjectIdea(SubjectIdea subjectIdea) {
         subjectIdeas.remove(subjectIdea);
         subjectIdea.setMajorModule(null);
+    }
+
+    //pomocnicze dajemy tam gdzie one to many
+    public void addModuleIdea(ModuleIdea moduleIdea) {
+        moduleIdeas.add(moduleIdea);
+        moduleIdea.setMajorModule(this);
+    }
+
+    public void removeModuleIdea(ModuleIdea moduleIdea) {
+        moduleIdeas.remove(moduleIdea);
+        moduleIdea.setMajorModule(null);
     }
 }
