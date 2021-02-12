@@ -1,6 +1,9 @@
 package pl.rynski.inzynierkabackend.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.dto.ChangeSubjectIdeaDto;
 import pl.rynski.inzynierkabackend.dao.dto.DeleteSubjectIdeaDto;
@@ -15,6 +18,7 @@ import pl.rynski.inzynierkabackend.utils.FetchDataUtils;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,14 +28,13 @@ public class SubjectIdeaService {
     private final SubjectIdeaRepository subjectIdeaRepository;
     private final FetchDataUtils fetchDataUtils;
 
-    //TODO sprawdzanie tych nulli przy Response
-
     //TODO odpowiadanie(zaznaczanie na approved/nieapproved, wysylanie maila do usera)
     //TODO info mailowe o nowym zgloszeniu do kazdego admina?(do kazdego admina i do usera z potwierdzeniem wyslania sugestii)
 
-    //TODO paginacja, podział na odpowiedziane/nieodpowiedziane
-    public List<SubjectIdeaResponse> getAllSubjectIdeas() {
-        return null;
+    public List<SubjectIdeaResponse> getAllSubjectIdeas(Boolean approved, int page, int size) {
+        Pageable sortedBySendingTime = PageRequest.of(page, size, Sort.by("sendingTime").descending());
+        List<SubjectIdea> subjects = subjectIdeaRepository.findAllByApproved(approved, sortedBySendingTime);
+        return subjects.stream().map(SubjectIdeaResponse::toResponse).collect(Collectors.toList());
     }
 
     public SubjectIdeaResponse addChangeSubjectIdea(Long moduleSubjectId, ChangeSubjectIdeaDto dto) {
@@ -52,8 +55,7 @@ public class SubjectIdeaService {
 
         SubjectIdea result = ChangeSubjectIdeaDto.fromDto(dto, majorModuleSubject, majorModule, tutor, effects);
         result.setUser(userDetailsService.getLoggedUser());
-        subjectIdeaRepository.save(result);
-        return SubjectIdeaResponse.toResponse(result);
+        return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
     }
 
     public SubjectIdeaResponse addNewSubjectIdea(NewSubjectIdeaDto dto) {
@@ -61,14 +63,15 @@ public class SubjectIdeaService {
         Tutor tutor = fetchDataUtils.tutorById(dto.getTutorId());
 
         Set<SubjectIdeaEffect> effects = new HashSet<>();
-        dto.getEffects().forEach(effect -> {
-            effects.add(createNewSingleEffect(effect));
-        });
+        if(dto.getEffects() != null) {
+            dto.getEffects().forEach(effect -> {
+                effects.add(createNewSingleEffect(effect));
+            });
+        }
 
         SubjectIdea result = NewSubjectIdeaDto.fromDto(dto, majorModule, tutor, effects);
         result.setUser(userDetailsService.getLoggedUser());
-        subjectIdeaRepository.save(result);
-        return SubjectIdeaResponse.toResponse(result);
+        return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
     }
 
     public SubjectIdeaResponse addDeleteSubjectIdea(DeleteSubjectIdeaDto dto) {
@@ -76,8 +79,7 @@ public class SubjectIdeaService {
 
         SubjectIdea result = DeleteSubjectIdeaDto.fromDto(dto, majorModuleSubject);
         result.setUser(userDetailsService.getLoggedUser());
-        subjectIdeaRepository.save(result);
-        return SubjectIdeaResponse.toResponse(result);
+        return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
     }
 
     public void deleteSubjectIdea(Long subjectIdeaId) {

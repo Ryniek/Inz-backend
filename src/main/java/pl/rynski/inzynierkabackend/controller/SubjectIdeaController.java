@@ -17,6 +17,11 @@ public class SubjectIdeaController {
 
     private final SubjectIdeaService subjectIdeaService;
 
+    @GetMapping
+    public ResponseEntity<?> getAllSubjectIdeas(@RequestParam(required = false) Boolean approved, @RequestParam int page, @RequestParam int size) {
+        return ResponseEntity.status(HttpStatus.OK).body(subjectIdeaService.getAllSubjectIdeas(approved, page, size));
+    }
+
     @Operation(summary = "Add idea of new subject")
     @PostMapping("/new")
     public ResponseEntity<?> addNewSubjectIdea(@RequestBody NewSubjectIdeaDto newSubjectIdeaDto) {

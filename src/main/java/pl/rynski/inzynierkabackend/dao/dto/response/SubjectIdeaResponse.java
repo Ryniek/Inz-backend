@@ -66,12 +66,12 @@ public class SubjectIdeaResponse {
         result.setResourcesNeeded(subjectIdea.getResourcesNeeded());
         result.setSemester(subjectIdea.getSemester());
         result.setEcts(subjectIdea.getEcts());
-        result.setContactHours(ContactHoursResponse.toResponse(subjectIdea.getContactHours()));
-        result.setNonContactHours(NonContactHoursResponse.toResponse(subjectIdea.getNonContactHours()));
-        result.setMajorModule(MajorModuleResponse.toResponse(subjectIdea.getMajorModule()));
-        result.setTutor(TutorResponse.toResponse(subjectIdea.getTutor()));
+        if(subjectIdea.getContactHours() != null) result.setContactHours(ContactHoursResponse.toResponse(subjectIdea.getContactHours()));
+        if(subjectIdea.getNonContactHours() != null) result.setNonContactHours(NonContactHoursResponse.toResponse(subjectIdea.getNonContactHours()));
+        if(subjectIdea.getMajorModule() != null) result.setMajorModule(MajorModuleResponse.toResponse(subjectIdea.getMajorModule()));
+        if(subjectIdea.getTutor() != null) result.setTutor(TutorResponse.toResponse(subjectIdea.getTutor()));
         result.setUser(UserResponse.toResponse(subjectIdea.getUser()));
-        result.setMajorModuleSubject(ModuleSubjectResponse.toResponse(subjectIdea.getMajorModuleSubject()));
+        if(subjectIdea.getMajorModuleSubject() != null) result.setMajorModuleSubject(ModuleSubjectResponse.toResponse(subjectIdea.getMajorModuleSubject()));
         result.setSubjectIdeaEffects(subjectIdea
                 .getSubjectIdeaEffects().stream()
                 .map(SubjectEffectResponse::toResponse)
