@@ -41,10 +41,10 @@ public class MajorModuleSubject {
     @JoinColumn(name = "non_contact_hours_id", referencedColumnName = "id")
     private NonContactHours nonContactHours;
 
-    //TODO to chyba tez do wywalenia bedzie(orphan removal)
-    @OneToMany(mappedBy = "majorModuleSubject")
+    @OneToMany(mappedBy = "majorModuleSubject", orphanRemoval = true)
     private Set<SubjectIdea> subjectIdeas = new HashSet<>();
 
+    //TODO orphan?
     @ManyToMany(mappedBy = "majorModuleSubjects")
     private Set<ModuleIdea> moduleIdeas = new HashSet<>();
 
@@ -67,5 +67,15 @@ public class MajorModuleSubject {
     public void removeEffectIdea(EffectIdea effectIdea) {
         this.effectIdeas.remove(effectIdea);
         effectIdea.getMajorModuleSubjects().remove(this);
+    }
+
+    public void addSubjectIdea(SubjectIdea subjectIdea) {
+        this.subjectIdeas.add(subjectIdea);
+        subjectIdea.setMajorModuleSubject(this);
+    }
+
+    public void removeSubjectIdea(SubjectIdea subjectIdea) {
+        this.subjectIdeas.remove(subjectIdea);
+        subjectIdea.setMajorModuleSubject(null);
     }
 }

@@ -17,13 +17,13 @@ public class SubjectIdea {
     private Long id;
 
     @Column(name = "existing", nullable = false)
-    private Boolean existing;
+    private Boolean existing = false;
 
-    @Column(name = "approved", nullable = false)
+    @Column(name = "approved")
     private Boolean approved;
 
     @Column(name = "to_remove", nullable = false)
-    private Boolean toRemove;
+    private Boolean toRemove = false;
 
     @Column(name = "sending_time", nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime sendingTime;
@@ -40,17 +40,17 @@ public class SubjectIdea {
     @Column(name = "resources_needed", columnDefinition = "TEXT")
     private String resourcesNeeded;
 
-    @Column(name = "semester", nullable = false)
+    @Column(name = "semester")
     private Integer semester;
 
     @Column(name = "ects")
     private Integer ects;
 
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "contact_hours_id", referencedColumnName = "id")
     private ContactHours contactHours;
 
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "non_contact_hours_id", referencedColumnName = "id")
     private NonContactHours nonContactHours;
 
@@ -75,7 +75,7 @@ public class SubjectIdea {
     @JoinColumn(name = "module_idea_id", referencedColumnName = "id")
     private ModuleIdea moduleIdea;
 
-    @OneToMany(mappedBy = "subjectIdea")
+    @OneToMany(mappedBy = "subjectIdea", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<SubjectIdeaEffect> subjectIdeaEffects = new HashSet<>();
 
     //pomocnicze do one to many, jak chcemy dodać to dodajemy z dwóch stron i zapisujemy środkową encją

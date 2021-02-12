@@ -37,13 +37,24 @@ public class MajorModule {
     private Set<ModuleIdea> moduleIdeas = new HashSet<>();
 
     //pomocnicze dajemy tam gdzie one to many
-    public void addModuleSubject(MajorModuleSubject moduleSubject) {
+    public void addMajorModuleSubject(MajorModuleSubject moduleSubject) {
         majorModuleSubjects.add(moduleSubject);
         moduleSubject.setMajorModule(this);
     }
 
-    public void removeModuleSubject(MajorModuleSubject moduleSubject) {
+    public void removeMajorModuleSubject(MajorModuleSubject moduleSubject) {
         majorModuleSubjects.remove(moduleSubject);
         moduleSubject.setMajorModule(null);
+    }
+
+    //pomocnicze dajemy tam gdzie one to many
+    public void addSubjectIdea(SubjectIdea subjectIdea) {
+        subjectIdeas.add(subjectIdea);
+        subjectIdea.setMajorModule(this);
+    }
+
+    public void removeSubjectIdea(SubjectIdea subjectIdea) {
+        subjectIdeas.remove(subjectIdea);
+        subjectIdea.setMajorModule(null);
     }
 }

@@ -3,13 +3,13 @@ package pl.rynski.inzynierkabackend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.dto.ModuleDto;
-import pl.rynski.inzynierkabackend.dao.dto.response.ModuleResponse;
 import pl.rynski.inzynierkabackend.dao.dto.SubjectDto;
+import pl.rynski.inzynierkabackend.dao.dto.response.ModuleResponse;
 import pl.rynski.inzynierkabackend.dao.model.Module;
 import pl.rynski.inzynierkabackend.dao.model.Subject;
-import pl.rynski.inzynierkabackend.exception.ResourceNotFoundException;
 import pl.rynski.inzynierkabackend.repository.ModuleRepository;
 import pl.rynski.inzynierkabackend.repository.SubjectRepository;
+import pl.rynski.inzynierkabackend.utils.FetchDataUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +21,7 @@ public class ModuleService {
 
     private final ModuleRepository moduleRepository;
     private final SubjectRepository subjectRepository;
+    private final FetchDataUtils fetchDataUtils;
 
     public List<ModuleResponse> getModules() {
         return moduleRepository.findAll().stream()
@@ -34,8 +35,7 @@ public class ModuleService {
     }
 
     public ModuleResponse addSubjectToModule(Long moduleId, SubjectDto subjectDto) {
-        Module module = moduleRepository.findById(moduleId)
-                .orElseThrow(() -> new ResourceNotFoundException("Module", "id", moduleId));
+        Module module = fetchDataUtils.moduleById(moduleId);
         Optional<Subject> existingSubject = subjectRepository.findBySubjectCode(subjectDto.getSubjectCode());
         if(existingSubject.isPresent()) {
             module.addSubject(existingSubject.get());
@@ -46,10 +46,8 @@ public class ModuleService {
     }
 
     public ModuleResponse removeSubjectFromModule(Long moduleId, Long subjectId) {
-        Module module = moduleRepository.findById(moduleId)
-                .orElseThrow(() -> new ResourceNotFoundException("Module", "id", moduleId));
-        Subject subject = subjectRepository.findById(subjectId)
-                .orElseThrow(() -> new ResourceNotFoundException("Subject", "id", subjectId));
+        Module module = fetchDataUtils.moduleById(moduleId);
+        Subject subject = fetchDataUtils.subjectById(subjectId);
         module.removeSubject(subject);
         return ModuleResponse.toResponse(moduleRepository.save(module));
     }

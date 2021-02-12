@@ -43,4 +43,25 @@ public class Tutor {
         modules.remove(majorModule);
         majorModule.setTutor(null);
     }
+
+    //pomocnicze dajemy tam gdzie one to many
+    public void addMajorModuleSubject(MajorModuleSubject majorModuleSubject) {
+        majorModuleSubjects.add(majorModuleSubject);
+        majorModuleSubject.setTutor(this);
+    }
+
+    public void removeMajorModuleSubject(MajorModuleSubject majorModuleSubject) {
+        majorModuleSubjects.remove(majorModuleSubject);
+        majorModuleSubject.setTutor(null);
+    }
+
+    public void addSubjectIdea(SubjectIdea subjectIdea) {
+        subjectIdeas.add(subjectIdea);
+        subjectIdea.setTutor(this);
+    }
+
+    public void removeSubjectIdea(SubjectIdea subjectIdea) {
+        subjectIdeas.remove(subjectIdea);
+        subjectIdea.setTutor(null);
+    }
 }

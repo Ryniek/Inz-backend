@@ -27,10 +27,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     public User getLoggedUser() {
-        UserPrincipal principal =
-                (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String currentUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         return userRepository
-                .findByEmail(principal.getUsername())
-                .orElseThrow(() -> new ResourceNotFoundException("User", "email", principal.getUsername()));
+                .findByEmail(currentUser)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "email", currentUser));
     }
 }
