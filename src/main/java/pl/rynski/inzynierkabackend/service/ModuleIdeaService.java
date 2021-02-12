@@ -25,11 +25,23 @@ public class ModuleIdeaService {
     private final CustomUserDetailsService userDetailsService;
     private final ModuleIdeaRepository moduleIdeaRepository;
     private final FetchDataUtils fetchDataUtils;
+    private final EmailService emailService;
 
     public List<ModuleIdeaResponse> getAllModuleIdeas(Boolean approved, int page, int size) {
         Pageable sortedBySendingTime = PageRequest.of(page, size, Sort.by("sendingTime").descending());
         List<ModuleIdea> subjects = moduleIdeaRepository.findAllByApproved(approved, sortedBySendingTime);
         return subjects.stream().map(ModuleIdeaResponse::toResponse).collect(Collectors.toList());
+    }
+
+    public ModuleIdeaResponse respondOnModuleIdea(Long moduleIdeaId, IdeaEmailDto ideaEmailDto) {
+        ModuleIdea moduleIdea = fetchDataUtils.moduleIdeaById(moduleIdeaId);
+        moduleIdea.setApproved(ideaEmailDto.getApproved());
+
+        emailService.sendEmail(ideaEmailDto.getContent(),
+                moduleIdea.getIdeaExplanation(),
+                moduleIdea.getSendingTime(),
+                moduleIdea.getUser().getEmail());
+        return ModuleIdeaResponse.toResponse(moduleIdeaRepository.save(moduleIdea));
     }
 
     public ModuleIdeaResponse addNewModuleIdea(NewModuleIdeaDto dto) {
@@ -61,6 +73,7 @@ public class ModuleIdeaService {
         dto.getExistingSubjects().forEach(subject -> {
             existingSubjects.add(createNewExistingSubject(subject));
         });
+        //TODO existing subjects mi sie nie podoba - ten semester sprawdzic czy jak dam nulla to nie wywala
 
         ModuleIdea result = ChangeModuleIdeaDto.fromDto(dto, majorModule, tutor, newSubjects, existingSubjects);
         result.setUser(userDetailsService.getLoggedUser());

@@ -21,25 +21,28 @@ public class ModuleIdeaController {
         return ResponseEntity.status(HttpStatus.OK).body(moduleIdeaService.getAllModuleIdeas(approved, page, size));
     }
 
+    @Operation(summary = "Send email with response")
+    @PostMapping("/mail/{moduleIdeaId}")
+    public ResponseEntity<?> respondOnModuleIdea(@PathVariable Long moduleIdeaId, @RequestBody IdeaEmailDto ideaEmailDto) {
+        return ResponseEntity.status(HttpStatus.OK).body(moduleIdeaService.respondOnModuleIdea(moduleIdeaId, ideaEmailDto));
+    }
+
     @Operation(summary = "Add idea of new module")
     @PostMapping("/new")
     public ResponseEntity<?> addNewModuleIdea(@RequestBody NewModuleIdeaDto newModuleIdeaDto) {
-        moduleIdeaService.addNewModuleIdea(newModuleIdeaDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(moduleIdeaService.addNewModuleIdea(newModuleIdeaDto));
     }
 
     @Operation(summary = "Add idea of changing existing module")
     @PostMapping("/change/{majorModuleId}")
     public ResponseEntity<?> addChangeModuleIdea(@PathVariable Long majorModuleId, @RequestBody ChangeModuleIdeaDto changeModuleIdeaDto) {
-        moduleIdeaService.addChangeModuleIdea(majorModuleId, changeModuleIdeaDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(moduleIdeaService.addChangeModuleIdea(majorModuleId, changeModuleIdeaDto));
     }
 
     @Operation(summary = "Add idea of deleting existing module")
     @PostMapping("/delete")
     public ResponseEntity<?> addDeleteModuleIdea(@RequestBody DeleteModuleIdeaDto deleteModuleIdeaDto) {
-        moduleIdeaService.addDeleteModuleIdea(deleteModuleIdeaDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(moduleIdeaService.addDeleteModuleIdea(deleteModuleIdeaDto));
     }
 
     @Operation(summary = "Delete module idea")
