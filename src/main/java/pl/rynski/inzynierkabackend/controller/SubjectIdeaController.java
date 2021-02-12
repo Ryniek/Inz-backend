@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.rynski.inzynierkabackend.dao.dto.ChangeSubjectIdeaDto;
 import pl.rynski.inzynierkabackend.dao.dto.DeleteSubjectIdeaDto;
+import pl.rynski.inzynierkabackend.dao.dto.IdeaEmailDto;
 import pl.rynski.inzynierkabackend.dao.dto.NewSubjectIdeaDto;
 import pl.rynski.inzynierkabackend.service.SubjectIdeaService;
 
@@ -17,9 +18,16 @@ public class SubjectIdeaController {
 
     private final SubjectIdeaService subjectIdeaService;
 
+    @Operation(summary = "Get all subjects limited by pagination divided on approved/not approved/unanswered")
     @GetMapping
     public ResponseEntity<?> getAllSubjectIdeas(@RequestParam(required = false) Boolean approved, @RequestParam int page, @RequestParam int size) {
         return ResponseEntity.status(HttpStatus.OK).body(subjectIdeaService.getAllSubjectIdeas(approved, page, size));
+    }
+
+    @Operation(summary = "Send email with response")
+    @PostMapping("/mail/{subjectIdeaId}")
+    public ResponseEntity<?> respondOnSubjectIdea(@PathVariable Long subjectIdeaId, @RequestBody IdeaEmailDto ideaEmailDto) {
+        return ResponseEntity.status(HttpStatus.OK).body(subjectIdeaService.respondOnSubjectIdea(subjectIdeaId, ideaEmailDto));
     }
 
     @Operation(summary = "Add idea of new subject")

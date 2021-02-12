@@ -5,10 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import pl.rynski.inzynierkabackend.dao.dto.ChangeSubjectIdeaDto;
-import pl.rynski.inzynierkabackend.dao.dto.DeleteSubjectIdeaDto;
-import pl.rynski.inzynierkabackend.dao.dto.NewSubjectIdeaDto;
-import pl.rynski.inzynierkabackend.dao.dto.SubjectEffectDto;
+import pl.rynski.inzynierkabackend.dao.dto.*;
 import pl.rynski.inzynierkabackend.dao.dto.response.SubjectIdeaResponse;
 import pl.rynski.inzynierkabackend.dao.model.*;
 import pl.rynski.inzynierkabackend.repository.SubjectIdeaRepository;
@@ -27,14 +24,23 @@ public class SubjectIdeaService {
     private final CustomUserDetailsService userDetailsService;
     private final SubjectIdeaRepository subjectIdeaRepository;
     private final FetchDataUtils fetchDataUtils;
-
-    //TODO odpowiadanie(zaznaczanie na approved/nieapproved, wysylanie maila do usera)
-    //TODO info mailowe o nowym zgloszeniu do kazdego admina?(do kazdego admina i do usera z potwierdzeniem wyslania sugestii)
+    private final EmailService emailService;
 
     public List<SubjectIdeaResponse> getAllSubjectIdeas(Boolean approved, int page, int size) {
         Pageable sortedBySendingTime = PageRequest.of(page, size, Sort.by("sendingTime").descending());
         List<SubjectIdea> subjects = subjectIdeaRepository.findAllByApproved(approved, sortedBySendingTime);
         return subjects.stream().map(SubjectIdeaResponse::toResponse).collect(Collectors.toList());
+    }
+
+    public SubjectIdeaResponse respondOnSubjectIdea(Long subjectIdeaId, IdeaEmailDto ideaEmailDto) {
+        SubjectIdea subjectIdea = fetchDataUtils.subjectIdeaById(subjectIdeaId);
+        subjectIdea.setApproved(ideaEmailDto.getApproved());
+
+        emailService.sendEmail(ideaEmailDto.getContent(),
+                subjectIdea.getIdeaExplanation(),
+                subjectIdea.getSendingTime(),
+                subjectIdea.getUser().getEmail());
+        return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(subjectIdea));
     }
 
     public SubjectIdeaResponse addChangeSubjectIdea(Long moduleSubjectId, ChangeSubjectIdeaDto dto) {
