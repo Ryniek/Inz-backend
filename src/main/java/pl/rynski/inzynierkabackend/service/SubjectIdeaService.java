@@ -28,10 +28,11 @@ public class SubjectIdeaService {
 
     public List<SubjectIdeaResponse> getAllSubjectIdeas(Boolean approved, int page, int size) {
         Pageable sortedBySendingTime = PageRequest.of(page, size, Sort.by("sendingTime").descending());
-        List<SubjectIdea> subjects = subjectIdeaRepository.findAllByApproved(approved, sortedBySendingTime);
+        List<SubjectIdea> subjects = subjectIdeaRepository.findAllByApprovedAndModuleIdeaIsNull(approved, sortedBySendingTime);
         return subjects.stream().map(SubjectIdeaResponse::toResponse).collect(Collectors.toList());
     }
 
+    //TODO trzeba to zrobic bardziej generycznie - respond On Idea i tyle
     public SubjectIdeaResponse respondOnSubjectIdea(Long subjectIdeaId, IdeaEmailDto ideaEmailDto) {
         SubjectIdea subjectIdea = fetchDataUtils.subjectIdeaById(subjectIdeaId);
         subjectIdea.setApproved(ideaEmailDto.getApproved());
@@ -53,11 +54,9 @@ public class SubjectIdeaService {
         if(dto.getTutorId() != null) tutor = fetchDataUtils.tutorById(dto.getTutorId());
 
         Set<SubjectIdeaEffect> effects = new HashSet<>();
-        if(!dto.getEffects().isEmpty() && dto.getEffects() != null) {
-            dto.getEffects().forEach(effect -> {
-                effects.add(createNewSingleEffect(effect));
-            });
-        }
+        dto.getEffects().forEach(effect -> {
+            effects.add(createNewSingleEffect(effect));
+        });
 
         SubjectIdea result = ChangeSubjectIdeaDto.fromDto(dto, majorModuleSubject, majorModule, tutor, effects);
         result.setUser(userDetailsService.getLoggedUser());
@@ -69,11 +68,9 @@ public class SubjectIdeaService {
         Tutor tutor = fetchDataUtils.tutorById(dto.getTutorId());
 
         Set<SubjectIdeaEffect> effects = new HashSet<>();
-        if(dto.getEffects() != null) {
-            dto.getEffects().forEach(effect -> {
-                effects.add(createNewSingleEffect(effect));
-            });
-        }
+        dto.getEffects().forEach(effect -> {
+            effects.add(createNewSingleEffect(effect));
+        });
 
         SubjectIdea result = NewSubjectIdeaDto.fromDto(dto, majorModule, tutor, effects);
         result.setUser(userDetailsService.getLoggedUser());

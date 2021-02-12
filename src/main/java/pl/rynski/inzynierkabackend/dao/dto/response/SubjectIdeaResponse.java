@@ -25,7 +25,6 @@ public class SubjectIdeaResponse {
     private Integer ects;
     private ContactHoursResponse contactHours;
     private NonContactHoursResponse nonContactHours;
-    //TODO zrobic wewnetrzna chyba klaske do tego
     private MajorModuleResponse majorModule;
     private TutorResponse tutor;
     private UserResponse user;
@@ -35,20 +34,18 @@ public class SubjectIdeaResponse {
     @Data
     private static class MajorModuleResponse {
         private Long id;
-        private String majorName;
-        private StudyType majorType;
-        private String majorYear;
+        private MajorShortResponse major;
         private String moduleName;
         private Boolean specialized;
+        private TutorResponse tutor;
 
         private static MajorModuleResponse toResponse(MajorModule majorModule) {
             MajorModuleResponse result = new MajorModuleResponse();
             result.setId(majorModule.getId());
-            result.setMajorName(majorModule.getMajor().getName());
-            result.setMajorType(majorModule.getMajor().getStudyType());
-            result.setMajorYear(majorModule.getMajor().getYears());
+            result.setMajor(MajorShortResponse.toResponse(majorModule.getMajor()));
             result.setModuleName(majorModule.getModule().getName());
             result.setSpecialized(majorModule.getModule().getSpecialized());
+            result.setTutor(TutorResponse.toResponse(majorModule.getTutor()));
             return result;
         }
     }
@@ -70,7 +67,7 @@ public class SubjectIdeaResponse {
         if(subjectIdea.getNonContactHours() != null) result.setNonContactHours(NonContactHoursResponse.toResponse(subjectIdea.getNonContactHours()));
         if(subjectIdea.getMajorModule() != null) result.setMajorModule(MajorModuleResponse.toResponse(subjectIdea.getMajorModule()));
         if(subjectIdea.getTutor() != null) result.setTutor(TutorResponse.toResponse(subjectIdea.getTutor()));
-        result.setUser(UserResponse.toResponse(subjectIdea.getUser()));
+        if(subjectIdea.getUser() != null) result.setUser(UserResponse.toResponse(subjectIdea.getUser()));
         if(subjectIdea.getMajorModuleSubject() != null) result.setMajorModuleSubject(ModuleSubjectResponse.toResponse(subjectIdea.getMajorModuleSubject()));
         result.setSubjectIdeaEffects(subjectIdea
                 .getSubjectIdeaEffects().stream()

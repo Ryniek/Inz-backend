@@ -48,7 +48,7 @@ public class SubjectIdeaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(subjectIdeaService.addDeleteSubjectIdea(deleteSubjectIdeaDto));
     }
 
-    @Operation(summary = "Delete the subject idea")
+    @Operation(summary = "Delete subject idea")
     @DeleteMapping("/{subjectIdeaId}")
     public ResponseEntity<?> deleteSubjectIdea(@PathVariable Long subjectIdeaId) {
         subjectIdeaService.deleteSubjectIdea(subjectIdeaId);

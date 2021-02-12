@@ -17,13 +17,13 @@ public class ModuleIdea {
     private Long id;
 
     @Column(name = "existing", nullable = false)
-    private Boolean existing;
+    private Boolean existing = false;
 
-    @Column(name = "approved", nullable = false)
+    @Column(name = "approved")
     private Boolean approved;
 
     @Column(name = "to_remove", nullable = false)
-    private Boolean toRemove;
+    private Boolean toRemove = false;
 
     @Column(name = "sending_time", nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime sendingTime;
@@ -45,31 +45,18 @@ public class ModuleIdea {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tutor_id", referencedColumnName = "id")
+    private Tutor tutor;
+
+    //Kiedy existing == true
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "major_module_id", referencedColumnName = "id")
     private MajorModule majorModule;
 
     //Stworzone nowe przedmioty do modułu
-    @OneToMany(mappedBy = "moduleIdea")
+    @OneToMany(mappedBy = "moduleIdea", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<SubjectIdea> subjectIdeas = new HashSet<>();
 
-    //TODO To rozkminic. Moze tu lepiej zrobic nowa tabele na te dane(propozycja nauczyciela, ects)
-    //Wybrane istniejące przedmioty do modułu
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "module_idea_subject",
-            joinColumns = @JoinColumn(name = "module_idea_id", referencedColumnName = "id"),
-            inverseJoinColumns= @JoinColumn(name = "major_module_subject_id", referencedColumnName = "id")
-    )
-    private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
-
-    //pomocne dodawania obiektow do relacji dajemy przy many to many gdzie chcemy
-    public void addMajorModuleSubject(MajorModuleSubject majorModuleSubject) {
-        this.majorModuleSubjects.add(majorModuleSubject);
-        majorModuleSubject.getModuleIdeas().add(this);
-    }
-
-    public void removeMajorModuleSubject(MajorModuleSubject majorModuleSubject) {
-        this.majorModuleSubjects.remove(majorModuleSubject);
-        majorModuleSubject.getModuleIdeas().remove(this);
-    }
+    @OneToMany(mappedBy = "moduleIdea", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    private Set<ModuleIdeaSubject> moduleIdeaSubjects = new HashSet<>();
 }
