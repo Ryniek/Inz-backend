@@ -55,4 +55,15 @@ public class Effect {
         subjectIdeaEffects.remove(subjectIdeaEffect);
         subjectIdeaEffect.setEffect(null);
     }
+
+    //pomocnicze do one to many, jak chcemy dodać to dodajemy z dwóch stron i zapisujemy środkową encją
+    public void addEffectIdea(EffectIdea effectIdea) {
+        effectIdeas.add(effectIdea);
+        effectIdea.setEffect(this);
+    }
+
+    public void removeEffectIdea(EffectIdea effectIdea) {
+        effectIdeas.remove(effectIdea);
+        effectIdea.setEffect(null);
+    }
 }

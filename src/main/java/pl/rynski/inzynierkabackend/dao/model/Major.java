@@ -37,7 +37,7 @@ public class Major {
     @OneToMany(mappedBy = "major", orphanRemoval = true)
     private Set<MajorModule> majorModules = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JoinTable(
             name = "major_effect",
             joinColumns = @JoinColumn(name = "major_id", referencedColumnName = "id"),
@@ -45,13 +45,7 @@ public class Major {
     )
     private Set<Effect> effects = new HashSet<>();
 
-    //TODO tutaj chyba trza bedzie zmienic strone zarzadzajaca
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "major_effect_idea",
-            joinColumns = @JoinColumn(name = "major_id", referencedColumnName = "id"),
-            inverseJoinColumns= @JoinColumn(name = "effect_idea_id", referencedColumnName = "id")
-    )
+    @ManyToMany(mappedBy = "majors")
     private Set<EffectIdea> effectIdeas = new HashSet<>();
 
     //pomocnie dodawania obiektow do relacji dajemy przy many to many gdzie chcemy
@@ -74,15 +68,5 @@ public class Major {
     public void removeMajorModule(MajorModule majorModule) {
         majorModules.remove(majorModule);
         majorModule.setMajor(null);
-    }
-
-    public void addEffectIdea(EffectIdea effectIdea) {
-        this.effectIdeas.add(effectIdea);
-        effectIdea.getMajors().add(this);
-    }
-
-    public void removeEffectIdea(EffectIdea effectIdea) {
-        this.effectIdeas.remove(effectIdea);
-        effectIdea.getMajors().remove(this);
     }
 }

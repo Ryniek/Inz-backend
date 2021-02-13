@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.rynski.inzynierkabackend.dao.dto.ChangeSubjectIdeaDto;
-import pl.rynski.inzynierkabackend.dao.dto.DeleteSubjectIdeaDto;
+import pl.rynski.inzynierkabackend.dao.dto.DeleteIdeaDto;
 import pl.rynski.inzynierkabackend.dao.dto.IdeaEmailDto;
 import pl.rynski.inzynierkabackend.dao.dto.NewSubjectIdeaDto;
 import pl.rynski.inzynierkabackend.service.SubjectIdeaService;
@@ -44,8 +44,8 @@ public class SubjectIdeaController {
 
     @Operation(summary = "Add idea of deleting existing subject")
     @PostMapping("/delete")
-    public ResponseEntity<?> addDeleteSubjectIdea(@RequestBody DeleteSubjectIdeaDto deleteSubjectIdeaDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(subjectIdeaService.addDeleteSubjectIdea(deleteSubjectIdeaDto));
+    public ResponseEntity<?> addDeleteSubjectIdea(@RequestBody DeleteIdeaDto deleteIdeaDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(subjectIdeaService.addDeleteSubjectIdea(deleteIdeaDto));
     }
 
     @Operation(summary = "Delete subject idea")

@@ -77,10 +77,10 @@ public class SubjectIdeaService {
         return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
     }
 
-    public SubjectIdeaResponse addDeleteSubjectIdea(DeleteSubjectIdeaDto dto) {
-        MajorModuleSubject majorModuleSubject = fetchDataUtils.moduleSubjectById(dto.getMajorModuleSubjectId());
+    public SubjectIdeaResponse addDeleteSubjectIdea(DeleteIdeaDto dto) {
+        MajorModuleSubject majorModuleSubject = fetchDataUtils.moduleSubjectById(dto.getIdeaId());
 
-        SubjectIdea result = DeleteSubjectIdeaDto.fromDto(dto, majorModuleSubject);
+        SubjectIdea result = DeleteIdeaDto.fromDto(dto, majorModuleSubject);
         result.setUser(userDetailsService.getLoggedUser());
         return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
     }

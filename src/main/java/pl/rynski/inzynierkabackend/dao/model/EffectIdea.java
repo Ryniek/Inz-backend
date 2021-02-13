@@ -18,13 +18,13 @@ public class EffectIdea {
     private Long id;
 
     @Column(name = "existing", nullable = false)
-    private Boolean existing;
+    private Boolean existing = false;
 
-    @Column(name = "approved", nullable = false)
+    @Column(name = "approved")
     private Boolean approved;
 
     @Column(name = "to_remove", nullable = false)
-    private Boolean toRemove;
+    private Boolean toRemove = false;
 
     @Column(name = "sending_time", nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime sendingTime;
@@ -54,9 +54,23 @@ public class EffectIdea {
     @JoinColumn(name = "effect_id", referencedColumnName = "id")
     private Effect effect;
 
-    @ManyToMany(mappedBy = "effectIdeas")
-    private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
+    @OneToMany(mappedBy = "effectIdea", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    private Set<SubjectEffectIdea> subjectEffectIdeas = new HashSet<>();
 
-    @ManyToMany(mappedBy = "effectIdeas")
-    private Set<Major> majors = new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name = "effect_idea_major",
+            joinColumns = @JoinColumn(name = "effect_idea_id", referencedColumnName = "id"),
+            inverseJoinColumns= @JoinColumn(name = "major_id", referencedColumnName = "id")
+    )    private Set<Major> majors = new HashSet<>();
+
+    public void addMajor(Major major) {
+        this.majors.add(major);
+        major.getEffectIdeas().add(this);
+    }
+
+    public void removeMajor(Major major) {
+        this.majors.remove(major);
+        major.getEffectIdeas().remove(this);
+    }
 }
