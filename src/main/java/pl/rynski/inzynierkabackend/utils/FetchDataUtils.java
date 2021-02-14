@@ -20,6 +20,7 @@ public class FetchDataUtils {
     private final MajorRepository majorRepository;
     private final DepartmentRepository departmentRepository;
     private final ModuleIdeaRepository moduleIdeaRepository;
+    private final EffectIdeaRepository effectIdeaRepository;
 
     public Department departmentById(Long departmentId) {
         return departmentRepository.findById(departmentId)
@@ -59,6 +60,11 @@ public class FetchDataUtils {
     public ModuleIdea moduleIdeaById(Long moduleIdeaId) {
         return moduleIdeaRepository.findById(moduleIdeaId)
                 .orElseThrow(() -> new ResourceNotFoundException("ModuleIdea", "id", moduleIdeaId));
+    }
+
+    public EffectIdea effectIdeaById(Long effectIdeaId) {
+        return effectIdeaRepository.findById(effectIdeaId)
+                .orElseThrow(() -> new ResourceNotFoundException("EffectIdea", "id", effectIdeaId));
     }
 
     public MajorModule majorModuleById(Long majorModuleId) {

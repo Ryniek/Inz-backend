@@ -80,10 +80,10 @@ public class ModuleIdeaService {
         return ModuleIdeaResponse.toResponse(moduleIdeaRepository.save(result));
     }
 
-    public ModuleIdeaResponse addDeleteModuleIdea(DeleteModuleIdeaDto dto) {
-        MajorModule majorModule = fetchDataUtils.majorModuleById(dto.getMajorModuleId());
+    public ModuleIdeaResponse addDeleteModuleIdea(DeleteIdeaDto dto) {
+        MajorModule majorModule = fetchDataUtils.majorModuleById(dto.getIdeaId());
 
-        ModuleIdea result = DeleteModuleIdeaDto.fromDto(dto, majorModule);
+        ModuleIdea result = DeleteIdeaDto.fromDto(dto, majorModule);
         result.setUser(userDetailsService.getLoggedUser());
         return ModuleIdeaResponse.toResponse(moduleIdeaRepository.save(result));
     }

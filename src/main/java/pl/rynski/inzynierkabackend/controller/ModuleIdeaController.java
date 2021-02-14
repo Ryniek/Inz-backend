@@ -41,8 +41,8 @@ public class ModuleIdeaController {
 
     @Operation(summary = "Add idea of deleting existing module")
     @PostMapping("/delete")
-    public ResponseEntity<?> addDeleteModuleIdea(@RequestBody DeleteModuleIdeaDto deleteModuleIdeaDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(moduleIdeaService.addDeleteModuleIdea(deleteModuleIdeaDto));
+    public ResponseEntity<?> addDeleteModuleIdea(@RequestBody DeleteIdeaDto deleteIdeaDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(moduleIdeaService.addDeleteModuleIdea(deleteIdeaDto));
     }
 
     @Operation(summary = "Delete module idea")

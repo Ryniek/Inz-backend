@@ -50,23 +50,8 @@ public class MajorModuleSubject {
     @OneToMany(mappedBy = "majorModuleSubject", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<MajorSubjectEffect> majorSubjectEffects = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "major_subject_effect_idea",
-            joinColumns = @JoinColumn(name = "major_module_subject_id", referencedColumnName = "id"),
-            inverseJoinColumns= @JoinColumn(name = "effect_idea_id", referencedColumnName = "id")
-    )
-    private Set<EffectIdea> effectIdeas = new HashSet<>();
-
-    public void addEffectIdea(EffectIdea effectIdea) {
-        this.effectIdeas.add(effectIdea);
-        effectIdea.getMajorModuleSubjects().add(this);
-    }
-
-    public void removeEffectIdea(EffectIdea effectIdea) {
-        this.effectIdeas.remove(effectIdea);
-        effectIdea.getMajorModuleSubjects().remove(this);
-    }
+    @OneToMany(mappedBy = "majorModuleSubject")
+    private Set<SubjectEffectIdea> subjectEffectIdeas = new HashSet<>();
 
     public void addSubjectIdea(SubjectIdea subjectIdea) {
         this.subjectIdeas.add(subjectIdea);
