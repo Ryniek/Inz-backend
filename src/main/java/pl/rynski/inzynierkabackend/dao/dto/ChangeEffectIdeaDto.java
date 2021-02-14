@@ -16,12 +16,13 @@ public class ChangeEffectIdeaDto {
     private Set<Long> majorIds = new HashSet<>();
     private Set<SubjectEffectDto> existingSubjects = new HashSet<>();
 
-    public static EffectIdea fromDto(ChangeEffectIdeaDto dto, List<Major> majors, Set<SubjectEffectIdea> subjects) {
+    public static EffectIdea fromDto(ChangeEffectIdeaDto dto, Effect effect, List<Major> majors, Set<SubjectEffectIdea> subjects) {
         EffectIdea result = new EffectIdea();
         result.setExisting(true);
         result.setSendingTime(DateUtils.getCurrentDateTime());
         result.setIdeaExplanation(dto.getIdeaExplanation());
         result.setContent(dto.getContent());
+        effect.addEffectIdea(result);
         majors.forEach(result::addMajor);
         result.setSubjectEffectIdeas(subjects);
         subjects.forEach(subject -> subject.setEffectIdea(result));

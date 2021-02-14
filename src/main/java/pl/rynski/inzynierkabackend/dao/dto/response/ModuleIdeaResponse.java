@@ -50,18 +50,6 @@ public class ModuleIdeaResponse {
         }
     }
 
-    @Data
-    private static class ExistingSubject {
-        private ModuleSubjectResponse subject;
-        private Integer newSemester;
-
-        private static ExistingSubject toResponse(ModuleIdeaSubject moduleIdeaSubject) {
-            ExistingSubject result = new ExistingSubject();
-            result.setSubject(ModuleSubjectResponse.toResponse(moduleIdeaSubject.getMajorModuleSubject()));
-            result.setNewSemester(moduleIdeaSubject.getSemester());
-            return result;
-        }
-    }
     public static ModuleIdeaResponse toResponse(ModuleIdea moduleIdea) {
         ModuleIdeaResponse result = new ModuleIdeaResponse();
         result.setId(moduleIdea.getId());
@@ -76,7 +64,6 @@ public class ModuleIdeaResponse {
         result.setUser(UserResponse.toResponse(moduleIdea.getUser()));
         if(moduleIdea.getTutor() != null) result.setTutor(TutorResponse.toResponse(moduleIdea.getTutor()));
         if(moduleIdea.getMajorModule() != null) result.setMajorModule(MajorModuleResponse.toResponse(moduleIdea.getMajorModule()));
-        //TODO sprawdzic czy wywali nulla czy = new Array w encji zadziała
         result.setNewSubjects(moduleIdea
                 .getSubjectIdeas().stream()
                 .map(SubjectIdeaResponse::toResponse)

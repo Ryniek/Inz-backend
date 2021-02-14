@@ -30,22 +30,19 @@ public class EffectIdeaController {
     @Operation(summary = "Add idea of new effect")
     @PostMapping("/new")
     public ResponseEntity<?> addNewEffectIdea(@RequestBody NewEffectIdeaDto newEffectIdeaDto) {
-        effectIdeaService.addNewEffectIdea(newEffectIdeaDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(effectIdeaService.addNewEffectIdea(newEffectIdeaDto));
     }
 
     @Operation(summary = "Add idea of changing existing effect")
     @PostMapping("/change/{effectId}")
     public ResponseEntity<?> addChangeEffectIdea(@PathVariable Long effectId, @RequestBody ChangeEffectIdeaDto changeEffectIdeaDto) {
-        effectIdeaService.addChangeEffectIdea(effectId, changeEffectIdeaDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(effectIdeaService.addChangeEffectIdea(effectId, changeEffectIdeaDto));
     }
 
     @Operation(summary = "Add idea of deleting existing effect")
     @PostMapping("/delete")
     public ResponseEntity<?> addDeleteEffectIdea(@RequestBody DeleteIdeaDto deleteIdeaDto) {
-        effectIdeaService.addDeleteEffectIdea(deleteIdeaDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(effectIdeaService.addDeleteEffectIdea(deleteIdeaDto));
     }
 
     @Operation(summary = "Delete effect idea")

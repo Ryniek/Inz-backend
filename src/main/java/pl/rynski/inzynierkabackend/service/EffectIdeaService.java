@@ -1,9 +1,13 @@
 package pl.rynski.inzynierkabackend.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.dto.*;
+import pl.rynski.inzynierkabackend.dao.dto.response.EffectIdeaResponse;
 import pl.rynski.inzynierkabackend.dao.dto.response.ModuleIdeaResponse;
 import pl.rynski.inzynierkabackend.dao.dto.response.SubjectIdeaResponse;
 import pl.rynski.inzynierkabackend.dao.model.*;
@@ -17,25 +21,25 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class EffectIdeaService {
 
     private final EffectIdeaRepository effectIdeaRepository;
-    private final ModuleSubjectRepository moduleSubjectRepository;
     private final MajorRepository majorRepository;
     private final EmailService emailService;
     private final FetchDataUtils fetchDataUtils;
     private final CustomUserDetailsService userDetailsService;
 
-    public String getAllEffectIdeas(Boolean approved, int page, int size) {
-
-        return null;
+    public List<EffectIdeaResponse> getAllEffectIdeas(Boolean approved, int page, int size) {
+        Pageable sortedBySendingTime = PageRequest.of(page, size, Sort.by("sendingTime").descending());
+        List<EffectIdea> effects = effectIdeaRepository.findAllByApproved(approved, sortedBySendingTime);
+        return effects.stream().map(EffectIdeaResponse::toResponse).collect(Collectors.toList());
     }
 
-    //TODO Response
-    public String respondOnEffectIdea(Long effectIdeaId, IdeaEmailDto ideaEmailDto) {
+    public EffectIdeaResponse respondOnEffectIdea(Long effectIdeaId, IdeaEmailDto ideaEmailDto) {
         EffectIdea effectIdea = fetchDataUtils.effectIdeaById(effectIdeaId);
         effectIdea.setApproved(ideaEmailDto.getApproved());
 
@@ -44,12 +48,10 @@ public class EffectIdeaService {
                 effectIdea.getSendingTime(),
                 effectIdea.getUser().getEmail());
 
-        effectIdeaRepository.save(effectIdea);
-        return null;
-        //return
+        return EffectIdeaResponse.toResponse(effectIdeaRepository.save(effectIdea));
     }
 
-    public void addNewEffectIdea(NewEffectIdeaDto dto) {
+    public EffectIdeaResponse addNewEffectIdea(NewEffectIdeaDto dto) {
         //TODO sprawdzic czy przedmiot byl juz przypisany wczesniej do danego modulu
         //TODO walidacja czy efekt jest dla przedmiotu
         Set<SubjectEffectIdea> subjects = new HashSet<>();
@@ -63,11 +65,10 @@ public class EffectIdeaService {
 
         EffectIdea result = NewEffectIdeaDto.fromDto(dto, subjects, majors);
         result.setUser(userDetailsService.getLoggedUser());
-        effectIdeaRepository.save(result);
-        //return ModuleIdeaResponse.toResponse(moduleIdeaRepository.save(result));
+        return EffectIdeaResponse.toResponse(effectIdeaRepository.save(result));
     }
 
-    public void addChangeEffectIdea(Long effectId, ChangeEffectIdeaDto dto) {
+    public EffectIdeaResponse addChangeEffectIdea(Long effectId, ChangeEffectIdeaDto dto) {
         Effect effect = fetchDataUtils.effectById(effectId);
 
         Set<SubjectEffectIdea> subjects = new HashSet<>();
@@ -80,19 +81,17 @@ public class EffectIdeaService {
             majors = majorRepository.findAllById(dto.getMajorIds());
         }
 
-        EffectIdea result = ChangeEffectIdeaDto.fromDto(dto, majors, subjects);
+        EffectIdea result = ChangeEffectIdeaDto.fromDto(dto, effect, majors, subjects);
         result.setUser(userDetailsService.getLoggedUser());
-        effectIdeaRepository.save(result);
-        //return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
+        return EffectIdeaResponse.toResponse(effectIdeaRepository.save(result));
     }
 
-    public void addDeleteEffectIdea(DeleteIdeaDto dto) {
+    public EffectIdeaResponse addDeleteEffectIdea(DeleteIdeaDto dto) {
         Effect effect = fetchDataUtils.effectById(dto.getIdeaId());
 
         EffectIdea result = DeleteIdeaDto.fromDto(dto, effect);
         result.setUser(userDetailsService.getLoggedUser());
-        effectIdeaRepository.save(result);
-        //return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
+        return EffectIdeaResponse.toResponse(effectIdeaRepository.save(result));
     }
 
     public void deleteEffectIdea(Long effectIdeaId) {
