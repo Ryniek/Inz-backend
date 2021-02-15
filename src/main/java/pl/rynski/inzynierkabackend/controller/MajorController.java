@@ -17,8 +17,8 @@ public class MajorController {
 
     @Operation(summary = "Get all majors by department id")
     @GetMapping("/{departmentId}")
-    public ResponseEntity<?> getMajorsByDepartment(@PathVariable Long departmentId) {
-        return ResponseEntity.ok().body(majorService.getMajorsByDepartment(departmentId));
+    public ResponseEntity<?> getMajorsByDepartment(@PathVariable Long departmentId, @RequestParam(required = false) Boolean hidden) {
+        return ResponseEntity.ok().body(majorService.getMajorsByDepartment(departmentId, hidden));
     }
 
     @Operation(summary = "Add major")

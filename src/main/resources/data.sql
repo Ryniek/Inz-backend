@@ -84,9 +84,20 @@ VALUES (1, 'W1', 'Ma elementarną  wiedzę z prawa gospodarczego i prawa autorsk
        (4, 'U2', 'Potrafi pozyskiwać informacje z dokumentacji, literatury, Internetu oraz innych wiarygodnych źródeł w języku polskim i angielskim, integrować je, dokonywać ich interpretacji oraz wyciągać wnioski i formułować opinie', 'SKILLS', true, false),
        (5, 'K1', 'Rozumie potrzebę dbania o ciągły rozwój intelektualny i fizyczny,  zdaje sobie sprawę z konieczności uczenia się przez całe życie i adaptowania swojej wiedzy do zmian cywilizacyjnych.', 'SOCIAL', true, false),
        (6, 'K2', 'Rozumie znaczenie społecznego oddziaływania informatyki, w tym technik komunikacyjnych i mobilności oraz posiada potrzebę informowania społeczeństwa o rozwoju i osiągnięciach informatyki.', 'SOCIAL', true, false),
-       (7, 'N1_W02', 'Ma wiedzę ogólną o biosferze, fizyce atmosfery i oceanów, zna zasady i specyfikę wykonywania pomiarów hydrometeorologicznych', 'KNOWLEDGE', false, true),
-       (8, 'N1_W03', 'Ma podstawową wiedzę w zakresie właściwości fizykochemicznych transportowanych ładunków i ich charakterystyki. ', 'KNOWLEDGE', false, true);
-
+       (7, 'N1_W02', 'Ma wiedzę ogólną o biosferze, fizyce atmosfery i oceanów, zna zasady i specyfikę wykonywania pomiarów hydrometeorologicznych.', 'KNOWLEDGE', false, true),
+       (8, 'N1_W03', 'Ma podstawową wiedzę w zakresie właściwości fizykochemicznych transportowanych ładunków i ich charakterystyki. ', 'KNOWLEDGE', false, true),
+       (9, 'I1_W06', 'Ma podstawową wiedzę w zakresie grafiki komputerowej, zna podstawowe metody komunikacji z komputerem', 'KNOWLEDGE', false, true),
+       (10, 'I1_W10', 'Zna wybrane języki programowania, ma wiedzę w zakresie stosowanych technik programowania, a także projektowania i wytwarzania aplikacji i systemów inf.', 'KNOWLEDGE', false, true),
+       (11, 'I1_W11', 'Ma wiedzę z algorytmizacji i podstaw tworzenia i przetwarzania struktur danych.', 'KNOWLEDGE', false, true),
+       (12, 'I1_U01', 'Potrafi posługiwać się językiem obcym na poziomie B2 (ESOKJ RD) oraz umie posługiwać się językiem angielskim specjalistycznym dla informatyki.', 'SKILLS', false, true),
+       (13, 'I1_U02', 'Potrafi pozyskiwać informacje z dokumentacji, literatury, Internetu oraz innych wiarygodnych źródeł w języku polskim i angielskim, integrować je, dokonywać ich interpretacji oraz wyciągać wnioski i formułować opinie.', 'SKILLS', false, true),
+       (14, 'I1_U03', 'Potrafi ocenić pod kątem ekonomicznym i zarządczym znaczenie podejmowanych przez siebie działań inżynierskich oraz scharakteryzować podstawowe zasady aktywności gospodarczej.', 'SKILLS', false, true),
+       (15, 'I1_U18', 'Potrafi administrować wybranymi systemami informatycznymi, w tym korzystać z właściwych technik zabezpieczających.', 'SKILLS', false, true),
+       (16, 'I1_U19', 'Potrafi zaprojektować i wykonać relacyjna bazę danych oraz skonstruować przykładowe zapytanie SQL.', 'SKILLS', false, true),
+       (17, 'I1_K01', 'Rozumie potrzebę dbania o ciągły rozwój intelektualny i fizyczny,  zdaje sobie sprawę z konieczności uczenia się przez całe życie i adaptowania swojej wiedzy do zmian cywilizacyjnych.', 'SOCIAL', false, true),
+       (18, 'I1_K02', 'Rozumie znaczenie społecznego oddziaływania informatyki, w tym technik komunikacyjnych i mobilności oraz posiada potrzebę informowania społeczeństwa o rozwoju i osiągnięciach informatyki.', 'SOCIAL', false, true),
+       (19, 'I1_K03', 'Rozumie społeczny i zawodowy kontekst informatyki, jej zasady prawne i etyczne oraz  świadomie stosuje się do przepisów obowiązującego prawa, przestrzega zasad etyki zawodowej.', 'SOCIAL', false, true),
+       (20, 'I1_K04', 'Rozumie znaczenie pojęć istotnych  w procesie kształtowania postaw takich jak patriotyzm, humanizm, tolerancja, współpraca wielokulturowa.', 'SOCIAL', false, true);
 
 INSERT INTO major_module (id, major_id, module_id, tutor_id)
 VALUES (1, 1, 1, 1), (2, 1, 2, 2), (3, 1, 3, 3), (4, 1, 8, 4), (5, 1, 9, 5),
@@ -103,7 +114,17 @@ VALUES (1, 1, 2), (4, 2, 3), (2, 2, 2), (3, 3, 3), (4, 4, 3), (5, 5, 1), (6, 5, 
        (9, 1, 2), (10, 2, 3), (11, 2, 2), (12, 3, 3), (13, 4, 3), (14, 5, 1), (15, 5, 1), (16, 6, 2), (16, 4, 3);
 
 INSERT INTO major_effect (major_id, effect_id)
-VALUES (1, 7), (5, 8);
+VALUES (1, 7), (1, 9), (1, 14), (1, 17), (1, 19),
+       (2, 8), (2, 10), (2, 12), (2, 14), (2, 16), (2, 18),
+       (3, 8), (3, 9), (3, 13), (3, 14), (3, 15), (3, 18), (3, 20),
+       (4, 12), (4, 16), (4, 17),
+       (5, 9), (5, 14), (5, 18),
+       (6, 11), (6, 19),
+       (7, 11), (7, 15), (7, 16),
+       (8, 17),
+       (9, 14), (9, 15),
+       (10, 17), (10, 18), (10, 19),
+       (11, 9), (11, 10);
 
 
 

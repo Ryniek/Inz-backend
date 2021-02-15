@@ -10,5 +10,6 @@ import java.util.List;
 
 @Repository
 public interface MajorRepository extends JpaRepository<Major, Long> {
+    List<Major> findAllByDepartmentAndHidden(Department department, Boolean hidden);
     List<Major> findAllByDepartment(Department department);
 }
