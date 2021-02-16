@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-//TODO sprawdzic czy dziala
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -14,5 +13,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> handleResourceNotFoundException (
             ResourceNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    public ResponseEntity<?> handleResourceAlreadyExistsException (
+            ResourceAlreadyExistsException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(exception.getMessage());
     }
 }

@@ -13,6 +13,7 @@ import pl.rynski.inzynierkabackend.repository.EffectRepository;
 import pl.rynski.inzynierkabackend.repository.MajorRepository;
 import pl.rynski.inzynierkabackend.utils.FetchDataUtils;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,9 +26,11 @@ public class MajorService {
     private final EffectRepository effectRepository;
     private final FetchDataUtils fetchDataUtils;
 
-    public List<MajorResponse> getMajorsByDepartment(Long departmentId) {
+    public List<MajorResponse> getMajorsByDepartment(Long departmentId, Boolean hidden) {
         Department department = fetchDataUtils.departmentById(departmentId);
-        List<Major> majors = majorRepository.findAllByDepartment(department);
+        List<Major> majors;
+        if(hidden != null) majors = majorRepository.findAllByDepartmentAndHidden(department, hidden);
+        else majors = majorRepository.findAllByDepartment(department);
         return majors.stream().map(MajorResponse::toResponse).collect(Collectors.toList());
     }
 
