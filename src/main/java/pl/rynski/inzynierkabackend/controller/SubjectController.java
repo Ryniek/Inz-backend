@@ -4,10 +4,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.rynski.inzynierkabackend.dao.dto.EffectDto;
+import pl.rynski.inzynierkabackend.dao.dto.SubjectDto;
 import pl.rynski.inzynierkabackend.service.SubjectService;
 
 @RestController
@@ -27,5 +26,11 @@ public class SubjectController {
     @GetMapping
     public ResponseEntity<?> getSubjects() {
         return ResponseEntity.status(HttpStatus.OK).body(subjectService.getSubjects());
+    }
+
+    @Operation(summary = "Add subject")
+    @PostMapping
+    public ResponseEntity<?> addSubject(@RequestBody SubjectDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(subjectService.addSubject(dto));
     }
 }

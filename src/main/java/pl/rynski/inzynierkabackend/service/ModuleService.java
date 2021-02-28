@@ -34,14 +34,10 @@ public class ModuleService {
         return ModuleResponse.toResponse(moduleRepository.save(module));
     }
 
-    public ModuleResponse addSubjectToModule(Long moduleId, SubjectDto subjectDto) {
+    public ModuleResponse addSubjectToModule(Long moduleId, Long subjectId) {
         Module module = fetchDataUtils.moduleById(moduleId);
-        Optional<Subject> existingSubject = subjectRepository.findBySubjectCode(subjectDto.getSubjectCode());
-        if(existingSubject.isPresent()) {
-            module.addSubject(existingSubject.get());
-        } else {
-            module.addSubject(SubjectDto.fromDto(subjectDto));
-        }
+        Subject subject = fetchDataUtils.subjectById(subjectId);
+        module.addSubject(subject);
         return ModuleResponse.toResponse(moduleRepository.save(module));
     }
 
