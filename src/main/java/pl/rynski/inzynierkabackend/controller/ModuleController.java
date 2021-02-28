@@ -28,14 +28,14 @@ public class ModuleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(moduleService.addModule(moduleDto));
     }
 
-    @Operation(summary = "Assing subject(create subject if not existing) to module")
-    @PutMapping("/{moduleId}/subject")
-    public ResponseEntity<?> addSubjectToModule(@PathVariable Long moduleId, @RequestBody SubjectDto subjectDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(moduleService.addSubjectToModule(moduleId, subjectDto));
+    @Operation(summary = "Add subject to module")
+    @PutMapping("/{moduleId}/subject/{subjectId}/add")
+    public ResponseEntity<?> addSubjectToModule(@PathVariable Long moduleId, @PathVariable Long subjectId) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(moduleService.addSubjectToModule(moduleId, subjectId));
     }
 
     @Operation(summary = "Remove subject from module")
-    @PutMapping("/{moduleId}/subject/{subjectId}")
+    @PutMapping("/{moduleId}/subject/{subjectId}/remove")
     public ResponseEntity<?> removeSubjectFromModule(@PathVariable Long moduleId, @PathVariable Long subjectId) {
         return ResponseEntity.status(HttpStatus.CREATED).body(moduleService.removeSubjectFromModule(moduleId, subjectId));
     }
