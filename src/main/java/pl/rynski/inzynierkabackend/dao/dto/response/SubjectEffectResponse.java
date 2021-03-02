@@ -1,7 +1,7 @@
 package pl.rynski.inzynierkabackend.dao.dto.response;
 
 import lombok.Data;
-import pl.rynski.inzynierkabackend.dao.model.MajorSubjectEffect;
+import pl.rynski.inzynierkabackend.dao.model.SubjectEffect;
 import pl.rynski.inzynierkabackend.dao.model.SubjectIdeaEffect;
 import pl.rynski.inzynierkabackend.dao.model.enums.EffectType;
 
@@ -13,13 +13,13 @@ public class SubjectEffectResponse {
     private EffectType type;
     private Integer connectionStrength;
 
-    public static SubjectEffectResponse toResponse(MajorSubjectEffect majorSubjectEffect) {
+    public static SubjectEffectResponse toResponse(SubjectEffect subjectEffect) {
         SubjectEffectResponse result = new SubjectEffectResponse();
-        result.setId(majorSubjectEffect.getEffect().getId());
-        result.setCode(majorSubjectEffect.getEffect().getCode());
-        result.setContent(majorSubjectEffect.getEffect().getContent());
-        result.setType(majorSubjectEffect.getEffect().getType());
-        result.setConnectionStrength(majorSubjectEffect.getConnectionStrength());
+        result.setId(subjectEffect.getEffect().getId());
+        result.setCode(subjectEffect.getEffect().getCode());
+        result.setContent(subjectEffect.getEffect().getContent());
+        result.setType(subjectEffect.getEffect().getType());
+        result.setConnectionStrength(subjectEffect.getConnectionStrength());
         return result;
     }
 

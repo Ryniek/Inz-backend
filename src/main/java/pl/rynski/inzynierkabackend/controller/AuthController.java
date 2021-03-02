@@ -27,4 +27,10 @@ public class AuthController {
         authService.register(userDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @Operation(summary = "Endpoint created due to test jwt")
+    @GetMapping("/token/test")
+    public ResponseEntity<?> tokenTest() {
+        return ResponseEntity.ok("Secured");
+    }
 }

@@ -34,6 +34,11 @@ public class MajorService {
         return majors.stream().map(MajorResponse::toResponse).collect(Collectors.toList());
     }
 
+    public MajorResponse getMajorById(Long majorId) {
+        Major major = fetchDataUtils.majorById(majorId);
+        return MajorResponse.toResponse(major);
+    }
+
     public MajorResponse addMajor(MajorDto dto) {
         Department department = fetchDataUtils.departmentById(dto.getDepartmentId());
         List<Effect> effects = effectRepository.findByIdsAndForMajor(dto.getEffects());

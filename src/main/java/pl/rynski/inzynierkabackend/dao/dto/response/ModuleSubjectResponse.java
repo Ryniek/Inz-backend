@@ -16,7 +16,6 @@ public class ModuleSubjectResponse {
     private TutorResponse tutor;
     private ContactHoursResponse contactHours;
     private NonContactHoursResponse nonContactHours;
-    private List<SubjectEffectResponse> effects = new ArrayList<>();
 
 
     public static ModuleSubjectResponse toResponse(MajorModuleSubject moduleSubject) {
@@ -28,10 +27,6 @@ public class ModuleSubjectResponse {
         result.setTutor(TutorResponse.toResponse(moduleSubject.getTutor()));
         result.setContactHours(ContactHoursResponse.toResponse(moduleSubject.getContactHours()));
         result.setNonContactHours(NonContactHoursResponse.toResponse(moduleSubject.getNonContactHours()));
-        result.setEffects(moduleSubject
-                .getMajorSubjectEffects().stream()
-                .map(SubjectEffectResponse::toResponse)
-                .collect(Collectors.toList()));
         return result;
     }
 }

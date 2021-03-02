@@ -8,13 +8,13 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-public class MajorSubjectEffect {
+public class SubjectEffect {
     @EmbeddedId
-    private MajorSubjectEffectId id = new MajorSubjectEffectId();
+    private SubjectEffectId id = new SubjectEffectId();
 
     @ManyToOne
-    @MapsId("majorModuleSubjectId")
-    private MajorModuleSubject majorModuleSubject;
+    @MapsId("subjectId")
+    private Subject subject;
 
     @ManyToOne
     @MapsId("effectId")

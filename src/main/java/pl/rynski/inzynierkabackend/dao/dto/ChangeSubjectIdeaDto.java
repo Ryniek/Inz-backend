@@ -18,10 +18,8 @@ public class ChangeSubjectIdeaDto {
     private Long majorModuleId;
     //Propozycja zmiany prowadzącego
     private Long tutorId;
-    //Propozycja zmiany efektów
-    private Set<SubjectEffectDto> effects = new HashSet<>();
 
-    public static SubjectIdea fromDto(ChangeSubjectIdeaDto dto, MajorModuleSubject majorModuleSubject, MajorModule majorModule, Tutor tutor, Set<SubjectIdeaEffect> effects) {
+    public static SubjectIdea fromDto(ChangeSubjectIdeaDto dto, MajorModuleSubject majorModuleSubject, MajorModule majorModule, Tutor tutor) {
         SubjectIdea result = new SubjectIdea();
         result.setExisting(true);
         result.setSendingTime(DateUtils.getCurrentDateTime());
@@ -33,10 +31,6 @@ public class ChangeSubjectIdeaDto {
         if(majorModule != null) majorModule.addSubjectIdea(result);
         if(tutor != null) tutor.addSubjectIdea(result);
         majorModuleSubject.addSubjectIdea(result);
-        if(!effects.isEmpty()) {
-            result.setSubjectIdeaEffects(effects);
-            effects.forEach(effect -> effect.setSubjectIdea(result));
-        }
         return result;
     }
 }

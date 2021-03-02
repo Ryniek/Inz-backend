@@ -14,9 +14,8 @@ public class ModuleSubjectDto {
     private Long tutorId;
     private ContactHoursDto contactHours;
     private NonContactHoursDto nonContactHours;
-    private Set<SubjectEffectDto> effects = new HashSet<>();
 
-    public static MajorModuleSubject fromDto(ModuleSubjectDto dto, MajorModule majorModule, Subject subject, Tutor tutor, Set<MajorSubjectEffect> effects) {
+    public static MajorModuleSubject fromDto(ModuleSubjectDto dto, MajorModule majorModule, Subject subject, Tutor tutor) {
         MajorModuleSubject result = new MajorModuleSubject();
         result.setEcts(dto.getEcts());
         result.setSemester(dto.getSemester());
@@ -25,8 +24,6 @@ public class ModuleSubjectDto {
         majorModule.addMajorModuleSubject(result);
         subject.addMajorModuleSubject(result);
         tutor.addMajorModuleSubject(result);
-        result.setMajorSubjectEffects(effects);
-        effects.forEach(effect -> effect.setMajorModuleSubject(result));
         return result;
     }
 }

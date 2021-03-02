@@ -2,7 +2,6 @@ package pl.rynski.inzynierkabackend.dao.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.rynski.inzynierkabackend.dao.dto.EffectDto;
 import pl.rynski.inzynierkabackend.dao.model.enums.EffectType;
 
 import javax.persistence.*;
@@ -34,7 +33,7 @@ public class Effect {
     private Boolean forMajor;
 
     @OneToMany(mappedBy = "effect")
-    private Set<MajorSubjectEffect> majorSubjectEffects = new HashSet<>();
+    private Set<SubjectEffect> subjectEffects = new HashSet<>();
 
     @ManyToMany(mappedBy = "effects")
     private Set<Major> majors = new HashSet<>();
