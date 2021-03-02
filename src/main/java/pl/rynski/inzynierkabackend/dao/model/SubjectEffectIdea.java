@@ -13,8 +13,8 @@ public class SubjectEffectIdea {
     private SubjectEffectIdeaId id = new SubjectEffectIdeaId();
 
     @ManyToOne
-    @MapsId("majorModuleSubjectId")
-    private MajorModuleSubject majorModuleSubject;
+    @MapsId("subjectId")
+    private Subject subject;
 
     @ManyToOne
     @MapsId("effectIdeaId")

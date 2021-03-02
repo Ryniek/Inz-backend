@@ -20,7 +20,6 @@ public class NewEffectIdeaDto {
     private Boolean forSubject;
     private Boolean forMajor;
     //TODO walidacja ze jak forSubject true to majorIds empty i na odwrot
-    //TODO tutaj rozbic effectIdea - majorModuleSubject na jeszcze posredniczaca z polem connectionStrength
     private Set<SubjectEffectDto> subjects = new HashSet<>();
     private Set<Long> majorIds = new HashSet<>();
 

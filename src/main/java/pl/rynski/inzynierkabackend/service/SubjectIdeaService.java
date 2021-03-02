@@ -53,12 +53,7 @@ public class SubjectIdeaService {
         Tutor tutor = null;
         if(dto.getTutorId() != null) tutor = fetchDataUtils.tutorById(dto.getTutorId());
 
-        Set<SubjectIdeaEffect> effects = new HashSet<>();
-        dto.getEffects().forEach(effect -> {
-            effects.add(createNewSingleEffect(effect));
-        });
-
-        SubjectIdea result = ChangeSubjectIdeaDto.fromDto(dto, majorModuleSubject, majorModule, tutor, effects);
+        SubjectIdea result = ChangeSubjectIdeaDto.fromDto(dto, majorModuleSubject, majorModule, tutor);
         result.setUser(userDetailsService.getLoggedUser());
         return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
     }

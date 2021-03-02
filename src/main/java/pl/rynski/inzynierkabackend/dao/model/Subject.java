@@ -27,6 +27,12 @@ public class Subject {
     @OneToMany(mappedBy = "subject")
     private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
 
+    @OneToMany(mappedBy = "subject", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    private Set<SubjectEffect> subjectEffects = new HashSet<>();
+
+    @OneToMany(mappedBy = "subject")
+    private Set<SubjectEffectIdea> subjectEffectIdeas = new HashSet<>();
+
     //pomocnicze dajemy tam gdzie one to many
     public void addMajorModuleSubject(MajorModuleSubject majorModuleSubject) {
         majorModuleSubjects.add(majorModuleSubject);

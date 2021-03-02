@@ -47,12 +47,6 @@ public class MajorModuleSubject {
     @OneToMany(mappedBy = "majorModuleSubject", orphanRemoval = true)
     private Set<ModuleIdeaSubject> moduleIdeaSubjects = new HashSet<>();
 
-    @OneToMany(mappedBy = "majorModuleSubject", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    private Set<MajorSubjectEffect> majorSubjectEffects = new HashSet<>();
-
-    @OneToMany(mappedBy = "majorModuleSubject")
-    private Set<SubjectEffectIdea> subjectEffectIdeas = new HashSet<>();
-
     public void addSubjectIdea(SubjectIdea subjectIdea) {
         this.subjectIdeas.add(subjectIdea);
         subjectIdea.setMajorModuleSubject(this);

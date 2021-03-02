@@ -100,7 +100,7 @@ public class EffectIdeaService {
 
     private SubjectEffectIdea createNewSingleSubject(SubjectEffectDto effect) {
         SubjectEffectIdea singleSubject = new SubjectEffectIdea();
-        singleSubject.setMajorModuleSubject(fetchDataUtils.moduleSubjectById(effect.getId()));
+        singleSubject.setSubject(fetchDataUtils.subjectById(effect.getId()));
         singleSubject.setConnectionStrength(effect.getConnectionStrength());
         return singleSubject;
     }

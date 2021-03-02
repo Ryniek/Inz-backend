@@ -3,7 +3,7 @@ package pl.rynski.inzynierkabackend.dao.dto.response;
 import lombok.Data;
 import pl.rynski.inzynierkabackend.dao.model.Effect;
 import pl.rynski.inzynierkabackend.dao.model.EffectIdea;
-import pl.rynski.inzynierkabackend.dao.model.MajorSubjectEffect;
+import pl.rynski.inzynierkabackend.dao.model.SubjectEffect;
 import pl.rynski.inzynierkabackend.dao.model.SubjectEffectIdea;
 import pl.rynski.inzynierkabackend.dao.model.enums.EffectType;
 
@@ -39,7 +39,7 @@ public class EffectIdeaResponse {
         private EffectType type;
         private Boolean forSubject;
         private Boolean forMajor;
-        private Set<ExistingSubject> majorSubjects = new HashSet<>();
+        private Set<ExistingSubject> subjects = new HashSet<>();
         private Set<MajorShortResponse> majors = new HashSet<>();
 
         @Data
@@ -49,15 +49,15 @@ public class EffectIdeaResponse {
 
             public static ExistingSubject toResponse(SubjectEffectIdea subjectEffectIdea) {
                 ExistingSubject result = new ExistingSubject();
-                result.setSubject(SubjectResponse.toResponse(subjectEffectIdea.getMajorModuleSubject().getSubject()));
+                result.setSubject(SubjectResponse.toResponse(subjectEffectIdea.getSubject()));
                 result.setConnectionStrength(subjectEffectIdea.getConnectionStrength());
                 return result;
             }
 
-            public static ExistingSubject toResponse(MajorSubjectEffect majorSubjectEffect) {
+            public static ExistingSubject toResponse(SubjectEffect subjectEffect) {
                 ExistingSubject result = new ExistingSubject();
-                result.setSubject(SubjectResponse.toResponse(majorSubjectEffect.getMajorModuleSubject().getSubject()));
-                result.setConnectionStrength(majorSubjectEffect.getConnectionStrength());
+                result.setSubject(SubjectResponse.toResponse(subjectEffect.getSubject()));
+                result.setConnectionStrength(subjectEffect.getConnectionStrength());
                 return result;
             }
         }
@@ -70,8 +70,8 @@ public class EffectIdeaResponse {
             result.setType(effect.getType());
             result.setForSubject(effect.getForSubject());
             result.setForMajor(effect.getForMajor());
-            result.setMajorSubjects(effect
-                    .getMajorSubjectEffects().stream()
+            result.setSubjects(effect
+                    .getSubjectEffects().stream()
                     .map(ExistingSubject::toResponse)
                     .collect(Collectors.toSet()));
             result.setMajors(effect
