@@ -21,6 +21,12 @@ public class MajorController {
         return ResponseEntity.ok().body(majorService.getMajorsByDepartment(departmentId, hidden));
     }
 
+    @Operation(summary = "Get major by id")
+    @GetMapping("/get/{majorId}")
+    public ResponseEntity<?> getMajorById(@PathVariable Long majorId) {
+        return ResponseEntity.status(HttpStatus.OK).body(majorService.getMajorById(majorId));
+    }
+
     @Operation(summary = "Add major")
     @PostMapping
     public ResponseEntity<?> addMajor(@RequestBody MajorDto majorDto) {
