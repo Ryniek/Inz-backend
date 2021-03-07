@@ -7,6 +7,8 @@ import pl.rynski.inzynierkabackend.dao.model.Module;
 import pl.rynski.inzynierkabackend.exception.ResourceNotFoundException;
 import pl.rynski.inzynierkabackend.repository.*;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class FetchDataUtils {

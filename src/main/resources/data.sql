@@ -4,7 +4,7 @@ VALUES (1, 'USER'),
 
 INSERT INTO user (id, email, password, register_time, role_id)
 VALUES (1, 'string', '$2a$10$TAqdFOrMrzi38eLfx81m3uBbX9UxuLqt0MvIRPjrRbcXjVEXaD3la', '2015-01-02 10:10:00', 1),
-       (2, 'admin', '$2a$10$XM05bBKsBOuYaIjMypWBp..yiaDSN.YKrcB3k42e7We50J/uxIM/m', '2010-01-01 07:37:51', 2);
+       (2, 'admin', '$2a$10$2KTTKAOHETH3GLDaXkd7Su09G9EsE7h00Ycnk68rGc0QsWCvPZfCm', '2010-01-01 07:37:51', 2);
 
 INSERT INTO department (id, name)
 VALUES (1, 'Wydział Mechaniczno-Elektryczny'),

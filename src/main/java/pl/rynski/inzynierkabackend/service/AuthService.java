@@ -3,7 +3,7 @@ package pl.rynski.inzynierkabackend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.rynski.inzynierkabackend.dao.dto.UserDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.UserDto;
 import pl.rynski.inzynierkabackend.dao.model.User;
 import pl.rynski.inzynierkabackend.dao.model.UserRole;
 import pl.rynski.inzynierkabackend.exception.ResourceAlreadyExistsException;

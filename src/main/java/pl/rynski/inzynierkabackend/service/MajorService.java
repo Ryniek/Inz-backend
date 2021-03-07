@@ -2,19 +2,15 @@ package pl.rynski.inzynierkabackend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.rynski.inzynierkabackend.dao.dto.MajorDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.MajorDto;
 import pl.rynski.inzynierkabackend.dao.dto.response.MajorResponse;
 import pl.rynski.inzynierkabackend.dao.model.Department;
 import pl.rynski.inzynierkabackend.dao.model.Effect;
 import pl.rynski.inzynierkabackend.dao.model.Major;
-import pl.rynski.inzynierkabackend.exception.ResourceNotFoundException;
-import pl.rynski.inzynierkabackend.repository.DepartmentRepository;
 import pl.rynski.inzynierkabackend.repository.EffectRepository;
 import pl.rynski.inzynierkabackend.repository.MajorRepository;
 import pl.rynski.inzynierkabackend.utils.FetchDataUtils;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +21,11 @@ public class MajorService {
     private final MajorRepository majorRepository;
     private final EffectRepository effectRepository;
     private final FetchDataUtils fetchDataUtils;
+
+    public List<MajorResponse> getNotHiddenMajors() {
+        List<Major> majors = majorRepository.findAllByHidden(false);
+        return majors.stream().map(MajorResponse::toResponse).collect(Collectors.toList());
+    }
 
     public List<MajorResponse> getMajorsByDepartment(Long departmentId, Boolean hidden) {
         Department department = fetchDataUtils.departmentById(departmentId);
@@ -37,6 +38,11 @@ public class MajorService {
     public MajorResponse getMajorById(Long majorId) {
         Major major = fetchDataUtils.majorById(majorId);
         return MajorResponse.toResponse(major);
+    }
+
+    public List<MajorResponse> getMajorsByEffect(Long effectId) {
+        Effect effect = fetchDataUtils.effectById(effectId);
+        return majorRepository.findAllByEffectsIn(List.of(effect)).stream().map(MajorResponse::toResponse).collect(Collectors.toList());
     }
 
     public MajorResponse addMajor(MajorDto dto) {

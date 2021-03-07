@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.rynski.inzynierkabackend.dao.dto.MajorDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.MajorDto;
 import pl.rynski.inzynierkabackend.service.MajorService;
 
 @RestController
@@ -14,6 +14,12 @@ import pl.rynski.inzynierkabackend.service.MajorService;
 public class MajorController {
 
     private final MajorService majorService;
+
+    @Operation(summary = "Get all not hidden majors")
+    @GetMapping
+    public ResponseEntity<?> getNotHiddenMajors() {
+        return ResponseEntity.ok().body(majorService.getNotHiddenMajors());
+    }
 
     @Operation(summary = "Get all majors by department id")
     @GetMapping("/{departmentId}")
@@ -25,6 +31,12 @@ public class MajorController {
     @GetMapping("/get/{majorId}")
     public ResponseEntity<?> getMajorById(@PathVariable Long majorId) {
         return ResponseEntity.status(HttpStatus.OK).body(majorService.getMajorById(majorId));
+    }
+
+    @Operation(summary = "Get all majors by effect")
+    @GetMapping("/effect/{effectId}")
+    public ResponseEntity<?> getMajorsByEffectId(@PathVariable Long effectId) {
+        return ResponseEntity.status(HttpStatus.OK).body(majorService.getMajorsByEffect(effectId));
     }
 
     @Operation(summary = "Add major")

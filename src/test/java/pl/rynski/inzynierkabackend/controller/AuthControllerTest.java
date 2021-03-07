@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
-import pl.rynski.inzynierkabackend.dao.dto.UserDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.UserDto;
 import pl.rynski.inzynierkabackend.dao.model.User;
 import pl.rynski.inzynierkabackend.dao.model.UserRole;
 import pl.rynski.inzynierkabackend.repository.UserRepository;

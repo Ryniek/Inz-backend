@@ -1,9 +1,8 @@
-package pl.rynski.inzynierkabackend.dao.dto;
+package pl.rynski.inzynierkabackend.dao.dto.request;
 
 import lombok.Data;
 import pl.rynski.inzynierkabackend.dao.model.EffectIdea;
 import pl.rynski.inzynierkabackend.dao.model.Major;
-import pl.rynski.inzynierkabackend.dao.model.MajorModuleSubject;
 import pl.rynski.inzynierkabackend.dao.model.SubjectEffectIdea;
 import pl.rynski.inzynierkabackend.dao.model.enums.EffectType;
 import pl.rynski.inzynierkabackend.utils.DateUtils;

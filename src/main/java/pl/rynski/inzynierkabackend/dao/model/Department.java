@@ -3,7 +3,6 @@ package pl.rynski.inzynierkabackend.dao.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.rynski.inzynierkabackend.dao.dto.DepartmentDto;
 
 import javax.persistence.*;
 import java.util.HashSet;

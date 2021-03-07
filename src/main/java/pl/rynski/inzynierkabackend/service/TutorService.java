@@ -2,7 +2,7 @@ package pl.rynski.inzynierkabackend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.rynski.inzynierkabackend.dao.dto.TutorDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.TutorDto;
 import pl.rynski.inzynierkabackend.dao.dto.response.TutorResponse;
 import pl.rynski.inzynierkabackend.dao.model.Tutor;
 import pl.rynski.inzynierkabackend.repository.TutorRepository;

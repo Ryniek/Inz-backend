@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.rynski.inzynierkabackend.dao.dto.DepartmentDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.DepartmentDto;
 import pl.rynski.inzynierkabackend.service.DepartmentService;
 
 @RestController

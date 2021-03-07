@@ -5,7 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import pl.rynski.inzynierkabackend.dao.dto.*;
+import pl.rynski.inzynierkabackend.dao.dto.request.*;
 import pl.rynski.inzynierkabackend.dao.dto.response.SubjectIdeaResponse;
 import pl.rynski.inzynierkabackend.dao.model.*;
 import pl.rynski.inzynierkabackend.repository.SubjectIdeaRepository;
