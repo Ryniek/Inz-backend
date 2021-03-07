@@ -2,8 +2,7 @@ package pl.rynski.inzynierkabackend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.rynski.inzynierkabackend.dao.dto.ModuleDto;
-import pl.rynski.inzynierkabackend.dao.dto.SubjectDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.ModuleDto;
 import pl.rynski.inzynierkabackend.dao.dto.response.ModuleResponse;
 import pl.rynski.inzynierkabackend.dao.model.Module;
 import pl.rynski.inzynierkabackend.dao.model.Subject;
@@ -12,7 +11,6 @@ import pl.rynski.inzynierkabackend.repository.SubjectRepository;
 import pl.rynski.inzynierkabackend.utils.FetchDataUtils;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

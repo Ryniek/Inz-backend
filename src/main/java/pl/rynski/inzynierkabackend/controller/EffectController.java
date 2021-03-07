@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.rynski.inzynierkabackend.dao.dto.EffectDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.EffectDto;
 import pl.rynski.inzynierkabackend.service.EffectService;
 
 @RestController
@@ -19,6 +19,12 @@ public class EffectController {
     @GetMapping
     public ResponseEntity<?> getEffects(@RequestParam Boolean forSubject) {
         return ResponseEntity.status(HttpStatus.OK).body(effectService.getEffects(forSubject));
+    }
+
+    @Operation(summary = "Get effect by id")
+    @GetMapping("/{effectId}")
+    public ResponseEntity<?> getEffectById(@PathVariable Long effectId) {
+        return ResponseEntity.status(HttpStatus.OK).body(effectService.getEffectById(effectId));
     }
 
     @Operation(summary = "Add effect")

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.rynski.inzynierkabackend.dao.dto.ModuleSubjectDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.ModuleSubjectDto;
 import pl.rynski.inzynierkabackend.service.ModuleSubjectService;
 
 @RestController
@@ -14,6 +14,12 @@ import pl.rynski.inzynierkabackend.service.ModuleSubjectService;
 public class ModuleSubjectController {
 
     private final ModuleSubjectService moduleSubjectService;
+
+    @Operation(summary = "Get moduleSubject by id")
+    @GetMapping("/{moduleSubjectId}")
+    public ResponseEntity<?> getModuleSubjectById(@PathVariable Long moduleSubjectId) {
+        return ResponseEntity.status(HttpStatus.OK).body(moduleSubjectService.getModuleSubjectById(moduleSubjectId));
+    }
 
     @Operation(summary = "Add Subject with all data(hours, ects etc.) to the module")
     @PostMapping("/{majorModuleId}")

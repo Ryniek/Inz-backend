@@ -2,17 +2,13 @@ package pl.rynski.inzynierkabackend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.rynski.inzynierkabackend.dao.dto.MajorModuleDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.MajorModuleDto;
 import pl.rynski.inzynierkabackend.dao.dto.response.MajorModuleResponse;
 import pl.rynski.inzynierkabackend.dao.model.Major;
 import pl.rynski.inzynierkabackend.dao.model.MajorModule;
 import pl.rynski.inzynierkabackend.dao.model.Module;
 import pl.rynski.inzynierkabackend.dao.model.Tutor;
-import pl.rynski.inzynierkabackend.exception.ResourceNotFoundException;
 import pl.rynski.inzynierkabackend.repository.MajorModuleRepository;
-import pl.rynski.inzynierkabackend.repository.MajorRepository;
-import pl.rynski.inzynierkabackend.repository.ModuleRepository;
-import pl.rynski.inzynierkabackend.repository.TutorRepository;
 import pl.rynski.inzynierkabackend.utils.FetchDataUtils;
 
 import java.util.List;

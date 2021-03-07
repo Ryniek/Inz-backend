@@ -2,7 +2,6 @@ package pl.rynski.inzynierkabackend.dao.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.rynski.inzynierkabackend.dao.dto.MajorDto;
 import pl.rynski.inzynierkabackend.dao.model.enums.StudyType;
 
 import javax.persistence.*;

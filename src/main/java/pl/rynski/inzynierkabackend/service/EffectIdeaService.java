@@ -4,16 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-import pl.rynski.inzynierkabackend.dao.dto.*;
+import pl.rynski.inzynierkabackend.dao.dto.request.*;
 import pl.rynski.inzynierkabackend.dao.dto.response.EffectIdeaResponse;
-import pl.rynski.inzynierkabackend.dao.dto.response.ModuleIdeaResponse;
-import pl.rynski.inzynierkabackend.dao.dto.response.SubjectIdeaResponse;
 import pl.rynski.inzynierkabackend.dao.model.*;
 import pl.rynski.inzynierkabackend.repository.EffectIdeaRepository;
 import pl.rynski.inzynierkabackend.repository.MajorRepository;
-import pl.rynski.inzynierkabackend.repository.ModuleSubjectRepository;
 import pl.rynski.inzynierkabackend.security.CustomUserDetailsService;
 import pl.rynski.inzynierkabackend.utils.FetchDataUtils;
 
@@ -55,9 +51,11 @@ public class EffectIdeaService {
         //TODO sprawdzic czy przedmiot byl juz przypisany wczesniej do danego modulu
         //TODO walidacja czy efekt jest dla przedmiotu
         Set<SubjectEffectIdea> subjects = new HashSet<>();
-        dto.getSubjects().forEach(subject -> {
-            subjects.add(createNewSingleSubject(subject));
-        });
+        if(!dto.getSubjects().isEmpty()) {
+            dto.getSubjects().forEach(subject -> {
+                subjects.add(createNewSingleSubject(subject));
+            });
+        }
         List<Major> majors = new ArrayList<>();
         if(!dto.getMajorIds().isEmpty()) {
             majors = majorRepository.findAllById(dto.getMajorIds());

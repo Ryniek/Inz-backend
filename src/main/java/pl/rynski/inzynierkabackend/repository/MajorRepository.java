@@ -12,4 +12,6 @@ import java.util.List;
 public interface MajorRepository extends JpaRepository<Major, Long> {
     List<Major> findAllByDepartmentAndHidden(Department department, Boolean hidden);
     List<Major> findAllByDepartment(Department department);
+    List<Major> findAllByEffectsIn(List<Effect> effects);
+    List<Major> findAllByHidden(Boolean hidden);
 }

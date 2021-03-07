@@ -5,8 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.rynski.inzynierkabackend.dao.dto.EffectDto;
-import pl.rynski.inzynierkabackend.dao.dto.SubjectDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.SubjectDto;
 import pl.rynski.inzynierkabackend.service.SubjectService;
 
 @RestController
@@ -20,6 +19,12 @@ public class SubjectController {
     @GetMapping("/{moduleId}")
     public ResponseEntity<?> getSubjectsByModule(@PathVariable Long moduleId) {
         return ResponseEntity.status(HttpStatus.OK).body(subjectService.getSubjectsByModule(moduleId));
+    }
+
+    @Operation(summary = "Get all subjects by effect id")
+    @GetMapping("/effect/{effectId}")
+    public ResponseEntity<?> getSubjectsByEffect(@PathVariable Long effectId) {
+        return ResponseEntity.status(HttpStatus.OK).body(subjectService.getSubjectsByEffect(effectId));
     }
 
     @Operation(summary = "Get all subjects")

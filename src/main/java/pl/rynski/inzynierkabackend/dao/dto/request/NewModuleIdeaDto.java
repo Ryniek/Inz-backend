@@ -1,4 +1,4 @@
-package pl.rynski.inzynierkabackend.dao.dto;
+package pl.rynski.inzynierkabackend.dao.dto.request;
 
 import lombok.Data;
 import pl.rynski.inzynierkabackend.dao.model.*;
@@ -8,24 +8,36 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-public class ChangeModuleIdeaDto {
+public class NewModuleIdeaDto {
+    private String moduleName;
     private String ideaExplanation;
+    private String graduateSkills;
+    private String potentialEmployers;
     private Long tutorId;
     //TODO walidacja ze max 8 w obu listach ponizej lacznie
+    //majorModuleId tutaj musi byc null
     private Set<NewSubjectIdeaDto> newSubjects = new HashSet<>();
-    private Set<NewModuleIdeaDto.ExistingSubject> existingSubjects = new HashSet<>();
+    private Set<ExistingSubject> existingSubjects = new HashSet<>();
 
-    public static ModuleIdea fromDto(ChangeModuleIdeaDto dto, MajorModule majorModule, Tutor tutor,  Set<SubjectIdea> subjectIdeas, Set<ModuleIdeaSubject> existingSubjects) {
+    @Data
+    public static class ExistingSubject {
+        private Long moduleSubjectId;
+        private Integer semester;
+    }
+
+    public static ModuleIdea fromDto(NewModuleIdeaDto dto, Tutor tutor, Set<SubjectIdea> subjectIdeas, Set<ModuleIdeaSubject> existingSubjects) {
         ModuleIdea result = new ModuleIdea();
-        result.setExisting(true);
+        result.setModuleName(dto.getModuleName());
         result.setSendingTime(DateUtils.getCurrentDateTime());
         result.setIdeaExplanation(dto.getIdeaExplanation());
-        majorModule.addModuleIdea(result);
-        if(tutor != null) tutor.addModuleIdea(result);
+        result.setGraduateSkills(dto.getGraduateSkills());
+        result.setPotentialEmployers(dto.getPotentialEmployers());
+        tutor.addModuleIdea(result);
         if(!subjectIdeas.isEmpty()) {
             result.setSubjectIdeas(subjectIdeas);
             subjectIdeas.forEach(subjectIdea -> subjectIdea.setModuleIdea(result));
         }
+        //TODO tu sprawdzic czy not null i zrobic ta posredniczaca
         if(!existingSubjects.isEmpty()) {
             result.setModuleIdeaSubjects(existingSubjects);
             existingSubjects.forEach(effect -> effect.setModuleIdea(result));

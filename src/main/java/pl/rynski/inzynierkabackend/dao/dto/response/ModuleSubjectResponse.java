@@ -12,6 +12,8 @@ public class ModuleSubjectResponse {
     private Long id;
     private Integer ects;
     private Integer semester;
+    private MajorShortResponse major;
+    private ModuleShortResponse module;
     private SubjectResponse subject;
     private TutorResponse tutor;
     private ContactHoursResponse contactHours;
@@ -23,6 +25,8 @@ public class ModuleSubjectResponse {
         result.setId(moduleSubject.getId());
         result.setEcts(moduleSubject.getEcts());
         result.setSemester(moduleSubject.getSemester());
+        result.setMajor(MajorShortResponse.toResponse(moduleSubject.getMajorModule().getMajor()));
+        result.setModule(ModuleShortResponse.toResponse(moduleSubject.getMajorModule().getModule()));
         result.setSubject(SubjectResponse.toResponse(moduleSubject.getSubject()));
         result.setTutor(TutorResponse.toResponse(moduleSubject.getTutor()));
         result.setContactHours(ContactHoursResponse.toResponse(moduleSubject.getContactHours()));

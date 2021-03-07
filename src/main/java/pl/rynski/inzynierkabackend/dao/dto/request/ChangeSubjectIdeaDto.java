@@ -1,11 +1,8 @@
-package pl.rynski.inzynierkabackend.dao.dto;
+package pl.rynski.inzynierkabackend.dao.dto.request;
 
 import lombok.Data;
 import pl.rynski.inzynierkabackend.dao.model.*;
 import pl.rynski.inzynierkabackend.utils.DateUtils;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 public class ChangeSubjectIdeaDto {
