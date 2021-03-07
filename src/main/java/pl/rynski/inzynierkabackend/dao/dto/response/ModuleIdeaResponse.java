@@ -38,6 +38,7 @@ public class ModuleIdeaResponse {
 
         private static MajorModuleResponse toResponse(MajorModule majorModule) {
             MajorModuleResponse result = new MajorModuleResponse();
+            result.setId(majorModule.getId());
             result.setMajor(MajorShortResponse.toResponse(majorModule.getMajor()));
             result.setModuleName(majorModule.getModule().getName());
             result.setSpecialized(majorModule.getModule().getSpecialized());

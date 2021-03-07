@@ -28,7 +28,7 @@ public class NewEffectIdeaDto {
         result.setContent(dto.getContent());
         result.setIdeaExplanation(dto.getIdeaExplanation());
         result.setType(dto.getType());
-        result.setForMajor(dto.getForSubject());
+        result.setForSubject(dto.getForSubject());
         result.setForMajor(dto.getForMajor());
         result.setSubjectEffectIdeas(subjects);
         subjects.forEach(subject -> subject.setEffectIdea(result));
