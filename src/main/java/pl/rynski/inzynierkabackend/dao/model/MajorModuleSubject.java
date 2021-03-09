@@ -44,9 +44,6 @@ public class MajorModuleSubject {
     @OneToMany(mappedBy = "majorModuleSubject", orphanRemoval = true)
     private Set<SubjectIdea> subjectIdeas = new HashSet<>();
 
-    @OneToMany(mappedBy = "majorModuleSubject", orphanRemoval = true)
-    private Set<ModuleIdeaSubject> moduleIdeaSubjects = new HashSet<>();
-
     public void addSubjectIdea(SubjectIdea subjectIdea) {
         this.subjectIdeas.add(subjectIdea);
         subjectIdea.setMajorModuleSubject(this);

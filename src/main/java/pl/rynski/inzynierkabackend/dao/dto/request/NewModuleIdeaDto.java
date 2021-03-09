@@ -14,6 +14,7 @@ public class NewModuleIdeaDto {
     private String graduateSkills;
     private String potentialEmployers;
     private Long tutorId;
+    private Long majorId;
     //TODO walidacja ze max 8 w obu listach ponizej lacznie
     //majorModuleId tutaj musi byc null
     private Set<NewSubjectIdeaDto> newSubjects = new HashSet<>();
@@ -21,17 +22,19 @@ public class NewModuleIdeaDto {
 
     @Data
     public static class ExistingSubject {
-        private Long moduleSubjectId;
-        private Integer semester;
+        private Long subjectId;
+        private Long tutorId;
+        private Integer ects;
     }
 
-    public static ModuleIdea fromDto(NewModuleIdeaDto dto, Tutor tutor, Set<SubjectIdea> subjectIdeas, Set<ModuleIdeaSubject> existingSubjects) {
+    public static ModuleIdea fromDto(NewModuleIdeaDto dto, Tutor tutor, Major major, Set<SubjectIdea> subjectIdeas, Set<ModuleIdeaSubject> existingSubjects) {
         ModuleIdea result = new ModuleIdea();
         result.setModuleName(dto.getModuleName());
         result.setSendingTime(DateUtils.getCurrentDateTime());
         result.setIdeaExplanation(dto.getIdeaExplanation());
         result.setGraduateSkills(dto.getGraduateSkills());
         result.setPotentialEmployers(dto.getPotentialEmployers());
+        result.setMajor(major);
         tutor.addModuleIdea(result);
         if(!subjectIdeas.isEmpty()) {
             result.setSubjectIdeas(subjectIdeas);

@@ -33,6 +33,9 @@ public class Subject {
     @OneToMany(mappedBy = "subject")
     private Set<SubjectEffectIdea> subjectEffectIdeas = new HashSet<>();
 
+    @OneToMany(mappedBy = "subject")
+    private Set<ModuleIdeaSubject> moduleIdeaSubjects = new HashSet<>();
+
     //pomocnicze dajemy tam gdzie one to many
     public void addMajorModuleSubject(MajorModuleSubject majorModuleSubject) {
         majorModuleSubjects.add(majorModuleSubject);

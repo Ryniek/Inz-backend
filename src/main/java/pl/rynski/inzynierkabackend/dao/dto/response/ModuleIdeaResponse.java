@@ -21,6 +21,7 @@ public class ModuleIdeaResponse {
     private String ideaExplanation;
     private String graduateSkills;
     private String potentialEmployers;
+    private MajorShortResponse major;
     private UserResponse user;
     private TutorResponse tutor;
     private MajorModuleResponse majorModule;
@@ -63,6 +64,7 @@ public class ModuleIdeaResponse {
         result.setGraduateSkills(moduleIdea.getGraduateSkills());
         result.setPotentialEmployers(moduleIdea.getPotentialEmployers());
         result.setUser(UserResponse.toResponse(moduleIdea.getUser()));
+        if(moduleIdea.getMajor() != null) result.setMajor(MajorShortResponse.toResponse(moduleIdea.getMajor()));
         if(moduleIdea.getTutor() != null) result.setTutor(TutorResponse.toResponse(moduleIdea.getTutor()));
         if(moduleIdea.getMajorModule() != null) result.setMajorModule(MajorModuleResponse.toResponse(moduleIdea.getMajorModule()));
         result.setNewSubjects(moduleIdea

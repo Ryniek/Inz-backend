@@ -53,6 +53,11 @@ public class ModuleIdea {
     @JoinColumn(name = "major_module_id", referencedColumnName = "id")
     private MajorModule majorModule;
 
+    //Kiedy nowy moduł dla kierunku
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "major_id", referencedColumnName = "id")
+    private Major major;
+
     //Stworzone nowe przedmioty do modułu
     @OneToMany(mappedBy = "moduleIdea", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<SubjectIdea> subjectIdeas = new HashSet<>();

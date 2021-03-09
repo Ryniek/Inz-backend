@@ -36,6 +36,9 @@ public class Tutor {
     @OneToMany(mappedBy = "tutor")
     private Set<ModuleIdea> moduleIdeas = new HashSet<>();
 
+    @OneToMany(mappedBy = "tutor")
+    private Set<ModuleIdeaSubject> moduleIdeaSubjects = new HashSet<>();
+
     //pomocnicze dajemy tam gdzie one to many
     public void addMajorModule(MajorModule majorModule) {
         modules.add(majorModule);
