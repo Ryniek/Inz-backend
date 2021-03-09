@@ -29,6 +29,12 @@ public class MajorModuleService {
                 .collect(Collectors.toList());
     }
 
+    public MajorModuleResponse getMajorModuleById(Long majorModuleId) {
+        MajorModule majorModule = fetchDataUtils.majorModuleById(majorModuleId);
+
+        return MajorModuleResponse.toResponse(majorModule);
+    }
+
     public MajorModuleResponse assingModuleToMajor(MajorModuleDto majorModuleDto) {
         //TODO sprawdzic czy modul o takim id nie jest juz przypisany, jesli jest to zwrocic jakas odpowiedz
         Major major = fetchDataUtils.majorById(majorModuleDto.getMajorId());

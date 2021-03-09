@@ -13,15 +13,17 @@ import java.util.Objects;
 public class ModuleIdeaSubjectId implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long moduleIdeaId;
-    private Long majorModuleSubjectId;
+    private Long subjectId;
+    private Long tutorId;
 
     public ModuleIdeaSubjectId() {
     }
 
-    public ModuleIdeaSubjectId(Long moduleIdeaId, Long majorModuleSubjectId) {
+    public ModuleIdeaSubjectId(Long moduleIdeaId, Long subjectId, Long tutorId) {
         super();
         this.moduleIdeaId = moduleIdeaId;
-        this.majorModuleSubjectId = majorModuleSubjectId;
+        this.subjectId = subjectId;
+        this.tutorId = tutorId;
     }
 
     @Override
@@ -31,7 +33,9 @@ public class ModuleIdeaSubjectId implements Serializable {
         result = prime * result
                 + ((moduleIdeaId == null) ? 0 : moduleIdeaId.hashCode());
         result = prime * result
-                + ((majorModuleSubjectId == null) ? 0 : majorModuleSubjectId.hashCode());
+                + ((subjectId == null) ? 0 : subjectId.hashCode());
+        result = prime * result
+                + (((tutorId == null)) ? 0 : tutorId.hashCode());
         return result;
     }
 
@@ -44,6 +48,6 @@ public class ModuleIdeaSubjectId implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         ModuleIdeaSubjectId other = (ModuleIdeaSubjectId) obj;
-        return Objects.equals(getMajorModuleSubjectId(), other.getMajorModuleSubjectId()) && Objects.equals(getModuleIdeaId(), other.getModuleIdeaId());
+        return Objects.equals(getSubjectId(), other.getSubjectId()) && Objects.equals(getModuleIdeaId(), other.getModuleIdeaId())&& Objects.equals(getTutorId(), other.getTutorId());
     }
 }

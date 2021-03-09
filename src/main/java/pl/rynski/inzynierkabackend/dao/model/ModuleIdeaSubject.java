@@ -17,9 +17,13 @@ public class ModuleIdeaSubject {
     private ModuleIdea moduleIdea;
 
     @ManyToOne
-    @MapsId("majorModuleSubjectId")
-    private MajorModuleSubject majorModuleSubject;
+    @MapsId("subjectId")
+    private Subject subject;
 
-    @Column(name = "semester", nullable = false)
-    private Integer semester;
+    @ManyToOne
+    @MapsId("tutorId")
+    private Tutor tutor;
+
+    @Column(name = "ects", nullable = false)
+    private Integer ects;
 }

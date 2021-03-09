@@ -16,10 +16,17 @@ public class MajorModuleController {
     private final MajorModuleService majorModuleService;
 
     @Operation(summary = "Get all modules assigned to the specific major")
-    @GetMapping("/{majorId}")
+    @GetMapping("/major/{majorId}")
     public ResponseEntity<?> getModulesByMajor(@PathVariable Long majorId) {
         return ResponseEntity.status(HttpStatus.OK).body(majorModuleService.getModulesByMajor(majorId));
     }
+
+    @Operation(summary = "Get major module by id")
+    @GetMapping("/{majorModuleId}")
+    public ResponseEntity<?> getMajorModuleById(@PathVariable Long majorModuleId) {
+        return ResponseEntity.status(HttpStatus.OK).body(majorModuleService.getMajorModuleById(majorModuleId));
+    }
+
 
     @Operation(summary = "Assign module with tutor to the specific major")
     @PostMapping

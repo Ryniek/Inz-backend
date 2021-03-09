@@ -45,8 +45,11 @@ public class ModuleIdeaService {
 
     public ModuleIdeaResponse addNewModuleIdea(NewModuleIdeaDto dto) {
         Tutor tutor = fetchDataUtils.tutorById(dto.getTutorId());
-        Set<SubjectIdea> newSubjects = newSubjectDtoToSubjectIdea(dto.getNewSubjects());
-
+        Major major = fetchDataUtils.majorById(dto.getMajorId());
+        Set<SubjectIdea> newSubjects = new HashSet<>();
+        if(!dto.getNewSubjects().isEmpty()) {
+            newSubjects = newSubjectDtoToSubjectIdea(dto.getNewSubjects());
+        }
         //TODO sprawdzic czy przedmiot byl juz przypisany wczesniej do danego modulu
         //TODO walidacja czy efekt jest dla przedmiotu
         Set<ModuleIdeaSubject> existingSubjects = new HashSet<>();
@@ -54,7 +57,7 @@ public class ModuleIdeaService {
             existingSubjects.add(createNewExistingSubject(subject));
         });
 
-        ModuleIdea result = NewModuleIdeaDto.fromDto(dto, tutor, newSubjects, existingSubjects);
+        ModuleIdea result = NewModuleIdeaDto.fromDto(dto, tutor, major, newSubjects, existingSubjects);
         result.setUser(userDetailsService.getLoggedUser());
         return ModuleIdeaResponse.toResponse(moduleIdeaRepository.save(result));
     }
@@ -115,8 +118,9 @@ public class ModuleIdeaService {
 
     private ModuleIdeaSubject createNewExistingSubject(NewModuleIdeaDto.ExistingSubject existingSubject) {
         ModuleIdeaSubject singleSubject = new ModuleIdeaSubject();
-        singleSubject.setMajorModuleSubject(fetchDataUtils.moduleSubjectById(existingSubject.getModuleSubjectId()));
-        singleSubject.setSemester(existingSubject.getSemester());
+        singleSubject.setSubject(fetchDataUtils.subjectById(existingSubject.getSubjectId()));
+        singleSubject.setTutor(fetchDataUtils.tutorById(existingSubject.getTutorId()));
+        singleSubject.setEcts(existingSubject.getEcts());
         return singleSubject;
     }
 }

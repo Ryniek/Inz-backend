@@ -5,13 +5,15 @@ import pl.rynski.inzynierkabackend.dao.model.ModuleIdeaSubject;
 
 @Data
 public class ExistingSubject {
-    private ModuleSubjectResponse subject;
-    private Integer semester;
+    private SubjectResponse subject;
+    private TutorResponse tutor;
+    private Integer ects;
 
     public static ExistingSubject toResponse(ModuleIdeaSubject moduleIdeaSubject) {
         ExistingSubject result = new ExistingSubject();
-        result.setSubject(ModuleSubjectResponse.toResponse(moduleIdeaSubject.getMajorModuleSubject()));
-        result.setSemester(moduleIdeaSubject.getSemester());
+        result.setSubject(SubjectResponse.toResponse(moduleIdeaSubject.getSubject()));
+        result.setTutor(TutorResponse.toResponse(moduleIdeaSubject.getTutor()));
+        result.setEcts(moduleIdeaSubject.getEcts());
         return result;
     }
 }

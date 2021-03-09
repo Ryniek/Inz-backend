@@ -36,6 +36,9 @@ public class Major {
     @OneToMany(mappedBy = "major", orphanRemoval = true)
     private Set<MajorModule> majorModules = new HashSet<>();
 
+    @OneToMany(mappedBy = "major", orphanRemoval = true)
+    private Set<ModuleIdea> moduleIdeas = new HashSet<>();
+
     @ManyToMany
     @JoinTable(
             name = "major_effect",
