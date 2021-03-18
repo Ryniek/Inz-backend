@@ -2,6 +2,8 @@ package pl.rynski.inzynierkabackend.dao.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.rynski.inzynierkabackend.dao.model.enums.StudyType;
+import pl.rynski.inzynierkabackend.dao.model.enums.TypeOfPassing;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -21,6 +23,18 @@ public class MajorModuleSubject {
     @Column(name = "semester", nullable = false)
     private Integer semester;
 
+    @Column(name = "type_of_passing", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TypeOfPassing typeOfPassing;
+
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "contact_hours_id", referencedColumnName = "id")
+    private ContactHours contactHours;
+
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "non_contact_hours_id", referencedColumnName = "id")
+    private NonContactHours nonContactHours;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "major_module_id", referencedColumnName = "id")
     private MajorModule majorModule;
@@ -30,16 +44,12 @@ public class MajorModuleSubject {
     private Subject subject;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
+    private Tutor supervisor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tutor_id", referencedColumnName = "id")
     private Tutor tutor;
-
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "contact_hours_id", referencedColumnName = "id")
-    private ContactHours contactHours;
-
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "non_contact_hours_id", referencedColumnName = "id")
-    private NonContactHours nonContactHours;
 
     @OneToMany(mappedBy = "majorModuleSubject", orphanRemoval = true)
     private Set<SubjectIdea> subjectIdeas = new HashSet<>();

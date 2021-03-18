@@ -2,6 +2,7 @@ package pl.rynski.inzynierkabackend.dao.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.rynski.inzynierkabackend.dao.model.enums.TypeOfPassing;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -46,6 +47,10 @@ public class SubjectIdea {
     @Column(name = "ects")
     private Integer ects;
 
+    @Column(name = "type_of_passing", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TypeOfPassing typeOfPassing;
+
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "contact_hours_id", referencedColumnName = "id")
     private ContactHours contactHours;
@@ -63,6 +68,10 @@ public class SubjectIdea {
     private Tutor tutor;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
+    private Tutor supervisor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
@@ -77,16 +86,13 @@ public class SubjectIdea {
     private ModuleIdea moduleIdea;
 
     @OneToMany(mappedBy = "subjectIdea", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    private Set<SubjectIdeaEffect> subjectIdeaEffects = new HashSet<>();
+    private Set<MajorEffectSubjectIdea> majorEffectSubjectIdeas = new HashSet<>();
 
-    //pomocnicze do one to many, jak chcemy dodać to dodajemy z dwóch stron i zapisujemy środkową encją
-    public void addSubjectIdeaEffect(SubjectIdeaEffect subjectIdeaEffect) {
-        subjectIdeaEffects.add(subjectIdeaEffect);
-        subjectIdeaEffect.setSubjectIdea(this);
-    }
-
-    public void removeSubjectIdeaEffect(SubjectIdeaEffect subjectIdeaEffect) {
-        subjectIdeaEffects.remove(subjectIdeaEffect);
-        subjectIdeaEffect.setSubjectIdea(null);
-    }
+    @ManyToMany
+    @JoinTable(
+            name = "subject_idea_subject_effect",
+            joinColumns = @JoinColumn(name = "subject_idea_id", referencedColumnName = "id"),
+            inverseJoinColumns= @JoinColumn(name = "subject_effect_id", referencedColumnName = "id")
+    )
+    private Set<SubjectEffect> subjectEffects = new HashSet<>();
 }

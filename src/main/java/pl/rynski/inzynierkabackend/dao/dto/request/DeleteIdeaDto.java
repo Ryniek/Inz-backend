@@ -28,14 +28,4 @@ public class DeleteIdeaDto {
         majorModuleSubject.addSubjectIdea(result);
         return result;
     }
-
-    public static EffectIdea fromDto(DeleteIdeaDto dto, Effect effect) {
-        EffectIdea result = new EffectIdea();
-        result.setExisting(true);
-        result.setToRemove(true);
-        result.setSendingTime(DateUtils.getCurrentDateTime());
-        result.setIdeaExplanation(dto.getIdeaExplanation());
-        effect.addEffectIdea(result);
-        return result;
-    }
 }

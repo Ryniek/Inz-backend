@@ -21,20 +21,23 @@ public class Subject {
     @Column(name = "subject_code", nullable = false, unique = true, columnDefinition = "VARCHAR(20)")
     private String subjectCode;
 
-    @ManyToMany(mappedBy = "subjects")
-    private Set<Module> modules = new HashSet<>();
+    @OneToMany(mappedBy = "subject")
+    private Set<MajorEffectSubject> majorEffects = new HashSet<>();
 
     @OneToMany(mappedBy = "subject")
     private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
 
-    @OneToMany(mappedBy = "subject", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    private Set<SubjectEffect> subjectEffects = new HashSet<>();
-
-    @OneToMany(mappedBy = "subject")
-    private Set<SubjectEffectIdea> subjectEffectIdeas = new HashSet<>();
-
     @OneToMany(mappedBy = "subject")
     private Set<ModuleIdeaSubject> moduleIdeaSubjects = new HashSet<>();
+
+    @ManyToMany(mappedBy = "subjects")
+    private Set<Module> modules = new HashSet<>();
+
+    @ManyToMany(mappedBy = "subjects")
+    private Set<SubjectEffect> subjectEffects = new HashSet<>();
+
+    @ManyToMany(mappedBy = "subjects")
+    private Set<EffectIdea> effectIdeas = new HashSet<>();
 
     //pomocnicze dajemy tam gdzie one to many
     public void addMajorModuleSubject(MajorModuleSubject majorModuleSubject) {

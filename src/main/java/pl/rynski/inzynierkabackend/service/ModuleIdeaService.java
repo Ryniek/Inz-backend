@@ -47,9 +47,6 @@ public class ModuleIdeaService {
         Tutor tutor = fetchDataUtils.tutorById(dto.getTutorId());
         Major major = fetchDataUtils.majorById(dto.getMajorId());
         Set<SubjectIdea> newSubjects = new HashSet<>();
-        if(!dto.getNewSubjects().isEmpty()) {
-            newSubjects = newSubjectDtoToSubjectIdea(dto.getNewSubjects());
-        }
         //TODO sprawdzic czy przedmiot byl juz przypisany wczesniej do danego modulu
         //TODO walidacja czy efekt jest dla przedmiotu
         Set<ModuleIdeaSubject> existingSubjects = new HashSet<>();
@@ -67,8 +64,6 @@ public class ModuleIdeaService {
         Tutor tutor = null;
         if(dto.getTutorId() != null) tutor = fetchDataUtils.tutorById(dto.getTutorId());
 
-        Set<SubjectIdea> newSubjects = newSubjectDtoToSubjectIdea(dto.getNewSubjects());
-
         //TODO sprawdzic czy przedmiot byl juz przypisany wczesniej do danego modulu
         //TODO walidacja czy efekt jest dla przedmiotu
         Set<ModuleIdeaSubject> existingSubjects = new HashSet<>();
@@ -77,7 +72,7 @@ public class ModuleIdeaService {
         });
         //TODO existing subjects mi sie nie podoba - ten semester sprawdzic czy jak dam nulla to nie wywala
 
-        ModuleIdea result = ChangeModuleIdeaDto.fromDto(dto, majorModule, tutor, newSubjects, existingSubjects);
+        ModuleIdea result = ChangeModuleIdeaDto.fromDto(dto, majorModule, tutor, existingSubjects);
         result.setUser(userDetailsService.getLoggedUser());
         return ModuleIdeaResponse.toResponse(moduleIdeaRepository.save(result));
     }
@@ -92,28 +87,6 @@ public class ModuleIdeaService {
 
     public void deleteModuleIdea(Long moduleIdeaId) {
         moduleIdeaRepository.delete(fetchDataUtils.moduleIdeaById(moduleIdeaId));
-    }
-
-    private Set<SubjectIdea> newSubjectDtoToSubjectIdea(Set<NewSubjectIdeaDto> newSubjectDtos) {
-        Set<SubjectIdea> newSubjects = new HashSet<>();
-        newSubjectDtos.stream().forEach(subject -> {
-            Tutor subjectTutor = fetchDataUtils.tutorById(subject.getTutorId());
-            Set<SubjectIdeaEffect> effects = new HashSet<>();
-            if (subject.getEffects() != null) {
-                subject.getEffects().forEach(effect -> {
-                    effects.add(createNewSingleEffect(effect));
-                });
-            }
-            newSubjects.add(NewSubjectIdeaDto.fromDto(subject, null, subjectTutor, effects));
-        });
-        return newSubjects;
-    }
-
-    private SubjectIdeaEffect createNewSingleEffect(SubjectEffectDto effect) {
-        SubjectIdeaEffect singleEffect = new SubjectIdeaEffect();
-        singleEffect.setEffect(fetchDataUtils.effectById(effect.getId()));
-        singleEffect.setConnectionStrength(effect.getConnectionStrength());
-        return singleEffect;
     }
 
     private ModuleIdeaSubject createNewExistingSubject(NewModuleIdeaDto.ExistingSubject existingSubject) {

@@ -5,9 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.dto.request.MajorDto;
 import pl.rynski.inzynierkabackend.dao.dto.response.MajorResponse;
 import pl.rynski.inzynierkabackend.dao.model.Department;
-import pl.rynski.inzynierkabackend.dao.model.Effect;
 import pl.rynski.inzynierkabackend.dao.model.Major;
-import pl.rynski.inzynierkabackend.repository.EffectRepository;
 import pl.rynski.inzynierkabackend.repository.MajorRepository;
 import pl.rynski.inzynierkabackend.utils.FetchDataUtils;
 
@@ -19,7 +17,6 @@ import java.util.stream.Collectors;
 public class MajorService {
 
     private final MajorRepository majorRepository;
-    private final EffectRepository effectRepository;
     private final FetchDataUtils fetchDataUtils;
 
     public List<MajorResponse> getNotHiddenMajors() {
@@ -40,15 +37,9 @@ public class MajorService {
         return MajorResponse.toResponse(major);
     }
 
-    public List<MajorResponse> getMajorsByEffect(Long effectId) {
-        Effect effect = fetchDataUtils.effectById(effectId);
-        return majorRepository.findAllByEffectsIn(List.of(effect)).stream().map(MajorResponse::toResponse).collect(Collectors.toList());
-    }
-
     public MajorResponse addMajor(MajorDto dto) {
         Department department = fetchDataUtils.departmentById(dto.getDepartmentId());
-        List<Effect> effects = effectRepository.findByIdsAndForMajor(dto.getEffects());
-        Major major = MajorDto.fromDto(dto, department, effects);
+        Major major = MajorDto.fromDto(dto, department);
         return MajorResponse.toResponse(majorRepository.save(major));
     }
 

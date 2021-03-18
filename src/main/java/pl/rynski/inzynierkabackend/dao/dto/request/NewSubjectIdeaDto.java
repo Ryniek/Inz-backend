@@ -3,7 +3,6 @@ package pl.rynski.inzynierkabackend.dao.dto.request;
 import lombok.Data;
 import pl.rynski.inzynierkabackend.dao.model.MajorModule;
 import pl.rynski.inzynierkabackend.dao.model.SubjectIdea;
-import pl.rynski.inzynierkabackend.dao.model.SubjectIdeaEffect;
 import pl.rynski.inzynierkabackend.dao.model.Tutor;
 import pl.rynski.inzynierkabackend.utils.DateUtils;
 
@@ -22,9 +21,8 @@ public class NewSubjectIdeaDto {
     private NonContactHoursDto nonContactHours;
     private Long majorModuleId;
     private Long tutorId;
-    private Set<SubjectEffectDto> effects = new HashSet<>();
 
-    public static SubjectIdea fromDto(NewSubjectIdeaDto dto, MajorModule majorModule, Tutor tutor, Set<SubjectIdeaEffect> effects) {
+    public static SubjectIdea fromDto(NewSubjectIdeaDto dto, MajorModule majorModule, Tutor tutor) {
         SubjectIdea result = new SubjectIdea();
         result.setSubjectName(dto.getSubjectName());
         result.setIdeaExplanation(dto.getIdeaExplanation());
@@ -37,10 +35,6 @@ public class NewSubjectIdeaDto {
         result.setSendingTime(DateUtils.getCurrentDateTime());
         if(majorModule != null) majorModule.addSubjectIdea(result);
         tutor.addSubjectIdea(result);
-        if(!effects.isEmpty()) {
-            result.setSubjectIdeaEffects(effects);
-            effects.forEach(effect -> effect.setSubjectIdea(result));
-        }
         return result;
     }
 }

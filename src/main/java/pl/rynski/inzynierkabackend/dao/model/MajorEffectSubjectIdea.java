@@ -8,18 +8,17 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-public class SubjectIdeaEffect {
-
+public class MajorEffectSubjectIdea {
     @EmbeddedId
-    private SubjectIdeaEffectId id = new SubjectIdeaEffectId();
+    private MajorEffectSubjectIdeaId id = new MajorEffectSubjectIdeaId();
 
     @ManyToOne
     @MapsId("subjectIdeaId")
     private SubjectIdea subjectIdea;
 
     @ManyToOne
-    @MapsId("effectId")
-    private Effect effect;
+    @MapsId("majorEffectId")
+    private MajorEffect majorEffect;
 
     @Column(name = "connection_strength", nullable = false)
     private Integer connectionStrength;
