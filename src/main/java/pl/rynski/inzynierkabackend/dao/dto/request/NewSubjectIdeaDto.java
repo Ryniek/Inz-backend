@@ -4,6 +4,7 @@ import lombok.Data;
 import pl.rynski.inzynierkabackend.dao.model.MajorModule;
 import pl.rynski.inzynierkabackend.dao.model.SubjectIdea;
 import pl.rynski.inzynierkabackend.dao.model.Tutor;
+import pl.rynski.inzynierkabackend.dao.model.enums.TypeOfPassing;
 import pl.rynski.inzynierkabackend.utils.DateUtils;
 
 import java.util.HashSet;
@@ -17,12 +18,14 @@ public class NewSubjectIdeaDto {
     private String resources;
     private Integer semester;
     private Integer ects;
+    private TypeOfPassing typeOfPassing;
     private ContactHoursDto contactHours;
     private NonContactHoursDto nonContactHours;
     private Long majorModuleId;
+    private Long supervisorId;
     private Long tutorId;
 
-    public static SubjectIdea fromDto(NewSubjectIdeaDto dto, MajorModule majorModule, Tutor tutor) {
+    public static SubjectIdea fromDto(NewSubjectIdeaDto dto, MajorModule majorModule, Tutor supervisor, Tutor tutor) {
         SubjectIdea result = new SubjectIdea();
         result.setSubjectName(dto.getSubjectName());
         result.setIdeaExplanation(dto.getIdeaExplanation());
@@ -30,10 +33,12 @@ public class NewSubjectIdeaDto {
         result.setResourcesNeeded(dto.getResources());
         result.setSemester(dto.getSemester());
         result.setEcts(dto.getEcts());
+        result.setTypeOfPassing(dto.getTypeOfPassing());
         result.setContactHours(ContactHoursDto.fromDto(dto.getContactHours()));
         result.setNonContactHours(NonContactHoursDto.fromDto(dto.getNonContactHours()));
         result.setSendingTime(DateUtils.getCurrentDateTime());
         if(majorModule != null) majorModule.addSubjectIdea(result);
+        supervisor.addSubjectIdeaSupervisor(result);
         tutor.addSubjectIdea(result);
         return result;
     }

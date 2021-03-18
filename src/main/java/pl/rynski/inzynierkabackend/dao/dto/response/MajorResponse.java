@@ -16,6 +16,7 @@ public class MajorResponse {
     private String years;
     private Boolean hidden;
     private DepartmentResponse department;
+    private List<EffectResponse> effects = new ArrayList<>();
 
     public static MajorResponse toResponse(Major major) {
         MajorResponse result = new MajorResponse();
@@ -25,6 +26,10 @@ public class MajorResponse {
         result.setYears(major.getYears());
         result.setHidden(major.getHidden());
         result.setDepartment(DepartmentResponse.toResponse(major.getDepartment()));
+        List<EffectResponse> effects = major.getMajorEffects().stream()
+                .map(EffectResponse::toResponse)
+                .collect(Collectors.toList());
+        result.setEffects(effects);
         return result;
     }
 }

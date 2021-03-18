@@ -50,19 +50,23 @@ public class SubjectIdeaService {
         MajorModule majorModule = null;
         if(dto.getMajorModuleId() != null) majorModule = fetchDataUtils.majorModuleById(dto.getMajorModuleId());
 
+        Tutor supervisor = null;
+        if(dto.getSupervisorId() != null) supervisor = fetchDataUtils.tutorById(dto.getSupervisorId());
+
         Tutor tutor = null;
         if(dto.getTutorId() != null) tutor = fetchDataUtils.tutorById(dto.getTutorId());
 
-        SubjectIdea result = ChangeSubjectIdeaDto.fromDto(dto, majorModuleSubject, majorModule, tutor);
+        SubjectIdea result = ChangeSubjectIdeaDto.fromDto(dto, majorModuleSubject, majorModule, supervisor, tutor);
         result.setUser(userDetailsService.getLoggedUser());
         return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
     }
 
     public SubjectIdeaResponse addNewSubjectIdea(NewSubjectIdeaDto dto) {
         MajorModule majorModule = fetchDataUtils.majorModuleById(dto.getMajorModuleId());
+        Tutor supervisor = fetchDataUtils.tutorById(dto.getSupervisorId());
         Tutor tutor = fetchDataUtils.tutorById(dto.getTutorId());
 
-        SubjectIdea result = NewSubjectIdeaDto.fromDto(dto, majorModule, tutor);
+        SubjectIdea result = NewSubjectIdeaDto.fromDto(dto, majorModule, supervisor, tutor);
         result.setUser(userDetailsService.getLoggedUser());
         return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
     }

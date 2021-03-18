@@ -26,7 +26,7 @@ public class SubjectEffect {
     @Enumerated(EnumType.STRING)
     private EffectType type;
 
-    @ManyToMany(mappedBy = "subjectEffects")
+    @ManyToMany(mappedBy = "subjectEffects", cascade = CascadeType.PERSIST)
     private Set<MajorEffect> majorEffects = new HashSet<>();
 
     @ManyToMany(mappedBy = "subjectEffects")
