@@ -40,7 +40,7 @@ public class Major {
     private Set<ModuleIdea> moduleIdeas = new HashSet<>();
 
     @OneToMany(mappedBy = "major")
-    private Set<EffectIdeaMajor> effectIdeaMajors = new HashSet<>();
+    private Set<EffectIdea> effectIdeas = new HashSet<>();
 
     @ManyToMany
     @JoinTable(

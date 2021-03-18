@@ -64,6 +64,7 @@ public class ModuleIdeaService {
         Tutor tutor = null;
         if(dto.getTutorId() != null) tutor = fetchDataUtils.tutorById(dto.getTutorId());
 
+        Set<SubjectIdea> newSubjects = newSubjectDtoToSubjectIdea(dto.getNewSubjects());
         //TODO sprawdzic czy przedmiot byl juz przypisany wczesniej do danego modulu
         //TODO walidacja czy efekt jest dla przedmiotu
         Set<ModuleIdeaSubject> existingSubjects = new HashSet<>();
@@ -72,7 +73,7 @@ public class ModuleIdeaService {
         });
         //TODO existing subjects mi sie nie podoba - ten semester sprawdzic czy jak dam nulla to nie wywala
 
-        ModuleIdea result = ChangeModuleIdeaDto.fromDto(dto, majorModule, tutor, existingSubjects);
+        ModuleIdea result = ChangeModuleIdeaDto.fromDto(dto, majorModule, tutor, newSubjects, existingSubjects);
         result.setUser(userDetailsService.getLoggedUser());
         return ModuleIdeaResponse.toResponse(moduleIdeaRepository.save(result));
     }
@@ -87,6 +88,16 @@ public class ModuleIdeaService {
 
     public void deleteModuleIdea(Long moduleIdeaId) {
         moduleIdeaRepository.delete(fetchDataUtils.moduleIdeaById(moduleIdeaId));
+    }
+
+    private Set<SubjectIdea> newSubjectDtoToSubjectIdea(Set<NewSubjectIdeaDto> newSubjectDtos) {
+        Set<SubjectIdea> newSubjects = new HashSet<>();
+        newSubjectDtos.stream().forEach(subject -> {
+            Tutor supervisor = fetchDataUtils.tutorById(subject.getSupervisorId());
+            Tutor subjectTutor = fetchDataUtils.tutorById(subject.getTutorId());
+            newSubjects.add(NewSubjectIdeaDto.fromDto(subject, null, supervisor, subjectTutor));
+        });
+        return newSubjects;
     }
 
     private ModuleIdeaSubject createNewExistingSubject(NewModuleIdeaDto.ExistingSubject existingSubject) {

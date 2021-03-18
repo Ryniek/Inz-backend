@@ -45,6 +45,15 @@ public class EffectIdea {
     @Column(name = "for_subject")
     private Boolean forSubject;
 
+    //Dla jakiego kierunku/przedmiotu proponujemy utworzenie nowego efektu
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "major_id", referencedColumnName = "id")
+    private Major major;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    private Subject subject;
+
     //Jezeli modyfikujemy istniejacy, gdy exising == true
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_effect_id", referencedColumnName = "id")
@@ -59,13 +68,5 @@ public class EffectIdea {
     private User user;
 
     @OneToMany(mappedBy = "effectIdea", cascade = CascadeType.PERSIST)
-    private Set<EffectIdeaMajor> effectIdeaMajors = new HashSet<>();
-
-    @ManyToMany
-    @JoinTable(
-            name = "effect_idea_subject",
-            joinColumns = @JoinColumn(name = "effect_idea_id", referencedColumnName = "id"),
-            inverseJoinColumns= @JoinColumn(name = "subject_id", referencedColumnName = "id")
-    )
-    private Set<Subject> subjects = new HashSet<>();
+    private Set<EffectIdeaSubject> effectIdeaSubject = new HashSet<>();
 }

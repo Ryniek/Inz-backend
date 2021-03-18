@@ -101,6 +101,14 @@ VALUES (1, 'W1', 'Ma elementarną  wiedzę z prawa gospodarczego i prawa autorsk
        (5, 'K1', 'Rozumie potrzebę dbania o ciągły rozwój intelektualny i fizyczny,  zdaje sobie sprawę z konieczności uczenia się przez całe życie i adaptowania swojej wiedzy do zmian cywilizacyjnych.', 'SOCIAL'),
        (6, 'K2', 'Rozumie znaczenie społecznego oddziaływania informatyki, w tym technik komunikacyjnych i mobilności oraz posiada potrzebę informowania społeczeństwa o rozwoju i osiągnięciach informatyki.', 'SOCIAL');
 
+INSERT INTO major_major_effect(major_id, major_effect_id)
+VALUES (1, 1), (1, 3), (1, 6), (1, 8), (1, 11),
+       (2, 2), (2, 4), (2, 6), (2, 9), (2, 12),
+       (3, 3), (3, 7), (3, 10), (3, 13), (3, 14);
+
+INSERT INTO major_effect_subject_effect(major_effect_id, subject_effect_id)
+VALUES (1, 1), (1, 3), (2, 2), (2, 5), (3, 6), (4, 6);
+
 INSERT INTO major_module (id, major_id, module_id, tutor_id)
 VALUES (1, 1, 1, 1), (2, 1, 2, 2), (3, 1, 3, 3), (4, 1, 8, 4), (5, 1, 9, 5),
        (6, 5, 1, 1), (7, 5, 2, 2), (8, 5, 3, 3), (9, 5, 8, 4), (10, 5, 9, 5);
@@ -111,6 +119,7 @@ VALUES (1, 5, 1, 1, 1, 2, 1, 1, 'GRADE'), (2, 4, 2, 1, 1, 2, 2, 2, 'GRADE'), (3,
        (9, 5, 1, 6, 1, 2, 9, 9, 'GRADE'), (10, 4, 2, 6, 1, 2, 10, 10, 'GRADE'), (11, 1, 3, 6, 2, 2, 11, 11, 'EXAM'), (12, 8, 1, 7, 3, 3, 12, 12, 'EXAM'),
        (13, 4, 2, 7, 3, 3, 13, 13, 'GRADE'), (14, 3, 5, 8, 4, 5, 14, 14, 'EXAM'), (15, 8, 6, 9, 9, 6, 15, 15, 'EXAM'), (16, 10, 7, 10, 10, 7, 16, 16, 'EXAM');
 
-
+INSERT INTO major_effect_subject (subject_id, major_effect_id, connection_strength)
+VALUES (1, 1, 3), (2, 2, 2), (3, 5, 1), (3, 6, 2), (4, 7, 3), (5, 8, 2);
 
 

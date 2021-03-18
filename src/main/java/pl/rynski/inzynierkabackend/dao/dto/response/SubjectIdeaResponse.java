@@ -4,6 +4,7 @@ import lombok.Data;
 import pl.rynski.inzynierkabackend.dao.model.MajorModule;
 import pl.rynski.inzynierkabackend.dao.model.SubjectIdea;
 import pl.rynski.inzynierkabackend.dao.model.enums.StudyType;
+import pl.rynski.inzynierkabackend.dao.model.enums.TypeOfPassing;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -23,12 +24,15 @@ public class SubjectIdeaResponse {
     private String resourcesNeeded;
     private Integer semester;
     private Integer ects;
+    private TypeOfPassing typeOfPassing;
     private ContactHoursResponse contactHours;
     private NonContactHoursResponse nonContactHours;
     private MajorModuleResponse majorModule;
+    private TutorResponse supervisor;
     private TutorResponse tutor;
     private UserResponse user;
     private ModuleSubjectResponse majorModuleSubject;
+
     @Data
     private static class MajorModuleResponse {
         private Long id;
@@ -61,9 +65,11 @@ public class SubjectIdeaResponse {
         result.setResourcesNeeded(subjectIdea.getResourcesNeeded());
         result.setSemester(subjectIdea.getSemester());
         result.setEcts(subjectIdea.getEcts());
+        result.setTypeOfPassing(subjectIdea.getTypeOfPassing());
         if(subjectIdea.getContactHours() != null) result.setContactHours(ContactHoursResponse.toResponse(subjectIdea.getContactHours()));
         if(subjectIdea.getNonContactHours() != null) result.setNonContactHours(NonContactHoursResponse.toResponse(subjectIdea.getNonContactHours()));
         if(subjectIdea.getMajorModule() != null) result.setMajorModule(MajorModuleResponse.toResponse(subjectIdea.getMajorModule()));
+        if(subjectIdea.getSupervisor() != null) result.setSupervisor(TutorResponse.toResponse(subjectIdea.getSupervisor()));
         if(subjectIdea.getTutor() != null) result.setTutor(TutorResponse.toResponse(subjectIdea.getTutor()));
         if(subjectIdea.getUser() != null) result.setUser(UserResponse.toResponse(subjectIdea.getUser()));
         if(subjectIdea.getMajorModuleSubject() != null) result.setMajorModuleSubject(ModuleSubjectResponse.toResponse(subjectIdea.getMajorModuleSubject()));

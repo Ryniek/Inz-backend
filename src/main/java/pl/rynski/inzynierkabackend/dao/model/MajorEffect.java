@@ -32,7 +32,10 @@ public class MajorEffect {
     @OneToMany(mappedBy = "majorEffect")
     private Set<MajorEffectSubjectIdea> majorEffectSubjectIdeas = new HashSet<>();
 
-    @ManyToMany(mappedBy = "majorEffects")
+    @OneToMany(mappedBy = "majorEffect")
+    private Set<EffectIdea> effectIdeas = new HashSet<>();
+
+    @ManyToMany(mappedBy = "majorEffects", cascade = CascadeType.PERSIST)
     private Set<Major> majors = new HashSet<>();
 
     @ManyToMany
@@ -42,4 +45,26 @@ public class MajorEffect {
             inverseJoinColumns= @JoinColumn(name = "subject_effect_id", referencedColumnName = "id")
     )
     private Set<SubjectEffect> subjectEffects = new HashSet<>();
+
+    //pomocnicze do Many to Many - dajemy gdzie chcemy ale zapisujemy przez zarzadzajaca
+    public void addMajor(Major major) {
+        this.majors.add(major);
+        major.getMajorEffects().add(this);
+    }
+
+    public void removeMajor(Major major) {
+        this.majors.remove(major);
+        major.getMajorEffects().remove(this);
+    }
+
+    //pomocnicze do one to many, jak chcemy dodać to dodajemy z dwóch stron i zapisujemy środkową encją
+    public void addEffectIdea(EffectIdea effectIdea) {
+        effectIdeas.add(effectIdea);
+        effectIdea.setMajorEffect(this);
+    }
+
+    public void removeEffectIdea(EffectIdea effectIdea) {
+        effectIdeas.remove(effectIdea);
+        effectIdea.setMajorEffect(null);
+    }
 }
