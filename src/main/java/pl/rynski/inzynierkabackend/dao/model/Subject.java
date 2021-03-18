@@ -30,14 +30,17 @@ public class Subject {
     @OneToMany(mappedBy = "subject")
     private Set<ModuleIdeaSubject> moduleIdeaSubjects = new HashSet<>();
 
+    @OneToMany(mappedBy = "subject")
+    private Set<EffectIdea> effectIdeas = new HashSet<>();
+
+    @OneToMany(mappedBy = "subject")
+    private Set<EffectIdeaSubject> effectIdeaSubjects = new HashSet<>();
+
     @ManyToMany(mappedBy = "subjects")
     private Set<Module> modules = new HashSet<>();
 
     @ManyToMany(mappedBy = "subjects")
     private Set<SubjectEffect> subjectEffects = new HashSet<>();
-
-    @ManyToMany(mappedBy = "subjects")
-    private Set<EffectIdea> effectIdeas = new HashSet<>();
 
     //pomocnicze dajemy tam gdzie one to many
     public void addMajorModuleSubject(MajorModuleSubject majorModuleSubject) {

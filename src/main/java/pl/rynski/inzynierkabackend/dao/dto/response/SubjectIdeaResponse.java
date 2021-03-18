@@ -32,6 +32,7 @@ public class SubjectIdeaResponse {
     private TutorResponse tutor;
     private UserResponse user;
     private ModuleSubjectResponse majorModuleSubject;
+
     @Data
     private static class MajorModuleResponse {
         private Long id;

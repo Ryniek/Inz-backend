@@ -26,6 +26,9 @@ public class SubjectEffect {
     @Enumerated(EnumType.STRING)
     private EffectType type;
 
+    @OneToMany(mappedBy = "subjectEffect")
+    private Set<EffectIdea> effectIdeas = new HashSet<>();
+
     @ManyToMany(mappedBy = "subjectEffects", cascade = CascadeType.PERSIST)
     private Set<MajorEffect> majorEffects = new HashSet<>();
 
@@ -39,4 +42,15 @@ public class SubjectEffect {
             inverseJoinColumns= @JoinColumn(name = "subject_id", referencedColumnName = "id")
     )
     private Set<Subject> subjects = new HashSet<>();
+
+    //pomocnicze do one to many, jak chcemy dodać to dodajemy z dwóch stron i zapisujemy środkową encją
+    public void addEffectIdea(EffectIdea effectIdea) {
+        effectIdeas.add(effectIdea);
+        effectIdea.setSubjectEffect(this);
+    }
+
+    public void removeEffectIdea(EffectIdea effectIdea) {
+        effectIdeas.remove(effectIdea);
+        effectIdea.setSubjectEffect(null);
+    }
 }
