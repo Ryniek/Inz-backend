@@ -39,38 +39,33 @@ public class EffectIdea {
     @Enumerated(EnumType.STRING)
     private EffectType type;
 
+    @Column(name = "for_major")
+    private Boolean forMajor;
+
     @Column(name = "for_subject")
     private Boolean forSubject;
 
-    @Column(name = "for_major")
-    private Boolean forMajor;
+    //Jezeli modyfikujemy istniejacy, gdy exising == true
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subject_effect_id", referencedColumnName = "id")
+    private SubjectEffect subjectEffect;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "major_effect_id", referencedColumnName = "id")
+    private MajorEffect majorEffect;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    //Jezeli modyfikujemy istniejacy, gdy exising == true
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "effect_id", referencedColumnName = "id")
-    private Effect effect;
-
-    @OneToMany(mappedBy = "effectIdea", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    private Set<SubjectEffectIdea> subjectEffectIdeas = new HashSet<>();
+    @OneToMany(mappedBy = "effectIdea", cascade = CascadeType.PERSIST)
+    private Set<EffectIdeaMajor> effectIdeaMajors = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
-            name = "effect_idea_major",
+            name = "effect_idea_subject",
             joinColumns = @JoinColumn(name = "effect_idea_id", referencedColumnName = "id"),
-            inverseJoinColumns= @JoinColumn(name = "major_id", referencedColumnName = "id")
-    )    private Set<Major> majors = new HashSet<>();
-
-    public void addMajor(Major major) {
-        this.majors.add(major);
-        major.getEffectIdeas().add(this);
-    }
-
-    public void removeMajor(Major major) {
-        this.majors.remove(major);
-        major.getEffectIdeas().remove(this);
-    }
+            inverseJoinColumns= @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    )
+    private Set<Subject> subjects = new HashSet<>();
 }

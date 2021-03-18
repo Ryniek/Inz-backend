@@ -33,12 +33,6 @@ public class MajorController {
         return ResponseEntity.status(HttpStatus.OK).body(majorService.getMajorById(majorId));
     }
 
-    @Operation(summary = "Get all majors by effect")
-    @GetMapping("/effect/{effectId}")
-    public ResponseEntity<?> getMajorsByEffectId(@PathVariable Long effectId) {
-        return ResponseEntity.status(HttpStatus.OK).body(majorService.getMajorsByEffect(effectId));
-    }
-
     @Operation(summary = "Add major")
     @PostMapping
     public ResponseEntity<?> addMajor(@RequestBody MajorDto majorDto) {

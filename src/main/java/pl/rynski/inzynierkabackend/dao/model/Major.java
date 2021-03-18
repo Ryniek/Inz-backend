@@ -39,27 +39,16 @@ public class Major {
     @OneToMany(mappedBy = "major", orphanRemoval = true)
     private Set<ModuleIdea> moduleIdeas = new HashSet<>();
 
+    @OneToMany(mappedBy = "major")
+    private Set<EffectIdeaMajor> effectIdeaMajors = new HashSet<>();
+
     @ManyToMany
     @JoinTable(
-            name = "major_effect",
+            name = "major_major_effect",
             joinColumns = @JoinColumn(name = "major_id", referencedColumnName = "id"),
-            inverseJoinColumns= @JoinColumn(name = "effect_id", referencedColumnName = "id")
+            inverseJoinColumns= @JoinColumn(name = "major_effect_id", referencedColumnName = "id")
     )
-    private Set<Effect> effects = new HashSet<>();
-
-    @ManyToMany(mappedBy = "majors")
-    private Set<EffectIdea> effectIdeas = new HashSet<>();
-
-    //pomocnie dodawania obiektow do relacji dajemy przy many to many gdzie chcemy
-    public void addEffect(Effect effect) {
-        this.effects.add(effect);
-        effect.getMajors().add(this);
-    }
-
-    public void removeEffect(Effect effect) {
-        this.effects.remove(effect);
-        effect.getMajors().remove(this);
-    }
+    private Set<MajorEffect> majorEffects = new HashSet<>();
 
     //pomocnicze dajemy tam gdzie one to many
     public void addMajorModule(MajorModule majorModule) {

@@ -27,8 +27,14 @@ public class Tutor {
     @OneToMany(mappedBy = "tutor")
     private Set<MajorModule> modules = new HashSet<>();
 
+    @OneToMany(mappedBy = "supervisor")
+    private Set<MajorModuleSubject> majorModuleSubjectsSupervisor = new HashSet<>();
+
     @OneToMany(mappedBy = "tutor")
     private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
+
+    @OneToMany(mappedBy = "supervisor")
+    private Set<SubjectIdea> subjectIdeasSupervisor = new HashSet<>();
 
     @OneToMany(mappedBy = "tutor")
     private Set<SubjectIdea> subjectIdeas = new HashSet<>();

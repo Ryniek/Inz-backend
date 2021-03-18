@@ -62,12 +62,7 @@ public class SubjectIdeaService {
         MajorModule majorModule = fetchDataUtils.majorModuleById(dto.getMajorModuleId());
         Tutor tutor = fetchDataUtils.tutorById(dto.getTutorId());
 
-        Set<SubjectIdeaEffect> effects = new HashSet<>();
-        dto.getEffects().forEach(effect -> {
-            effects.add(createNewSingleEffect(effect));
-        });
-
-        SubjectIdea result = NewSubjectIdeaDto.fromDto(dto, majorModule, tutor, effects);
+        SubjectIdea result = NewSubjectIdeaDto.fromDto(dto, majorModule, tutor);
         result.setUser(userDetailsService.getLoggedUser());
         return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
     }
@@ -82,12 +77,5 @@ public class SubjectIdeaService {
 
     public void deleteSubjectIdea(Long subjectIdeaId) {
         subjectIdeaRepository.delete(fetchDataUtils.subjectIdeaById(subjectIdeaId));
-    }
-
-    private SubjectIdeaEffect createNewSingleEffect(SubjectEffectDto effect) {
-        SubjectIdeaEffect singleEffect = new SubjectIdeaEffect();
-        singleEffect.setEffect(fetchDataUtils.effectById(effect.getId()));
-        singleEffect.setConnectionStrength(effect.getConnectionStrength());
-        return singleEffect;
     }
 }

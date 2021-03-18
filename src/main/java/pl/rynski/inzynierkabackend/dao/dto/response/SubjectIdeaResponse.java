@@ -29,8 +29,6 @@ public class SubjectIdeaResponse {
     private TutorResponse tutor;
     private UserResponse user;
     private ModuleSubjectResponse majorModuleSubject;
-    private Set<SubjectEffectResponse> subjectIdeaEffects = new HashSet<>();
-
     @Data
     private static class MajorModuleResponse {
         private Long id;
@@ -69,10 +67,6 @@ public class SubjectIdeaResponse {
         if(subjectIdea.getTutor() != null) result.setTutor(TutorResponse.toResponse(subjectIdea.getTutor()));
         if(subjectIdea.getUser() != null) result.setUser(UserResponse.toResponse(subjectIdea.getUser()));
         if(subjectIdea.getMajorModuleSubject() != null) result.setMajorModuleSubject(ModuleSubjectResponse.toResponse(subjectIdea.getMajorModuleSubject()));
-        result.setSubjectIdeaEffects(subjectIdea
-                .getSubjectIdeaEffects().stream()
-                .map(SubjectEffectResponse::toResponse)
-                .collect(Collectors.toSet()));
         return result;
     }
 }

@@ -21,12 +21,6 @@ public class SubjectController {
         return ResponseEntity.status(HttpStatus.OK).body(subjectService.getSubjectsByModule(moduleId));
     }
 
-    @Operation(summary = "Get all subjects by effect id")
-    @GetMapping("/effect/{effectId}")
-    public ResponseEntity<?> getSubjectsByEffect(@PathVariable Long effectId) {
-        return ResponseEntity.status(HttpStatus.OK).body(subjectService.getSubjectsByEffect(effectId));
-    }
-
     @Operation(summary = "Get all subjects")
     @GetMapping
     public ResponseEntity<?> getSubjects() {
