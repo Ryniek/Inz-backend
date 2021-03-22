@@ -29,6 +29,7 @@ public class EffectIdeaResponse {
     private EffectResponse majorEffect;
     private EffectResponse subjectEffect;
     private List<MajorEffectSubjectResponse> majorEffectSubjects = new ArrayList<>();
+    private List<SubjectShortResponse> subjects = new ArrayList<>();
 
     @Data
     private static class MajorEffectSubjectResponse {
@@ -61,10 +62,14 @@ public class EffectIdeaResponse {
         if(effectIdea.getSubject() != null) result.setSubject(SubjectShortResponse.toResponse(effectIdea.getSubject()));
         result.setForSubject(effectIdea.getForSubject());
         result.setForMajor(effectIdea.getForMajor());
+        result.setUser(UserResponse.toResponse(effectIdea.getUser()));
         if(effectIdea.getMajorEffect() != null) result.setMajorEffect(EffectResponse.toResponse(effectIdea.getMajorEffect()));
         if(effectIdea.getSubjectEffect() != null) result.setSubjectEffect(EffectResponse.toResponse(effectIdea.getSubjectEffect()));
         result.setMajorEffectSubjects(effectIdea.getEffectIdeaSubject().stream()
                 .map(MajorEffectSubjectResponse::toResponse)
+                .collect(Collectors.toList()));
+        result.setSubjects(effectIdea.getSubjects().stream()
+                .map(SubjectShortResponse::toResponse)
                 .collect(Collectors.toList()));
         return result;
     }

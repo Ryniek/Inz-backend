@@ -37,6 +37,9 @@ public class Subject {
     private Set<EffectIdeaSubject> effectIdeaSubjects = new HashSet<>();
 
     @ManyToMany(mappedBy = "subjects")
+    private Set<EffectIdea> subjectEffectIdeas = new HashSet<>();
+
+    @ManyToMany(mappedBy = "subjects")
     private Set<Module> modules = new HashSet<>();
 
     @ManyToMany(mappedBy = "subjects")

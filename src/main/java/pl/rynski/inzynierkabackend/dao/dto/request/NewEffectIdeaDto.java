@@ -23,12 +23,6 @@ public class NewEffectIdeaDto {
     private Boolean forMajor;
     private Set<MajorEffectSubjectDto> majorEffectSubjects = new HashSet<>();
 
-    @Data
-    public static class MajorEffectSubjectDto {
-        private Long subjectId;
-        private Integer connectionStrength;
-    }
-
     public static EffectIdea fromDto(NewEffectIdeaDto dto, Subject subject, Major major, Set<EffectIdeaSubject> effectSubjects) {
         EffectIdea result = new EffectIdea();
         result.setSendingTime(DateUtils.getCurrentDateTime());

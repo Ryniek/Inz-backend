@@ -29,22 +29,26 @@ public class DeleteIdeaDto {
         return result;
     }
 
-    public static EffectIdea fromDto(DeleteIdeaDto dto, MajorEffect majorEffect) {
+    public static EffectIdea fromDto(DeleteIdeaDto dto, MajorEffect majorEffect, Boolean forSubject) {
         EffectIdea result = new EffectIdea();
         result.setExisting(true);
         result.setToRemove(true);
         result.setSendingTime(DateUtils.getCurrentDateTime());
         result.setIdeaExplanation(dto.getIdeaExplanation());
+        result.setForSubject(forSubject);
+        result.setForMajor(!forSubject);
         majorEffect.addEffectIdea(result);
         return result;
     }
 
-    public static EffectIdea fromDto(DeleteIdeaDto dto, SubjectEffect subjectEffect) {
+    public static EffectIdea fromDto(DeleteIdeaDto dto, SubjectEffect subjectEffect, Boolean forSubject) {
         EffectIdea result = new EffectIdea();
         result.setExisting(true);
         result.setToRemove(true);
         result.setSendingTime(DateUtils.getCurrentDateTime());
         result.setIdeaExplanation(dto.getIdeaExplanation());
+        result.setForSubject(forSubject);
+        result.setForMajor(!forSubject);
         subjectEffect.addEffectIdea(result);
         return result;
     }
