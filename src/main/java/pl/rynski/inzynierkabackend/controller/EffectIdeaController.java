@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.rynski.inzynierkabackend.dao.dto.request.ChangeEffectIdeaDto;
 import pl.rynski.inzynierkabackend.dao.dto.request.DeleteIdeaDto;
 import pl.rynski.inzynierkabackend.dao.dto.request.IdeaEmailDto;
 import pl.rynski.inzynierkabackend.dao.dto.request.NewEffectIdeaDto;
@@ -36,11 +37,11 @@ public class EffectIdeaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(effectIdeaService.addNewEffectIdea(newEffectIdeaDto));
     }
 
-/*    @Operation(summary = "Add idea of changing existing effect")
+    @Operation(summary = "Add idea of changing existing effect")
     @PostMapping("/change/{effectId}")
-    public ResponseEntity<?> addChangeEffectIdea(@PathVariable Long effectId, @RequestBody ChangeEffectIdeaDto changeEffectIdeaDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(effectIdeaService.addChangeEffectIdea(effectId, changeEffectIdeaDto));
-    }*/
+    public ResponseEntity<?> addChangeEffectIdea(@PathVariable Long effectId, @RequestParam Boolean forSubject, @RequestBody ChangeEffectIdeaDto changeEffectIdeaDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(effectIdeaService.addChangeEffectIdea(effectId, forSubject, changeEffectIdeaDto));
+    }
 
     @Operation(summary = "Add idea of deleting existing effect")
     @PostMapping("/delete")

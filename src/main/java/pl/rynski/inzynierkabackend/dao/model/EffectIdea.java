@@ -69,4 +69,12 @@ public class EffectIdea {
 
     @OneToMany(mappedBy = "effectIdea", cascade = CascadeType.PERSIST)
     private Set<EffectIdeaSubject> effectIdeaSubject = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "subject_effect_idea_subject",
+            joinColumns = @JoinColumn(name = "effect_idea_id", referencedColumnName = "id"),
+            inverseJoinColumns= @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    )
+    private Set<Subject> subjects = new HashSet<>();
 }
