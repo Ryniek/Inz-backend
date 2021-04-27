@@ -19,7 +19,7 @@ public class MajorEffect {
     @Column(name = "code", nullable = false, unique = true, columnDefinition = "VARCHAR(25)")
     private String code;
 
-    @Column(name = "content", nullable = false)
+    @Column(name = "content", nullable = false, unique = true, columnDefinition = "VARCHAR(250)")
     private String content;
 
     @Column(name = "type", nullable = false)

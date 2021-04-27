@@ -32,7 +32,6 @@ public class EffectDto {
 
     public static SubjectEffect fromDto(EffectDto dto, MajorModuleSubject majorModuleSubject) {
         SubjectEffect result = new SubjectEffect();
-        result.setCode(dto.getCode());
         result.setContent(dto.getContent());
         result.setType(dto.getType());
         majorModuleSubject.addSubjectEffect(result);

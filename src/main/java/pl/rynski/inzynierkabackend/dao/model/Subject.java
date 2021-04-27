@@ -18,7 +18,7 @@ public class Subject {
     @Column(name = "name", nullable = false, unique = true, columnDefinition = "VARCHAR(250)")
     private String name;
 
-    @Column(name = "subject_code", unique = true, columnDefinition = "VARCHAR(20)")
+    @Column(name = "subject_code", columnDefinition = "VARCHAR(20)")
     private String subjectCode;
 
     @OneToMany(mappedBy = "subject")

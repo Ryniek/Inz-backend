@@ -27,7 +27,7 @@ public class MajorModuleSubject {
     @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
     private Tutor supervisor;
 
-    @OneToMany(mappedBy = "majorModuleSubject", orphanRemoval = true)
+    @OneToMany(mappedBy = "majorModuleSubject")
     private Set<SubjectEffect> subjectEffects = new HashSet<>();
 
     @OneToMany(mappedBy = "majorModuleSubject")

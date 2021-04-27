@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+//TODO getAllSubjectEffects
 @Entity
 @Getter
 @Setter
@@ -16,10 +17,7 @@ public class SubjectEffect {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "code", columnDefinition = "VARCHAR(25)")
-    private String code;
-
-    @Column(name = "content", nullable = false)
+    @Column(name = "content", nullable = false, unique = true, columnDefinition = "VARCHAR(250)")
     private String content;
 
     @Column(name = "type", nullable = false)

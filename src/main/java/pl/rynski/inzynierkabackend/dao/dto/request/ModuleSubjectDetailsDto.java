@@ -13,6 +13,7 @@ public class ModuleSubjectDetailsDto {
     private Long tutorId;
     private ContactHoursDto contactHours;
     private NonContactHoursDto nonContactHours;
+    //TODO wysylac nulla przy contact hours / non contact hours
 
     public static MajorModuleSubjectDetails fromDto(ModuleSubjectDetailsDto dto, MajorModuleSubject majorModuleSubject, Tutor tutor) {
         MajorModuleSubjectDetails result = new MajorModuleSubjectDetails();
@@ -21,8 +22,8 @@ public class ModuleSubjectDetailsDto {
         result.setTypeOfPassing(dto.getTypeOfPassing());
         result.setTutor(tutor);
         tutor.addMajorModuleSubjectDetails(result);
-        result.setContactHours(ContactHoursDto.fromDto(dto.getContactHours()));
-        result.setNonContactHours(NonContactHoursDto.fromDto(dto.getNonContactHours()));
+        if(dto.getContactHours() != null) result.setContactHours(ContactHoursDto.fromDto(dto.getContactHours()));
+        if(dto.getNonContactHours() != null) result.setNonContactHours(NonContactHoursDto.fromDto(dto.getNonContactHours()));
         majorModuleSubject.addMajorModuleSubjectDetails(result);
         return result;
     }

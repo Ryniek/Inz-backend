@@ -89,8 +89,7 @@ public class SubjectIdea {
     @OneToMany(mappedBy = "subjectIdea", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<MajorEffectSubjectIdea> majorEffectSubjectIdeas = new HashSet<>();
 
-    //git
-    @OneToMany(mappedBy = "subjectIdea", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "subjectIdea", cascade = CascadeType.PERSIST)
     private Set<SubjectEffect> subjectEffects = new HashSet<>();
 
     //pomocnicze dajemy tam gdzie one to many

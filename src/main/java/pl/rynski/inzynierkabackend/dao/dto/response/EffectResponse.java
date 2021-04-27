@@ -15,7 +15,6 @@ public class EffectResponse {
     public static EffectResponse toResponse(SubjectEffect effect) {
         EffectResponse result = new EffectResponse();
         result.setId(effect.getId());
-        result.setCode(effect.getCode());
         result.setContent(effect.getContent());
         result.setType(effect.getType());
         return result;

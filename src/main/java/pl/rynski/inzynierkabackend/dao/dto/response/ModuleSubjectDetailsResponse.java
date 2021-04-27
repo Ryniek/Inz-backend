@@ -21,8 +21,8 @@ public class ModuleSubjectDetailsResponse {
         result.setSemester(details.getSemester());
         result.setTypeOfPassing(details.getTypeOfPassing());
         result.setTutor(TutorResponse.toResponse(details.getTutor()));
-        result.setContactHours(ContactHoursResponse.toResponse(details.getContactHours()));
-        result.setNonContactHours(NonContactHoursResponse.toResponse(details.getNonContactHours()));
+        if(details.getContactHours() != null) result.setContactHours(ContactHoursResponse.toResponse(details.getContactHours()));
+        if(details.getNonContactHours() != null) result.setNonContactHours(NonContactHoursResponse.toResponse(details.getNonContactHours()));
         return result;
     }
 }

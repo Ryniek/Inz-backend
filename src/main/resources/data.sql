@@ -68,38 +68,90 @@ VALUES (1, 1),(1, 2),(1, 3),(1, 4),(1, 5),(1, 6),(1, 7),(1, 8),(2, 9),(2, 10),(2
     (9, 45),(9, 46),(9, 47),(9, 48),(9, 49),(9, 50),(9, 51),(9, 52),(10, 53),(10, 54),(10, 55),(10, 56);
 
 INSERT INTO contact_hours (id, lecture, exercise, laboratory, seminar, project)
-VALUES (1, 1, 29, 0, 0, 0), (2, 10, 15, 10, 0, 0), (3, 10, 14, 0, 0, 0), (4, 10, 20, 0, 0, 0), (5, 5, 25, 0, 0, 0),(6, 10, 20, 5, 0, 0),
-       (7, 1, 29, 0, 0, 0), (8, 10, 15, 10, 0, 0), (9, 10, 14, 0, 0, 0), (10, 10, 20, 0, 0, 0), (11, 5, 25, 0, 0, 0),(12, 10, 20, 5, 0, 0),
-       (13, 10, 20, 5, 0, 0),(14, 10, 20, 5, 0, 0),(15, 10, 20, 5, 0, 0),(16, 10, 20, 5, 0, 0);
+VALUES (1, 1, 29, 0, 0, 0), (2, 0, 30, 0, 0, 0), (3, 0, 30, 0, 0, 0), (4, 0, 30, 0, 0, 0), (5, 0, 30, 0, 0, 0),
+       (6, 0, 30, 0, 0, 0),
+       (7, 1, 14, 0, 0, 0), (8, 0, 15, 0, 0, 0),
+       (9, 10, 0, 15, 0, 0),
+       (10, 5, 10, 0, 0, 0),
+       (11, 30, 0, 0, 0, 0),
+       (12, 30, 0, 0, 0, 0),
+       (13, 20, 10, 0, 0, 0),(14, 20, 10, 0, 0, 0);
 
 INSERT INTO non_contact_hours (id, consultation, exam, pwt, pwp)
-VALUES (1, 5, 0, 8, 20),(2, 10, 4, 0, 10),(3, 10, 4, 0, 5),(4, 10, 4, 0, 5),(5, 10, 4, 0, 5),(6, 10, 4, 0, 5),
-       (7, 5, 0, 8, 20),(8, 10, 4, 0, 10),(9, 10, 4, 0, 5),(10, 10, 4, 0, 5),(11, 10, 4, 0, 5),(12, 10, 4, 0, 5),
-       (13, 10, 4, 0, 5),(14, 10, 4, 0, 5),(15, 10, 4, 0, 5),(16, 10, 4, 0, 5);
+VALUES (1, 5, 0, 8, 20),(2, 5, 0, 8, 20),(3, 5, 0, 8, 20),(4, 5, 0, 8, 20),(5, 5, 0, 8, 20),
+       (6, 5, 0, 0, 15),
+       --wf null
+       (7, 5, 0, 10, 12),
+       --ochrona wlasnosci null
+       (8, 5, 0, 5, 0),
+       (9, 5, 0, 5, 20),
+       (10, 5, 0, 10, 5),(11, 5, 4, 10, 5);
 
 INSERT INTO major_effect (id, code, content, type)
-VALUES (1, 'N1_W02', 'Ma wiedzę ogólną o biosferze, fizyce atmosfery i oceanów, zna zasady i specyfikę wykonywania pomiarów hydrometeorologicznych.', 'KNOWLEDGE'),
-       (2, 'N1_W03', 'Ma podstawową wiedzę w zakresie właściwości fizykochemicznych transportowanych ładunków i ich charakterystyki. ', 'KNOWLEDGE'),
-       (3, 'I1_W06', 'Ma podstawową wiedzę w zakresie grafiki komputerowej, zna podstawowe metody komunikacji z komputerem', 'KNOWLEDGE'),
-       (4, 'I1_W10', 'Zna wybrane języki programowania, ma wiedzę w zakresie stosowanych technik programowania, a także projektowania i wytwarzania aplikacji i systemów inf.', 'KNOWLEDGE'),
-       (5, 'I1_W11', 'Ma wiedzę z algorytmizacji i podstaw tworzenia i przetwarzania struktur danych.', 'KNOWLEDGE'),
-       (6, 'I1_U01', 'Potrafi posługiwać się językiem obcym na poziomie B2 (ESOKJ RD) oraz umie posługiwać się językiem angielskim specjalistycznym dla informatyki.', 'SKILLS'),
-       (7, 'I1_U02', 'Potrafi pozyskiwać informacje z dokumentacji, literatury, Internetu oraz innych wiarygodnych źródeł w języku polskim i angielskim, integrować je, dokonywać ich interpretacji oraz wyciągać wnioski i formułować opinie.', 'SKILLS'),
-       (8, 'I1_U03', 'Potrafi ocenić pod kątem ekonomicznym i zarządczym znaczenie podejmowanych przez siebie działań inżynierskich oraz scharakteryzować podstawowe zasady aktywności gospodarczej.', 'SKILLS'),
-       (9, 'I1_U18', 'Potrafi administrować wybranymi systemami informatycznymi, w tym korzystać z właściwych technik zabezpieczających.', 'SKILLS'),
-       (10, 'I1_U19', 'Potrafi zaprojektować i wykonać relacyjna bazę danych oraz skonstruować przykładowe zapytanie SQL.', 'SKILLS'),
-       (11, 'I1_K01', 'Rozumie potrzebę dbania o ciągły rozwój intelektualny i fizyczny,  zdaje sobie sprawę z konieczności uczenia się przez całe życie i adaptowania swojej wiedzy do zmian cywilizacyjnych.', 'SOCIAL'),
-       (12, 'I1_K02', 'Rozumie znaczenie społecznego oddziaływania informatyki, w tym technik komunikacyjnych i mobilności oraz posiada potrzebę informowania społeczeństwa o rozwoju i osiągnięciach informatyki.', 'SOCIAL'),
-       (13, 'I1_K03', 'Rozumie społeczny i zawodowy kontekst informatyki, jej zasady prawne i etyczne oraz  świadomie stosuje się do przepisów obowiązującego prawa, przestrzega zasad etyki zawodowej.', 'SOCIAL'),
-       (14, 'I1_K04', 'Rozumie znaczenie pojęć istotnych  w procesie kształtowania postaw takich jak patriotyzm, humanizm, tolerancja, współpraca wielokulturowa.', 'SOCIAL');
-
-INSERT INTO subject_effect (id, code, content, type)
 VALUES (1, 'W1', 'Ma elementarną  wiedzę z prawa gospodarczego i prawa autorskiego oraz wiedzę w zakresie inżynierskich  uwarunkowań działań o charakterze ekonomiczno-zarządczym.', 'KNOWLEDGE'),
-       (2, 'W2', 'Ma uporządkowaną wiedzę z matematyki i metod jej stosowania,  zna podstawowe prawa i twierdzenia matematyki, w tym matematyki dyskretnej i metod probabilistycznych', 'KNOWLEDGE'),
-       (3, 'U1', 'Potrafi posługiwać się językiem obcym na poziomie B2 (ESOKJ RD) oraz umie posługiwać się językiem angielskim specjalistycznym dla informatyki', 'SKILLS'),
-       (4, 'U2', 'Potrafi pozyskiwać informacje z dokumentacji, literatury, Internetu oraz innych wiarygodnych źródeł w języku polskim i angielskim, integrować je, dokonywać ich interpretacji oraz wyciągać wnioski i formułować opinie', 'SKILLS'),
-       (5, 'K1', 'Rozumie potrzebę dbania o ciągły rozwój intelektualny i fizyczny,  zdaje sobie sprawę z konieczności uczenia się przez całe życie i adaptowania swojej wiedzy do zmian cywilizacyjnych.', 'SOCIAL'),
-       (6, 'K2', 'Rozumie znaczenie społecznego oddziaływania informatyki, w tym technik komunikacyjnych i mobilności oraz posiada potrzebę informowania społeczeństwa o rozwoju i osiągnięciach informatyki.', 'SOCIAL');
+       (2, 'W2', 'Ma uporządkowaną wiedzę z matematyki i metod jej stosowania,  zna podstawowe prawa i twierdzenia matematyki, w tym matematyki dyskretnej i metod probabilistycznych.', 'KNOWLEDGE'),
+       (3, 'W3', 'Ma podstawową wiedzę z zakresu fizyki ze szczególnym uwzględnieniem aspektów istotnych w informatyce.', 'KNOWLEDGE'),
+       (4, 'W4', 'Ma podstawową wiedzę z zakresu elektroniki, metod budowy układów elektronicznych, technik cyfrowych i metod ich stosowania w układach programowalnych', 'KNOWLEDGE'),
+       (5, 'W5', 'Zna elementarne zagadnienia informatyki, jej uwarunkowań społecznych, zawodowych, środowiskowych, prawnych i etycznych.', 'KNOWLEDGE'),
+       (6, 'W6', 'Ma podstawową wiedzę w zakresie grafiki komputerowej, zna podstawowe metody komunikacji z komputerem.', 'KNOWLEDGE'),
+       (7, 'W7', 'Zna zasady budowy i funkcjonowania podstawowych składników systemów komputerowych oraz podstawowe zasady kodowania informacji, charakterystyczne dla informatyki.', 'KNOWLEDGE'),
+       (8, 'W8', 'Ma podstawową wiedzę w zakresie technologii sieciowych, w tym sieci bezprzewodowych.', 'KNOWLEDGE'),
+       (9, 'W9', 'Ma uporządkowaną, podbudowaną teoretycznie wiedzę w zakresie architektury SI, zasad projektowania oprogramowania dla poszczególnych architektur oraz działania systemów wbudowanych.', 'KNOWLEDGE'),
+       (10, 'W10', 'Zna wybrane języki programowania, ma wiedzę w zakresie stosowanych technik programowania, a także projektowania i wytwarzania aplikacji i systemów inf.', 'KNOWLEDGE'),
+       (11, 'W11', 'Ma wiedzę z algorytmizacji i podstaw tworzenia i przetwarzania struktur danych.', 'KNOWLEDGE'),
+       (12, 'W12', 'Ma uporządkowaną, podbudowana teoretycznie wiedzę o budowie, zasadach projektowania i działania systemów informatycznych, w tym baz danych. Zna podstawowe metody ich ochrony.', 'KNOWLEDGE'),
+       (13, 'W13', 'Zna podstawowe metody techniczne i narzędzia stosowane przy rozwiązywaniu prostych problemów z zakresu sztucznej inteligencji.', 'KNOWLEDGE'),
+       (14, 'W14', 'Zna ogólne narzędzia wspomagające pracę informatyka oraz specyficzne narzędzia związane z wybraną specjalnością . Ma wiedzę w zakresie zastosowań rozwiązań informatycznych w rzeczywistych dziedzinach aktywności ludzkiej.', 'KNOWLEDGE'),
+       (15, 'W15', 'Ma wiedze w zakresie metod gromadzenia, przetwarzania i stosowania zgromadzonych danych w wybranych dziedzinach informatyki.', 'KNOWLEDGE'),
+       (16, 'W16', 'Zna metody projektowania, wytwarzania i administrowania systemami informatycznymi charakterystycznymi dla wybranych dziedzin  informatyki.', 'KNOWLEDGE'),
+       (17, 'U1', 'Potrafi posługiwać się językiem obcym na poziomie B2 (ESOKJ RD) oraz umie posługiwać się językiem angielskim specjalistycznym dla informatyki.', 'SKILLS'),
+       (18, 'U2', 'Potrafi pozyskiwać informacje z dokumentacji, literatury, Internetu oraz innych wiarygodnych źródeł w języku polskim i angielskim, integrować je, dokonywać ich interpretacji oraz wyciągać wnioski i formułować opinie.', 'SKILLS'),
+       (19, 'U3', 'Potrafi ocenić pod kątem ekonomicznym i zarządczym znaczenie podejmowanych przez siebie działań inżynierskich oraz scharakteryzować podstawowe zasady aktywności gospodarczej.', 'SKILLS'),
+       (20, 'U4', 'Potrafi wykorzystywać poznane modele, metody matematyczne, symulacje komputerowe oraz inne techniki obliczeniowe do rozwiązywania prostych problemów inżynierskich.', 'SKILLS'),
+       (21, 'U5', 'Potrafi wyjaśnić podstawowe zależności fizyczne oraz wykorzystać je do rozwiązywania prostych problemów inżynierskich.', 'SKILLS'),
+       (22, 'U6', 'Potrafi zaprojektować i opisać działanie prostych układów cyfrowych i elektronicznych.', 'SKILLS'),
+       (23, 'U7', 'Ma umiejętności niezbędne do funkcjonowania w środowisku pracy, umie zachowywać się w sposób właściwy dla sfery przemysłowej. Potrafi sam rozwijać swoją wiedzę i umiejętności zawodowe.', 'SKILLS'),
+       (24, 'U8', 'Potrafi zaprojektować i wykonać prosty interfejs graficzny lub komunikacyjny.', 'SKILLS'),
+       (25, 'U9', 'Potrafi zaprojektować procesy wytwarzania aplikacji oraz aktywnie uczestniczyć w pracach zespołów informatycznych przejmując zadania charakterystyczne dla przydzielonej mu roli.', 'SKILLS'),
+       (26, 'U10', 'Potrafi wyjaśnić zasady budowy i działania sprzętu IT oraz wykonać podstawowe operacje obliczeniowe w wybranych systemach kodowania.', 'SKILLS'),
+       (27, 'U11', 'Ma podstawowe umiejętności w zakresie projektowania, programowania i obsługi systemów wbudowanych.', 'SKILLS'),
+       (28, 'U12', 'Potrafi projektować i administrować sieciami komputerowymi, w tym sieciami bezprzewodowymi.', 'SKILLS'),
+       (29, 'U13', 'Potrafi opisać obecne klasy architektur sprzętu komputerowego, szczegółowo objaśnić budowę jego elementów składowych oraz wskazać wpływ architektury na działanie oprogramowania.', 'SKILLS'),
+       (30, 'U14', 'Umie właściwie wybrać i zastosować język i paradygmaty programowania dla analizowanego problemu inżynierskiego.', 'SKILLS'),
+       (31, 'U15', 'Potrafi wybrać i zastosować algorytm i struktury danych najodpowiedniejsze dla prostego problemu technicznego, szczególnie dla wybranej specjalności.', 'SKILLS'),
+       (32, 'U16', 'Potrafi opisać proces powstawania oprogramowania, używać wybranych narzędzi i technik wspomagających wytwarzanie aplikacji.', 'SKILLS'),
+       (33, 'U17', 'Potrafi scharakteryzować  budowę i działanie wybranych systemów informatycznych oraz określić ich przydatność w konkretnych zastosowaniach inżynierskich.', 'SKILLS'),
+       (34, 'U18', 'Potrafi administrować wybranymi systemami informatycznymi, w tym korzystać z właściwych technik zabezpieczających.', 'SKILLS'),
+       (35, 'U19', 'Potrafi zaprojektować i wykonać relacyjna bazę danych oraz skonstruować przykładowe zapytanie SQL.', 'SKILLS'),
+       (36, 'U20', 'Potrafi wybrać i zastosować właściwe techniki i narzędzia sztucznej inteligencji do rozwiązania prostych problemów inżynierskich.', 'SKILLS'),
+       (37, 'U21', 'Potrafi określić możliwość zastosowania współczesnych metod i narzędzi informatycznych do rozwiązywania prostych problemów inżynierskich oraz wybrać i zastosować wybraną technikę w szczególności rozwiązania w zakresie wybranej specjalności.', 'SKILLS'),
+       (38, 'U22', 'Potrafi wykryć i zinterpretować związki występujące w zjawiskach rzeczywistych oraz wykorzystać je w tworzeniu modeli, programów  i symulacji komputerowych dla wybranej specjalności.', 'SKILLS'),
+       (39, 'U23', 'Potrafi wykorzystywać poznane modele, metody matematyczne, symulacje komputerowe, pomiary charakterystyk statycznych i dynamicznych oraz inne techniki obliczeniowe i analityczne do projektowania i wykonania projektów inżynierskich w wybranej dziedzinie.', 'SKILLS'),
+       (40, 'U24', 'Umie dyskutować na tematy informatyczne i wyrobić sobie własną krytyczną opinię na temat nowych osiągnięć w wybranych dyscyplinach informatycznych.', 'SKILLS'),
+       (41, 'K1', 'Rozumie potrzebę dbania o ciągły rozwój intelektualny i fizyczny,  zdaje sobie sprawę z konieczności uczenia się przez całe życie i adaptowania swojej wiedzy do zmian cywilizacyjnych.', 'SOCIAL'),
+       (42, 'K2', 'Rozumie znaczenie społecznego oddziaływania informatyki, w tym technik komunikacyjnych i mobilności oraz posiada potrzebę informowania społeczeństwa o rozwoju i osiągnięciach informatyki.', 'SOCIAL'),
+       (43, 'K3', 'Rozumie społeczny i zawodowy kontekst informatyki, jej zasady prawne i etyczne oraz  świadomie stosuje się do przepisów obowiązującego prawa, przestrzega zasad etyki zawodowej.', 'SOCIAL'),
+       (44, 'K4', 'Rozumie znaczenie pojęć istotnych  w procesie kształtowania postaw takich jak patriotyzm, humanizm, tolerancja, współpraca wielokulturowa.', 'SOCIAL'),
+       (45, 'K5', 'Rozumie kontekst ekonomiczny podejmowanych przez siebie działań i potrafi myśleć i działać w sposób przedsiębiorczy.', 'SOCIAL'),
+       (46, 'K6', 'Potrafi pracować w zespole, przyjmując w nim różne role i rozumiejąc zasady odpowiedzialności i współpracy; rozumie konieczność systematycznej pracy nad projektami o charakterze długofalowym.', 'SOCIAL'),
+       (47, 'K7', 'Rozumie i realizuję potrzebę prowadzenia zdrowego trybu życia i propagowania kultury fizycznej oraz uczestniczy w sportowym i społecznym życiu Uczelni.', 'SOCIAL');
+
+INSERT INTO subject_effect (id, content, type)
+VALUES (1, 'Ma podstawową wiedzę o miejscu i znaczeniu języków obcych w systemie nauk oraz o ich specyfice przedmiotowej.', 'SKILLS'),
+       (2, 'Zna podstawową terminologię obcojęzyczną właściwą  dla studiowanego kierunku.', 'SKILLS'),
+       (3, 'Zna i rozumie podstawowe pojęcia i zasady z zakresu ochrony własności przemysłowej i prawa autorskiego.', 'SKILLS'),
+       (4, 'Ma świadomość kompleksowej natury języka oraz jego złożoność i historycznej zmienności jego znaczeń.', 'SKILLS'),
+       (5, 'Ma umiejętności językowe właściwe dla studiowanego kierunku zgodnie z wymaganiami określonymi dla poziomu co najmniej B2 Europejskiego Systemu Opisu Kształcenia Językowego.', 'SKILLS'),
+       (6, 'Umie samodzielnie wykorzystywać wiedzę z wykorzystaniem słowników, leksykonów oraz innych tradycyjnych i cyfrowych źródeł informacji.', 'SKILLS'),
+       (7, 'Potrafi wyszukiwać, analizować, oceniać i selekcjonować informacje z różnych źródeł.', 'SKILLS'),
+       (8, 'Posiada umiejętność przygotowania typowych prac pisemnych w języku angielskim właściwych dla studiowanego kierunku studiów.', 'SKILLS'),
+       (9, 'Posiada umiejętność przygotowania wystąpień ustnych w języku angielskim dotyczących zagadnień szczegółowych z zakresu studiowanego kierunku studiów.', 'SKILLS'),
+       (10, 'Ma świadomość posiadanej przez siebie wiedzy i umiejętności oraz konieczności ich stałej aktualizacji w kontekście wykonywanego zawodu.', 'SOCIAL'),
+       (11, 'Rozumie potrzebę ciągłego dokształcania się, ciągłości praktyki komunikacyjnej w języku angielskim oraz uczenia się przez całe życie.', 'SOCIAL'),
+       (12, 'Potrafi pracować w grupie, przyjmując różne role przy wykonywaniu wspólnych projektów i prowadzonej dyskusji.', 'SOCIAL'),
+       (13, 'Efektywnie organizuje swoją pracę oraz innych i potrafi krytycznie ocenić jej priorytety oraz stopień zaawansowania.', 'SOCIAL'),
+       (14, 'Potrafi uzupełniać i doskonalić nabytą wiedzę i umiejętności.', 'SOCIAL'),
+       (15, 'Student zna podstawy polskiego prawa gospodarczego, potrafi wyjaśnić prawne i organizacyjne konsewkencje wyboru formy działalności gospodarczej oraz potrafi przygotować właściwą dokumentację.', 'KNOWLEDGE');
 
 INSERT INTO major_major_effect(major_id, major_effect_id)
 VALUES (1, 1), (1, 3), (1, 6), (1, 8), (1, 11),
