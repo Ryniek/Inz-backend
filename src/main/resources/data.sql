@@ -27,14 +27,22 @@ INSERT INTO tutor (id, first_name, last_name, degree)
 VALUES (1, 'Andrzej', 'Żak', 'kmdr dr hab. inż.'),
        (2, 'Patrycja', 'Trojczak', 'dr inż.'),
        (3, 'Kornelia', 'Bernaciak', 'dr inż.'),
-       (4, 'TestoweImie1', 'TestoweNazwisko1', 'inż.'),
-       (5, 'TestoweImie2', 'TestoweNazwisko2', 'kmdr dr hab. inż.'),
-       (6, 'TestoweImie3', 'TestoweNazwisko3', 'mgr inż.'),
-       (7, 'TestoweImie4', 'TestoweNazwisko4', 'kmdr dr hab. inż.'),
-       (8, 'TestoweImie5', 'TestoweNazwisko5', 'mgr inż.'),
-       (9, 'TestoweImie6', 'TestoweNazwisko6', 'kmdr dr hab. inż.'),
-       (10, 'TestoweImie7', 'TestoweNazwisko7', 'kmdr dr hab. inż.'),
-       (11, 'TestoweImie8', 'TestoweNazwisko8', 'mgr inż.');
+       (4, 'Studium języków obcych', null, null),
+       (5, 'Wydział Nauk Humanistycznych i Społecznych', null,  null),
+       (6, 'Wincenty', 'Karawajczyk', 'dr'),
+       (7, 'Krzysztof', 'Topolski', 'dr'),
+       (8, 'Vadim', 'Romanuke', 'dr hab. inż.'),
+       (9, 'Jerzy', 'Garus', 'dr hab. inż.'),
+       (10, 'Andrzej', 'Glaner', 'dr'),
+       (11, 'Jan', 'Masiejczyk', 'dr inż.'),
+       (12, 'Artur', 'Cywiński', 'dr inż.'),
+       (13, 'Tadeusz', 'Bodnar', 'mgr inż.'),
+       (14, 'Tomasz', 'Górski', 'dr inż.'),
+       (15, 'Wojciech', 'Jędruch', 'dr hab. inż.'),
+       (16, 'Paweł', 'Piskur', 'dr inż.'),
+       (17, 'Przemysław', 'Rodwald', 'kmdr por. dr inż.'),
+       (18, 'Artur', 'Zacniewski', 'dr inż.'),
+       (19, 'Wydział Mechaniczno-Elektryczny', null, null);
 
 INSERT INTO module (id, name, specialized)
 VALUES (1, 'Moduł ogólnouczelniany', false),
@@ -47,7 +55,6 @@ VALUES (1, 'Moduł ogólnouczelniany', false),
     (8, 'Moduł specjalistyczny: Programowanie aplikacji użytkowych', true),
     (9, 'Moduł specjalistyczny: Sieci komputerowe', true),
     (10, 'Realizacja projektu zespołowego', false);
-
 
 INSERT INTO subject (id, name, subject_code)
 VALUES (1, 'Język angielski', 'Ja'), (2, 'Angielski zawodowy', 'Az'), (3, 'Wychowanie fizyczne', 'Wf'), (4, 'Podstawy przedsiębiorczości', 'Pp'), (5, 'Ochrona właśności intelektualnej', 'Owi'), (6, 'Podstawy ekonomii', 'H1'), (7, 'Podstawy logiki', 'H2'), (8, 'Historia Polski - wybrane aspekty', 'Hp'),
@@ -151,19 +158,44 @@ VALUES (1, 'Ma podstawową wiedzę o miejscu i znaczeniu języków obcych w syst
        (12, 'Potrafi pracować w grupie, przyjmując różne role przy wykonywaniu wspólnych projektów i prowadzonej dyskusji.', 'SOCIAL'),
        (13, 'Efektywnie organizuje swoją pracę oraz innych i potrafi krytycznie ocenić jej priorytety oraz stopień zaawansowania.', 'SOCIAL'),
        (14, 'Potrafi uzupełniać i doskonalić nabytą wiedzę i umiejętności.', 'SOCIAL'),
-       (15, 'Student zna podstawy polskiego prawa gospodarczego, potrafi wyjaśnić prawne i organizacyjne konsewkencje wyboru formy działalności gospodarczej oraz potrafi przygotować właściwą dokumentację.', 'KNOWLEDGE');
+       (15, 'Student zna podstawy polskiego prawa gospodarczego, potrafi wyjaśnić prawne i organizacyjne konsewkencje wyboru formy działalności gospodarczej oraz potrafi przygotować właściwą dokumentację.', 'KNOWLEDGE'),
+       (16, 'Student zna podstawy zarządzania przedsiebiorstwem, potrafi dyskutować i opisywać sytuacje decyzyjne, które są typowe dla kierownictwa  szczebla operacyjnego i strategicznego.', 'KNOWLEDGE'),
+       (17, 'Student potrafi sklasyfikować źródła pozyskiwania kapitału i potrafi przeanalizować ich opłacalność w konkretnych sytuacjach decyzyjnych.', 'SKILLS'),
+       (18, 'Student potrafi przeanalizować dostępne narzędzia ekonomiczne i marketingowe pod kątem ich opłacalności i mozliwości wykorzystania w przykładowych sytuacjach decyzyjnych.', 'SKILLS'),
+       (19, 'Student potrafi zaprojektować kompleksowe rozwiązanie  problemu ekonomicznego i zaprezentować go publicznie.', 'SKILLS'),
+       (20, 'Student śledzi bieżącą sytuację ekonomiczną w kraju i na świecie, krytycznie obserwuje i dyskutuje model biznesowy przedsiębiorstw, zwlaszcza z branży informatycznej.', 'SOCIAL'),
+       (21, 'Student uważnie śledzi treści wykładu, w celu lepszego zrozumienia kontekstu ekonomicznego zdarzeń i i działań,  samodzielnie wyszukuje informacje uzupełniające z innych źródeł oraz analizuje zasady funkcjonowania znanych mu przedsiębiorstw.', 'SOCIAL'),
+       (22, 'Aktywnie uczestniczy w zajęciach laboratoryjnych, rozwiązuje problemy decyzyjne o charakterze ekonomicznym, dzieli się z grupą własnymi obserwacjami z otoczenia ekonomicznego kraju, rozumie procesy ewolucji zjawisk gospodarczych i konieczność ciągłego nadązania za zmieniajacymi się warunkami ekonomicznymi.', 'SOCIAL'),
+       (23, 'Potrafi podejmować zadania długofalowe, dokonywać i przestrzegać ustaleń organizacyjnych, przejmować wyznaczone mu role w zespołach. ', 'SOCIAL'),
+       (24, 'Ma wiedzę w zakresie definiowania prawa ochrony własności intelektualnej.', 'KNOWLEDGE'),
+       (25, 'Umie zastosować podstawowe konstrukcje prawne dla rozwiązywania problemów pojawiających się w kontekście wykonywania i implementacji praw własności intelektualnej.', 'KNOWLEDGE'),
+       (26, 'Umie dokonać analizy prawnej prostego stanu faktycznego z zakresu problematyki ochrony praw własności intelektualnej.', 'KNOWLEDGE'),
+       (27, 'Potrafi pracować w grupie nad rozwiązaniem problemu prawnego  w sferze ochrony własności intelektualnej.', 'SOCIAL'),
+       (28, 'Student zna podstawowe pojęcia ekonomiczne, potrafi opisać podstawowe zasady funkcjonowania gospodarki rynkowej i obiegu pieniądza, rozumie zasadę konstrukcji budżetu państwa.', 'KNOWLEDGE'),
+       (29, 'Student potrafi ocenić pod kątem ekonomicznym typowe działania i decyzje inzynierskie, szczególnie gdy dotyczą branży informatycznej.', 'SKILLS'),
+       (30, 'Student rozumie kontekst ekonomiczny podejmowanych przez siebie działań, potrafi wskazać ich główne przesłanki ekonomiczne.', 'SOCIAL'),
+       (31, 'Student wyjaśnia główne terminy logiki, wymienia jej działy oraz pokazuje miejsce, rolę i zadania logiki w systemie nauk.', 'KNOWLEDGE'),
+       (32, 'Student charakteryzuje istotę, rodzaje, strukturę oraz funkcje języka z punktu widzenia logiki.', 'KNOWLEDGE'),
+       (33, 'Student rozróżnia podstawowe rodzaje rozumowań oraz ich błędy.', 'KNOWLEDGE'),
+       (34, 'Student opisuje zasadnicze sposoby definiowania pojęć.', 'KNOWLEDGE'),
+       (35, 'Student buduje definicje zgodnie z zaleceniami logiki; dostrzega błędy w definiowaniu.', 'SKILLS'),
+       (36, 'Student sprawdza poprawność rozumowań dedukcyjnych za pomocą wybranych działań w ramach rachunku zdań.', 'SKILLS'),
+       (37, 'Student wykrywa typowe przyczyny nieporozumień w procesie komunikowania się.', 'SKILLS'),
+       (38, 'Student skutecznie posługuje się językiem naturalnym w procesie komunikowania się z innymi członkami swojej grupy.', 'SOCIAL'),
+       (39, 'Rozumie potrzebę dbania o ciągły rozwój intelektualny i fizyczny,  zdaje sobie sprawę z konieczności uczenia się przez całe życie i adaptowania swojej wiedzy do zmian cywilizacyjnych.', 'KNOWLEDGE'),
+       (40, 'Rozumie znaczenie pojęć istotnych  w procesie kształtowania postaw takich jak patriotyzm, humanizm, tolerancja, współpraca wielokulturowa.', 'KNOWLEDGE'),
+       (41, 'Zna definicje i podstawowe własności funkcji elementarnych.', 'KNOWLEDGE'),
+       (42, 'Zna pojęcie granicy ciągu oraz funkcji.Umie obliczać granice ciągu oraz funkcji.', 'KNOWLEDGE'),
+       (43, 'Potrafi wykorzystać poznany rachunek różniczkowy do rozwiazywania prostych problemów inżynierskich.', 'SKILLS'),
+       (44, 'Potrafi wykorzystać poznany rachunek całkowy do rozwiazywania prostych problemów inżynierskich.', 'SKILLS');
+
 
 INSERT INTO major_major_effect(major_id, major_effect_id)
-VALUES (1, 1), (1, 3), (1, 6), (1, 8), (1, 11),
-       (2, 2), (2, 4), (2, 6), (2, 9), (2, 12),
-       (3, 3), (3, 7), (3, 10), (3, 13), (3, 14);
-
-INSERT INTO major_effect_subject_effect(major_effect_id, subject_effect_id)
-VALUES (1, 1), (1, 3), (2, 2), (2, 5), (3, 6), (4, 6);
+VALUES (1, 1),(1, 2),(1, 3),(1, 4),(1, 5),(1, 6),(1, 7),(1, 8),(1, 9),(1, 10),(1, 11),(1, 12),(1, 13),(1, 14),(1, 15),(1, 16),(1, 17),(1, 18),(1, 19),(1, 20),(1, 21),(1, 22),(1, 23),(1, 24),(1, 25),(1, 26),(1, 27),(1, 28),(1, 29),(1, 30),(1, 31),(1, 32),(1, 33),(1, 34),(1, 35),(1, 36),(1, 37),(1, 38),(1, 39),(1, 40),(1, 41),(1, 42),(1, 43),(1, 44),(1, 45),(1, 46),(1, 47);
 
 INSERT INTO major_module (id, major_id, module_id, tutor_id)
-VALUES (1, 1, 1, 1), (2, 1, 2, 2), (3, 1, 3, 3), (4, 1, 8, 4), (5, 1, 9, 5),
-       (6, 5, 1, 1), (7, 5, 2, 2), (8, 5, 3, 3), (9, 5, 8, 4), (10, 5, 9, 5);
+VALUES (1, 1, 1, 5), (2, 1, 2, 3), (3, 1, 3, 9), (4, 1, 4, 10), (5, 1, 5, 2),
+       (6, 1, 6, 14), (7, 1, 7, 1), (8, 1, 8, 18), (9, 1, 9, 13), (10, 1, 10, 19);
 
 INSERT INTO major_module_subject (id, ects, semester, major_module_id, subject_id, tutor_id, supervisor_id, contact_hours_id, non_contact_hours_id, type_of_passing)
 VALUES (1, 5, 1, 1, 1, 2, 2, 1, 1, 'GRADE'), (2, 4, 2, 1, 1, 2, 2, 2, 2, 'GRADE'), (3, 1, 3, 1, 2, 2, 2,  3, 3, 'NO_GRADE'), (4, 8, 1, 2, 3, 3, 3, 4, 4, 'NO_GRADE'),
