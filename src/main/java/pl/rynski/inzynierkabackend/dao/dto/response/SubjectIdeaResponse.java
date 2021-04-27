@@ -31,7 +31,7 @@ public class SubjectIdeaResponse {
     private TutorResponse supervisor;
     private TutorResponse tutor;
     private UserResponse user;
-    private ModuleSubjectResponse majorModuleSubject;
+    private ModuleSubjectDetailsResponse moduleSubjectDetails;
 
     @Data
     private static class MajorModuleResponse {
@@ -72,7 +72,7 @@ public class SubjectIdeaResponse {
         if(subjectIdea.getSupervisor() != null) result.setSupervisor(TutorResponse.toResponse(subjectIdea.getSupervisor()));
         if(subjectIdea.getTutor() != null) result.setTutor(TutorResponse.toResponse(subjectIdea.getTutor()));
         if(subjectIdea.getUser() != null) result.setUser(UserResponse.toResponse(subjectIdea.getUser()));
-        if(subjectIdea.getMajorModuleSubject() != null) result.setMajorModuleSubject(ModuleSubjectResponse.toResponse(subjectIdea.getMajorModuleSubject()));
+        if(subjectIdea.getMajorModuleSubjectDetails() != null) result.setModuleSubjectDetails(ModuleSubjectDetailsResponse.toResponse(subjectIdea.getMajorModuleSubjectDetails()));
         return result;
     }
 }

@@ -22,7 +22,7 @@ public class ChangeSubjectIdeaDto {
     //Propozycja zmiany prowadzącego
     private Long tutorId;
 
-    public static SubjectIdea fromDto(ChangeSubjectIdeaDto dto, MajorModuleSubject majorModuleSubject, MajorModule majorModule, Tutor supervisor, Tutor tutor) {
+    public static SubjectIdea fromDto(ChangeSubjectIdeaDto dto, MajorModuleSubjectDetails majorModuleSubjectDetails, MajorModule majorModule, Tutor supervisor, Tutor tutor) {
         SubjectIdea result = new SubjectIdea();
         result.setExisting(true);
         result.setSendingTime(DateUtils.getCurrentDateTime());
@@ -35,7 +35,7 @@ public class ChangeSubjectIdeaDto {
         if(majorModule != null) majorModule.addSubjectIdea(result);
         if(tutor != null) tutor.addSubjectIdea(result);
         if(supervisor != null) supervisor.addSubjectIdeaSupervisor(result);
-        majorModuleSubject.addSubjectIdea(result);
+        majorModuleSubjectDetails.addSubjectIdea(result);
         return result;
     }
 }

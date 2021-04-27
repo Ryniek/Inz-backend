@@ -38,8 +38,8 @@ public class SubjectIdeaController {
 
     @Operation(summary = "Add idea of changing existing subject")
     @PostMapping("/change/{moduleSubjectId}")
-    public ResponseEntity<?> addChangeSubjectIdea(@PathVariable Long moduleSubjectId, @RequestBody ChangeSubjectIdeaDto changeSubjectIdeaDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(subjectIdeaService.addChangeSubjectIdea(moduleSubjectId, changeSubjectIdeaDto));
+    public ResponseEntity<?> addChangeSubjectIdea(@PathVariable Long moduleSubjectDetailsId, @RequestBody ChangeSubjectIdeaDto changeSubjectIdeaDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(subjectIdeaService.addChangeSubjectIdea(moduleSubjectDetailsId, changeSubjectIdeaDto));
     }
 
     @Operation(summary = "Add idea of deleting existing subject")

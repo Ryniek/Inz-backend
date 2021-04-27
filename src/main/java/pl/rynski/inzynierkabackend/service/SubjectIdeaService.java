@@ -35,7 +35,6 @@ public class SubjectIdeaService {
         return subjects.stream().map(SubjectIdeaResponse::toResponse).collect(Collectors.toList());
     }
 
-    //TODO trzeba to zrobic bardziej generycznie - respond On Idea i tyle
     public SubjectIdeaResponse respondOnSubjectIdea(Long subjectIdeaId, IdeaEmailDto ideaEmailDto) {
         SubjectIdea subjectIdea = fetchDataUtils.subjectIdeaById(subjectIdeaId);
         subjectIdea.setApproved(ideaEmailDto.getApproved());
@@ -47,8 +46,8 @@ public class SubjectIdeaService {
         return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(subjectIdea));
     }
 
-    public SubjectIdeaResponse addChangeSubjectIdea(Long moduleSubjectId, ChangeSubjectIdeaDto dto) {
-        MajorModuleSubject majorModuleSubject = fetchDataUtils.moduleSubjectById(moduleSubjectId);
+    public SubjectIdeaResponse addChangeSubjectIdea(Long moduleSubjectDetailsId, ChangeSubjectIdeaDto dto) {
+        MajorModuleSubjectDetails majorModuleSubjectDetails = fetchDataUtils.moduleSubjectDetailsById(moduleSubjectDetailsId);
 
         MajorModule majorModule = null;
         if(dto.getMajorModuleId() != null) majorModule = fetchDataUtils.majorModuleById(dto.getMajorModuleId());
@@ -59,7 +58,7 @@ public class SubjectIdeaService {
         Tutor tutor = null;
         if(dto.getTutorId() != null) tutor = fetchDataUtils.tutorById(dto.getTutorId());
 
-        SubjectIdea result = ChangeSubjectIdeaDto.fromDto(dto, majorModuleSubject, majorModule, supervisor, tutor);
+        SubjectIdea result = ChangeSubjectIdeaDto.fromDto(dto, majorModuleSubjectDetails, majorModule, supervisor, tutor);
         result.setUser(userDetailsService.getLoggedUser());
         return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
     }
@@ -79,9 +78,9 @@ public class SubjectIdeaService {
     }
 
     public SubjectIdeaResponse addDeleteSubjectIdea(DeleteIdeaDto dto) {
-        MajorModuleSubject majorModuleSubject = fetchDataUtils.moduleSubjectById(dto.getEffectId());
+        MajorModuleSubjectDetails majorModuleSubjectDetails = fetchDataUtils.moduleSubjectDetailsById(dto.getElementId());
 
-        SubjectIdea result = DeleteIdeaDto.fromDto(dto, majorModuleSubject);
+        SubjectIdea result = DeleteIdeaDto.fromDto(dto, majorModuleSubjectDetails);
         result.setUser(userDetailsService.getLoggedUser());
         return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
     }

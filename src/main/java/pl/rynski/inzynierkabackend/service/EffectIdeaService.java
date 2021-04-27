@@ -70,7 +70,7 @@ public class EffectIdeaService {
     }
 
     public EffectIdeaResponse addDeleteEffectIdea(DeleteIdeaDto dto) {
-        MajorEffect majorEffect = fetchDataUtils.majorEffectById(dto.getEffectId());
+        MajorEffect majorEffect = fetchDataUtils.majorEffectById(dto.getElementId());
 
         EffectIdea result = DeleteIdeaDto.fromDto(dto, majorEffect);
         result.setUser(userDetailsService.getLoggedUser());

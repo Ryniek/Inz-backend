@@ -6,7 +6,7 @@ import pl.rynski.inzynierkabackend.utils.DateUtils;
 
 @Data
 public class DeleteIdeaDto {
-    private Long effectId;
+    private Long elementId;
     private String ideaExplanation;
 
     public static ModuleIdea fromDto(DeleteIdeaDto dto, MajorModule majorModule) {
@@ -19,13 +19,13 @@ public class DeleteIdeaDto {
         return result;
     }
 
-    public static SubjectIdea fromDto(DeleteIdeaDto dto, MajorModuleSubject majorModuleSubject) {
+    public static SubjectIdea fromDto(DeleteIdeaDto dto, MajorModuleSubjectDetails majorModuleSubjectDetails) {
         SubjectIdea result = new SubjectIdea();
         result.setExisting(true);
         result.setToRemove(true);
         result.setSendingTime(DateUtils.getCurrentDateTime());
         result.setIdeaExplanation(dto.getIdeaExplanation());
-        majorModuleSubject.addSubjectIdea(result);
+        majorModuleSubjectDetails.addSubjectIdea(result);
         return result;
     }
 

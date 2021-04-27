@@ -27,14 +27,14 @@ INSERT INTO tutor (id, first_name, last_name, degree)
 VALUES (1, 'Andrzej', 'Żak', 'kmdr dr hab. inż.'),
        (2, 'Patrycja', 'Trojczak', 'dr inż.'),
        (3, 'Kornelia', 'Bernaciak', 'dr inż.'),
-       (4, 'Test1', 'Blabla1', 'inż.'),
-       (5, 'Test2', 'Blabla2', 'kmdr dr hab. inż.'),
-       (6, 'Test3', 'Blabla3', 'mgr inż.'),
-       (7, 'Test4', 'Blabla4', 'kmdr dr hab. inż.'),
-       (8, 'Test5', 'Blabla5', 'mgr inż.'),
-       (9, 'Test6', 'Blabla6', 'kmdr dr hab. inż.'),
-       (10, 'Test7', 'Blabla7', 'kmdr dr hab. inż.'),
-       (11, 'Test8', 'Blabla8', 'mgr inż.');
+       (4, 'TestoweImie1', 'TestoweNazwisko1', 'inż.'),
+       (5, 'TestoweImie2', 'TestoweNazwisko2', 'kmdr dr hab. inż.'),
+       (6, 'TestoweImie3', 'TestoweNazwisko3', 'mgr inż.'),
+       (7, 'TestoweImie4', 'TestoweNazwisko4', 'kmdr dr hab. inż.'),
+       (8, 'TestoweImie5', 'TestoweNazwisko5', 'mgr inż.'),
+       (9, 'TestoweImie6', 'TestoweNazwisko6', 'kmdr dr hab. inż.'),
+       (10, 'TestoweImie7', 'TestoweNazwisko7', 'kmdr dr hab. inż.'),
+       (11, 'TestoweImie8', 'TestoweNazwisko8', 'mgr inż.');
 
 INSERT INTO module (id, name, specialized)
 VALUES (1, 'Moduł ogólnouczelniany', false),
@@ -44,28 +44,28 @@ VALUES (1, 'Moduł ogólnouczelniany', false),
     (5, 'Moduł inżynierii komputerowej i sieci', false),
     (6, 'Moduł programowania', false),
     (7, 'Moduł systemów informatycznych', false),
-    (8, 'Moduł specjalistyczny: Programowanie robotów mobilnych', true),
-    (9, 'Moduł specjalistyczny: Programowanie aplikacji użytkowych', true),
-    (10, 'Moduł specjalistyczny: Biznesowe systemy informatyczne', true),
-    (11, 'Moduł specjalistyczny: Sieci komputerowe', true);
+    (8, 'Moduł specjalistyczny: Programowanie aplikacji użytkowych', true),
+    (9, 'Moduł specjalistyczny: Sieci komputerowe', true),
+    (10, 'Realizacja projektu zespołowego', false);
+
 
 INSERT INTO subject (id, name, subject_code)
-VALUES (1, 'Język angielski', 'Ja'),
-       (2, 'Angielski zawodowy', 'Az'),
-       (3, 'Matematyka', 'Mm'),
-       (4, 'Fizyka', 'Ff'),
-       (5, 'Podstawy informatyki', 'Pi'),
-       (6, 'Systemy wbudowane', 'Sw'),
-       (7, 'Języki programowania', 'Jp'),
-       (8, 'Systemy operacyjne', 'So'),
-       (9, 'Podstawy robotyki', 'Pr'),
-       (10, 'Aplikacje internetowe', 'Ai'),
-       (11, 'Zaawansowane bazy danych', 'Zbd'),
-       (12, 'Usługi katalogowe', 'Uk');
+VALUES (1, 'Język angielski', 'Ja'), (2, 'Angielski zawodowy', 'Az'), (3, 'Wychowanie fizyczne', 'Wf'), (4, 'Podstawy przedsiębiorczości', 'Pp'), (5, 'Ochrona właśności intelektualnej', 'Owi'), (6, 'Podstawy ekonomii', 'H1'), (7, 'Podstawy logiki', 'H2'), (8, 'Historia Polski - wybrane aspekty', 'Hp'),
+       (9, 'Matematyka', 'Mm'), (10, 'Matematyka dyskretna', 'Md'), (11, 'Metody probabilistyczne', 'Mp'), (12, 'Metody numeryczne', 'Mn'),
+       (13, 'Fizyka', 'Ff'), (14, 'Podstawy elektrotechniki', 'Pet'), (15, 'Podstawy elektroniki', 'Pee'), (16, 'Układy cyfrowe', 'Uc'), (17, 'Podstawy automatyki', 'Pa'),
+       (18, 'Podstawy informatyki', 'Pi'), (19, 'Grafika i komunikacja człowiek-komputer', 'Gkc'), (20, 'Zarządzanie projektami informatycznymi', 'Zpi'), (21, 'Problemy społeczne i zawodowe informatyka', 'Psz'),
+       (22, 'Architektura systemów komputerowych', 'Ask'), (23, 'Systemy wbudowane', 'Sw'), (24, 'Sterowniki programowalne', 'Sp'), (25, 'Sieci komputerowe', 'Sk'), (26, 'Sieci bezprzewodowe', 'Sb'),
+       (27, 'Języki programowania', 'Jp'), (28, 'Podstawy programowania', 'Pp'), (29, 'Programowanie inżynierskie Matlab', 'Pim'), (30, 'Metodologia programowania', 'Mp'), (31, 'Algorytmy i złożoności', 'Az'), (32, 'Inżynieria oprogramowania', 'Io'),
+       (33, 'Systemy operacyjne', 'So'), (34, 'Bazy danych', 'Bd'), (35, 'Sztuczna inteligencja', 'Si'), (36, 'Bezpieczeństwo systemów informatycznych', 'Bsi'),
+       (37, 'Projektowanie serwisów WWW', 'Psw'), (38, 'Zaawansowane bazy danych', 'Zbd'), (39, 'Aplikacje internetowe', 'Ai'), (40, 'Aplikacje mobilne dla systemu Android', 'Ama'), (41, 'Aplikacje w architekturze klient-serwer', 'Amw'), (42, 'Wstęp do uczenia maszynowego', 'Prr'), (43, 'Architektura zorientowana na usługi', 'Azu'), (44, 'Bezpieczeństwo serwisów internetowych', 'Bin'),
+       (45, 'Protokoły sieci teleinformatycznych', 'Pst'), (46, 'Administrowanie serwerami', 'As'),(47, 'Routing w sieciach informatycznych', 'Rsi'),(48, 'Projektowanie i infrastuktura sieci', 'Psi'),(49, 'Technologie sieci rozległych', 'Tsr'),(50, 'Usługi katalogowe', 'Uk'),(51, 'Zarządzanie sieciami komputerowymi', 'Zsk'),(52, 'Bezpieczeństwo sieci', 'Bs'),
+       (53, 'Zespołowe przedsięwzięcia inżynierskie', 'Zpi'), (54, 'Przygotownie do praktyki', 'Pp'), (55, 'Przygotowanie pracy dyplomowej', 'Ppd'), (56, 'Projekt dyplomowy inżynierski i egzamin zawodowy', null);
 
 INSERT INTO module_subject (module_id, subject_id)
-VALUES (1, 1),(1, 2),(2, 3),(3, 4),(4, 5),(5, 6),(6, 7),(7, 8),(8, 9),
-       (9, 10),(10, 11),(11, 12);
+VALUES (1, 1),(1, 2),(1, 3),(1, 4),(1, 5),(1, 6),(1, 7),(1, 8),(2, 9),(2, 10),(2, 11),(2, 12),(3, 13),(3, 14),(3, 15),(3, 16),(3, 17),
+  (4, 18),(4, 19),(4, 20),(4, 21),(5, 22),(5, 23),(5, 24),(5, 25),(5, 26),(6, 27),(6, 28),(6, 29),(6, 30),(6, 31),(6, 32),
+  (7, 33),(7, 34),(7, 35),(7, 36),(8, 37),(8, 38),(8, 39),(8, 40),(8, 41),(8, 42),(8, 43),(8, 44),
+    (9, 45),(9, 46),(9, 47),(9, 48),(9, 49),(9, 50),(9, 51),(9, 52),(10, 53),(10, 54),(10, 55),(10, 56);
 
 INSERT INTO contact_hours (id, lecture, exercise, laboratory, seminar, project)
 VALUES (1, 1, 29, 0, 0, 0), (2, 10, 15, 10, 0, 0), (3, 10, 14, 0, 0, 0), (4, 10, 20, 0, 0, 0), (5, 5, 25, 0, 0, 0),(6, 10, 20, 5, 0, 0),
