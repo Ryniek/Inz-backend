@@ -1,4 +1,4 @@
-package pl.rynski.inzynierkabackend.dao.dto.request;
+package pl.rynski.inzynierkabackend.dao.dto.request.ideas;
 
 import lombok.Data;
 import pl.rynski.inzynierkabackend.dao.model.*;

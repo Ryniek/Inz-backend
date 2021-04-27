@@ -3,6 +3,7 @@ package pl.rynski.inzynierkabackend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.dto.request.MajorDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.EffectDto;
 import pl.rynski.inzynierkabackend.dao.dto.response.MajorResponse;
 import pl.rynski.inzynierkabackend.dao.model.Department;
 import pl.rynski.inzynierkabackend.dao.model.Major;
@@ -40,9 +41,12 @@ public class MajorService {
         return MajorResponse.toResponse(major);
     }
 
+    //TODO sprawdzic poprawnosc
     public MajorResponse addMajor(MajorDto dto) {
         Department department = fetchDataUtils.departmentById(dto.getDepartmentId());
-        List<MajorEffect> majorEffects = majorEffectRepository.findAllById(dto.getMajorEffects());
+        List<MajorEffect> majorEffects;
+        majorEffects = majorEffectRepository.findAllById(dto.getMajorEffects());
+        majorEffects.addAll(createNewMajorEffects(dto.getNewMajorEffects()));
         Major major = MajorDto.fromDto(dto, department, majorEffects);
         return MajorResponse.toResponse(majorRepository.save(major));
     }
@@ -55,5 +59,9 @@ public class MajorService {
 
     public void deleteMajor(Long majorId) {
         majorRepository.delete(fetchDataUtils.majorById(majorId));
+    }
+
+    private List<MajorEffect> createNewMajorEffects(List<EffectDto> newMajorEffects) {
+        return newMajorEffects.stream().map(EffectDto::fromDto).collect(Collectors.toList());
     }
 }

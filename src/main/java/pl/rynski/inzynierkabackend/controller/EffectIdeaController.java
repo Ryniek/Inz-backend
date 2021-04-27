@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.rynski.inzynierkabackend.dao.dto.request.ChangeEffectIdeaDto;
-import pl.rynski.inzynierkabackend.dao.dto.request.DeleteIdeaDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.ideas.ChangeEffectIdeaDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.ideas.DeleteIdeaDto;
 import pl.rynski.inzynierkabackend.dao.dto.request.IdeaEmailDto;
-import pl.rynski.inzynierkabackend.dao.dto.request.NewEffectIdeaDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.ideas.NewEffectIdeaDto;
 import pl.rynski.inzynierkabackend.service.EffectIdeaService;
 
 @RestController
@@ -39,14 +39,14 @@ public class EffectIdeaController {
 
     @Operation(summary = "Add idea of changing existing effect")
     @PostMapping("/change/{effectId}")
-    public ResponseEntity<?> addChangeEffectIdea(@PathVariable Long effectId, @RequestParam Boolean forSubject, @RequestBody ChangeEffectIdeaDto changeEffectIdeaDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(effectIdeaService.addChangeEffectIdea(effectId, forSubject, changeEffectIdeaDto));
+    public ResponseEntity<?> addChangeEffectIdea(@PathVariable Long effectId, @RequestBody ChangeEffectIdeaDto changeEffectIdeaDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(effectIdeaService.addChangeEffectIdea(effectId, changeEffectIdeaDto));
     }
 
     @Operation(summary = "Add idea of deleting existing effect")
     @PostMapping("/delete")
-    public ResponseEntity<?> addDeleteEffectIdea(@RequestBody DeleteIdeaDto deleteIdeaDto, @RequestParam Boolean forSubject) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(effectIdeaService.addDeleteEffectIdea(deleteIdeaDto, forSubject));
+    public ResponseEntity<?> addDeleteEffectIdea(@RequestBody DeleteIdeaDto deleteIdeaDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(effectIdeaService.addDeleteEffectIdea(deleteIdeaDto));
     }
 
     @Operation(summary = "Delete effect idea")

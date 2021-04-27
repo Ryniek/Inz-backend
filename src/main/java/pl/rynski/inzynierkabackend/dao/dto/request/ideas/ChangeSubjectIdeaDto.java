@@ -1,6 +1,8 @@
-package pl.rynski.inzynierkabackend.dao.dto.request;
+package pl.rynski.inzynierkabackend.dao.dto.request.ideas;
 
 import lombok.Data;
+import pl.rynski.inzynierkabackend.dao.dto.request.ContactHoursDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.NonContactHoursDto;
 import pl.rynski.inzynierkabackend.dao.model.*;
 import pl.rynski.inzynierkabackend.dao.model.enums.TypeOfPassing;
 import pl.rynski.inzynierkabackend.utils.DateUtils;

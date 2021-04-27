@@ -6,6 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.dto.request.*;
+import pl.rynski.inzynierkabackend.dao.dto.request.ideas.ChangeSubjectIdeaDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.ideas.DeleteIdeaDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.ideas.NewSubjectIdeaDto;
 import pl.rynski.inzynierkabackend.dao.dto.response.SubjectIdeaResponse;
 import pl.rynski.inzynierkabackend.dao.model.*;
 import pl.rynski.inzynierkabackend.repository.SubjectIdeaRepository;
@@ -65,14 +68,18 @@ public class SubjectIdeaService {
         MajorModule majorModule = fetchDataUtils.majorModuleById(dto.getMajorModuleId());
         Tutor supervisor = fetchDataUtils.tutorById(dto.getSupervisorId());
         Tutor tutor = fetchDataUtils.tutorById(dto.getTutorId());
+        Set<MajorEffectSubjectIdea> majorEffects = new HashSet<>();
+        dto.getMajorEffects().forEach(effect -> {
+            majorEffects.add(createNewMajorEffect(effect));
+        });
 
-        SubjectIdea result = NewSubjectIdeaDto.fromDto(dto, majorModule, supervisor, tutor);
+        SubjectIdea result = NewSubjectIdeaDto.fromDto(dto, majorModule, supervisor, tutor, majorEffects);
         result.setUser(userDetailsService.getLoggedUser());
         return SubjectIdeaResponse.toResponse(subjectIdeaRepository.save(result));
     }
 
     public SubjectIdeaResponse addDeleteSubjectIdea(DeleteIdeaDto dto) {
-        MajorModuleSubject majorModuleSubject = fetchDataUtils.moduleSubjectById(dto.getIdeaId());
+        MajorModuleSubject majorModuleSubject = fetchDataUtils.moduleSubjectById(dto.getEffectId());
 
         SubjectIdea result = DeleteIdeaDto.fromDto(dto, majorModuleSubject);
         result.setUser(userDetailsService.getLoggedUser());
@@ -81,5 +88,12 @@ public class SubjectIdeaService {
 
     public void deleteSubjectIdea(Long subjectIdeaId) {
         subjectIdeaRepository.delete(fetchDataUtils.subjectIdeaById(subjectIdeaId));
+    }
+
+    private MajorEffectSubjectIdea createNewMajorEffect(NewSubjectIdeaDto.MajorEffectIdDto effect) {
+        MajorEffectSubjectIdea majorEffectSubjectIdea = new MajorEffectSubjectIdea();
+        majorEffectSubjectIdea.setMajorEffect(fetchDataUtils.majorEffectById(effect.getMajorEffectId()));
+        majorEffectSubjectIdea.setConnectionStrength(effect.getConnectionStrength());
+        return majorEffectSubjectIdea;
     }
 }

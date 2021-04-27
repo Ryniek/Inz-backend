@@ -18,6 +18,7 @@ public class MajorDto {
     private Boolean hidden;
     private Long departmentId;
     private List<Long> majorEffects = new ArrayList<>();
+    private List<EffectDto> newMajorEffects = new ArrayList<>();
 
     public static Major fromDto(MajorDto dto, Department department, List<MajorEffect> majorEffects) {
         Major major = new Major();
@@ -26,7 +27,7 @@ public class MajorDto {
         major.setYears(dto.getYears());
         major.setHidden(dto.getHidden());
         major.setDepartment(department);
-        major.setMajorEffects(new HashSet<>(majorEffects));
+        if(!majorEffects.isEmpty()) major.setMajorEffects(new HashSet<>(majorEffects));
         return major;
     }
 }

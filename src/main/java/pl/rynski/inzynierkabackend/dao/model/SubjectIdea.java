@@ -47,7 +47,7 @@ public class SubjectIdea {
     @Column(name = "ects")
     private Integer ects;
 
-    @Column(name = "type_of_passing", nullable = false)
+    @Column(name = "type_of_passing")
     @Enumerated(EnumType.STRING)
     private TypeOfPassing typeOfPassing;
 
@@ -59,6 +59,7 @@ public class SubjectIdea {
     @JoinColumn(name = "non_contact_hours_id", referencedColumnName = "id")
     private NonContactHours nonContactHours;
 
+    //Wybrany moduł dla nowego przedmiotu lub propozycja zmiany modułu
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "major_module_id", referencedColumnName = "id")
     private MajorModule majorModule;
@@ -71,28 +72,35 @@ public class SubjectIdea {
     @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
     private Tutor supervisor;
 
+    //TODO wyswietlac te przy all SubjectIdea ktore maja moduleIdea == null
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "module_idea_id", referencedColumnName = "id")
+    private ModuleIdea moduleIdea;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     //Jezeli modyfikujemy istniejacy, gdy exising == true
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "major_module_subject_id", referencedColumnName = "id")
-    private MajorModuleSubject majorModuleSubject;
-
-    //TODO wyswietlac te przy all SubjectIdea ktore maja moduleIdea == null
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "module_idea_id", referencedColumnName = "id")
-    private ModuleIdea moduleIdea;
+    @JoinColumn(name = "major_module_subject_details_id", referencedColumnName = "id")
+    private MajorModuleSubjectDetails majorModuleSubjectDetails;
 
     @OneToMany(mappedBy = "subjectIdea", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<MajorEffectSubjectIdea> majorEffectSubjectIdeas = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "subject_idea_subject_effect",
-            joinColumns = @JoinColumn(name = "subject_idea_id", referencedColumnName = "id"),
-            inverseJoinColumns= @JoinColumn(name = "subject_effect_id", referencedColumnName = "id")
-    )
+    //git
+    @OneToMany(mappedBy = "subjectIdea", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<SubjectEffect> subjectEffects = new HashSet<>();
+
+    //pomocnicze dajemy tam gdzie one to many
+    public void addSubjectEffect(SubjectEffect subjectEffect) {
+        subjectEffects.add(subjectEffect);
+        subjectEffect.setSubjectIdea(this);
+    }
+
+    public void removeSubjectEffect(SubjectEffect subjectEffect) {
+        subjectEffects.remove(subjectEffect);
+        subjectEffect.setSubjectIdea(null);
+    }
 }

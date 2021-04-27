@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.rynski.inzynierkabackend.dao.dto.request.ChangeModuleIdeaDto;
-import pl.rynski.inzynierkabackend.dao.dto.request.DeleteIdeaDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.ideas.ChangeModuleIdeaDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.ideas.DeleteIdeaDto;
 import pl.rynski.inzynierkabackend.dao.dto.request.IdeaEmailDto;
-import pl.rynski.inzynierkabackend.dao.dto.request.NewModuleIdeaDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.ideas.NewModuleIdeaDto;
 import pl.rynski.inzynierkabackend.service.ModuleIdeaService;
 
 @RestController

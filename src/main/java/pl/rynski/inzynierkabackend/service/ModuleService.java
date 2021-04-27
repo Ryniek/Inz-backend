@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 public class ModuleService {
 
     private final ModuleRepository moduleRepository;
-    private final SubjectRepository subjectRepository;
     private final FetchDataUtils fetchDataUtils;
 
     public List<ModuleResponse> getModules() {

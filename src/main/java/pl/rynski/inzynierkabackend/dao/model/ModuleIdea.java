@@ -62,6 +62,7 @@ public class ModuleIdea {
     @OneToMany(mappedBy = "moduleIdea", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<SubjectIdea> subjectIdeas = new HashSet<>();
 
+    //Wybrane istniejace przedmiotu do modułu
     @OneToMany(mappedBy = "moduleIdea", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<ModuleIdeaSubject> moduleIdeaSubjects = new HashSet<>();
 }

@@ -113,11 +113,11 @@ INSERT INTO major_module (id, major_id, module_id, tutor_id)
 VALUES (1, 1, 1, 1), (2, 1, 2, 2), (3, 1, 3, 3), (4, 1, 8, 4), (5, 1, 9, 5),
        (6, 5, 1, 1), (7, 5, 2, 2), (8, 5, 3, 3), (9, 5, 8, 4), (10, 5, 9, 5);
 
-INSERT INTO major_module_subject (id, ects, semester, major_module_id, subject_id, tutor_id, contact_hours_id, non_contact_hours_id, type_of_passing)
-VALUES (1, 5, 1, 1, 1, 2, 1, 1, 'GRADE'), (2, 4, 2, 1, 1, 2, 2, 2, 'GRADE'), (3, 1, 3, 1, 2, 2, 3, 3, 'NO_GRADE'), (4, 8, 1, 2, 3, 3, 4, 4, 'NO_GRADE'),
-       (5, 4, 2, 2, 3, 3, 5, 5, 'GRADE'), (6, 3, 5, 3, 4, 5, 6, 6, 'NO_GRADE'), (7, 8, 6, 4, 9, 6, 7, 7, 'GRADE'), (8, 10, 7, 5, 10, 7, 8, 8, 'NO_GRADE'),
-       (9, 5, 1, 6, 1, 2, 9, 9, 'GRADE'), (10, 4, 2, 6, 1, 2, 10, 10, 'GRADE'), (11, 1, 3, 6, 2, 2, 11, 11, 'EXAM'), (12, 8, 1, 7, 3, 3, 12, 12, 'EXAM'),
-       (13, 4, 2, 7, 3, 3, 13, 13, 'GRADE'), (14, 3, 5, 8, 4, 5, 14, 14, 'EXAM'), (15, 8, 6, 9, 9, 6, 15, 15, 'EXAM'), (16, 10, 7, 10, 10, 7, 16, 16, 'EXAM');
+INSERT INTO major_module_subject (id, ects, semester, major_module_id, subject_id, tutor_id, supervisor_id, contact_hours_id, non_contact_hours_id, type_of_passing)
+VALUES (1, 5, 1, 1, 1, 2, 2, 1, 1, 'GRADE'), (2, 4, 2, 1, 1, 2, 2, 2, 2, 'GRADE'), (3, 1, 3, 1, 2, 2, 2,  3, 3, 'NO_GRADE'), (4, 8, 1, 2, 3, 3, 3, 4, 4, 'NO_GRADE'),
+       (5, 4, 2, 2, 3, 3, 3, 5, 5, 'GRADE'), (6, 3, 5, 3, 4, 5, 5, 6, 6, 'NO_GRADE'), (7, 8, 6, 4, 9, 6, 6, 7, 7, 'GRADE'), (8, 10, 7, 5, 10, 7, 7, 8, 8, 'NO_GRADE'),
+       (9, 5, 1, 6, 1, 2, 2, 9, 9, 'GRADE'), (10, 4, 2, 6, 1, 2, 2, 10, 10, 'GRADE'), (11, 1, 3, 6, 2, 2, 2, 11, 11, 'EXAM'), (12, 8, 1, 7, 3, 3, 3, 12, 12, 'EXAM'),
+       (13, 4, 2, 7, 3, 3, 3, 13, 13, 'GRADE'), (14, 3, 5, 8, 4, 5, 5, 14, 14, 'EXAM'), (15, 8, 6, 9, 9, 6, 6, 15, 15, 'EXAM'), (16, 10, 7, 10, 10, 7, 7, 16, 16, 'EXAM');
 
 INSERT INTO major_effect_subject (subject_id, major_effect_id, connection_strength)
 VALUES (1, 1, 3), (2, 2, 2), (3, 5, 1), (3, 6, 2), (4, 7, 3), (5, 8, 2);

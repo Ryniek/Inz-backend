@@ -4,28 +4,25 @@ import lombok.Data;
 import pl.rynski.inzynierkabackend.dao.model.*;
 import pl.rynski.inzynierkabackend.dao.model.enums.TypeOfPassing;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 @Data
 public class ModuleSubjectDto {
-    private Integer ects;
-    private Integer semester;
-    private TypeOfPassing typeOfPassing;
     private Long subjectId;
     private Long supervisorId;
-    private Long tutorId;
-    private ContactHoursDto contactHours;
-    private NonContactHoursDto nonContactHours;
+    private List<MajorEffectConnectionDto> majorEffects = new ArrayList<>();
+    private List<EffectDto> subjectEffects = new ArrayList<>();
 
-    public static MajorModuleSubject fromDto(ModuleSubjectDto dto, MajorModule majorModule, Subject subject, Tutor supervisor, Tutor tutor) {
+    public static MajorModuleSubject fromDto(ModuleSubjectDto dto, MajorModule majorModule, Subject subject, Tutor supervisor, Set<MajorEffectModuleSubject> majorEffects) {
         MajorModuleSubject result = new MajorModuleSubject();
-        result.setEcts(dto.getEcts());
-        result.setSemester(dto.getSemester());
-        result.setTypeOfPassing(dto.getTypeOfPassing());
-        result.setContactHours(ContactHoursDto.fromDto(dto.getContactHours()));
-        result.setNonContactHours(NonContactHoursDto.fromDto(dto.getNonContactHours()));
         majorModule.addMajorModuleSubject(result);
         subject.addMajorModuleSubject(result);
         supervisor.addMajorModuleSubjectSupervisor(result);
-        tutor.addMajorModuleSubject(result);
+        result.setMajorEffects(majorEffects);
+        dto.getSubjectEffects().stream()
+                .forEach(subjectEffect -> result.addSubjectEffect(EffectDto.fromDto(subjectEffect, result)));
         return result;
     }
 }

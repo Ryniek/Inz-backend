@@ -2,8 +2,6 @@ package pl.rynski.inzynierkabackend.dao.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.rynski.inzynierkabackend.dao.model.enums.StudyType;
-import pl.rynski.inzynierkabackend.dao.model.enums.TypeOfPassing;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -17,29 +15,11 @@ public class MajorModuleSubject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ects", nullable = false)
-    private Integer ects;
-
-    @Column(name = "semester", nullable = false)
-    private Integer semester;
-
-    @Column(name = "type_of_passing", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private TypeOfPassing typeOfPassing;
-
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "contact_hours_id", referencedColumnName = "id")
-    private ContactHours contactHours;
-
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "non_contact_hours_id", referencedColumnName = "id")
-    private NonContactHours nonContactHours;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "major_module_id", referencedColumnName = "id")
     private MajorModule majorModule;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
     private Subject subject;
 
@@ -47,20 +27,37 @@ public class MajorModuleSubject {
     @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
     private Tutor supervisor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tutor_id", referencedColumnName = "id")
-    private Tutor tutor;
-
     @OneToMany(mappedBy = "majorModuleSubject", orphanRemoval = true)
-    private Set<SubjectIdea> subjectIdeas = new HashSet<>();
+    private Set<SubjectEffect> subjectEffects = new HashSet<>();
 
-    public void addSubjectIdea(SubjectIdea subjectIdea) {
-        this.subjectIdeas.add(subjectIdea);
-        subjectIdea.setMajorModuleSubject(this);
+    @OneToMany(mappedBy = "majorModuleSubject")
+    private Set<MajorEffectModuleSubject> majorEffects = new HashSet<>();
+
+    @OneToMany(mappedBy = "majorModuleSubject")
+    private Set<EffectIdeaModuleSubject> effectIdeaModuleSubject = new HashSet<>();
+
+    @OneToMany(mappedBy = "majorModuleSubject", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    private Set<MajorModuleSubjectDetails> majorModuleSubjectDetails = new HashSet<>();
+
+    //pomocnicze dajemy tam gdzie one to many
+    public void addMajorModuleSubjectDetails(MajorModuleSubjectDetails details) {
+        majorModuleSubjectDetails.add(details);
+        details.setMajorModuleSubject(this);
     }
 
-    public void removeSubjectIdea(SubjectIdea subjectIdea) {
-        this.subjectIdeas.remove(subjectIdea);
-        subjectIdea.setMajorModuleSubject(null);
+    public void removeMajorModuleSubjectDetails(MajorModuleSubjectDetails details) {
+        majorModuleSubjectDetails.remove(details);
+        details.setMajorModuleSubject(null);
+    }
+
+    //pomocnicze dajemy tam gdzie one to many
+    public void addSubjectEffect(SubjectEffect subjectEffect) {
+        subjectEffects.add(subjectEffect);
+        subjectEffect.setMajorModuleSubject(this);
+    }
+
+    public void removeSubjectEffect(SubjectEffect subjectEffect) {
+        subjectEffects.remove(subjectEffect);
+        subjectEffect.setMajorModuleSubject(null);
     }
 }

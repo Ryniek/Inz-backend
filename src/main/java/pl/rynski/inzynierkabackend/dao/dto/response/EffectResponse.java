@@ -21,6 +21,7 @@ public class EffectResponse {
         return result;
     }
 
+    //TODO obczaic czy ta metoda uzywana, jak nie to zamienic klase na SubjectEffectResponse
     public static EffectResponse toResponse(MajorEffect effect) {
         EffectResponse result = new EffectResponse();
         result.setId(effect.getId());

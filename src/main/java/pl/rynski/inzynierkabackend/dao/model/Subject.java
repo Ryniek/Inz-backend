@@ -22,28 +22,13 @@ public class Subject {
     private String subjectCode;
 
     @OneToMany(mappedBy = "subject")
-    private Set<MajorEffectSubject> majorEffects = new HashSet<>();
-
-    @OneToMany(mappedBy = "subject")
     private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
 
     @OneToMany(mappedBy = "subject")
     private Set<ModuleIdeaSubject> moduleIdeaSubjects = new HashSet<>();
 
-    @OneToMany(mappedBy = "subject")
-    private Set<EffectIdea> effectIdeas = new HashSet<>();
-
-    @OneToMany(mappedBy = "subject")
-    private Set<EffectIdeaSubject> effectIdeaSubjects = new HashSet<>();
-
-    @ManyToMany(mappedBy = "subjects")
-    private Set<EffectIdea> subjectEffectIdeas = new HashSet<>();
-
     @ManyToMany(mappedBy = "subjects")
     private Set<Module> modules = new HashSet<>();
-
-    @ManyToMany(mappedBy = "subjects")
-    private Set<SubjectEffect> subjectEffects = new HashSet<>();
 
     //pomocnicze dajemy tam gdzie one to many
     public void addMajorModuleSubject(MajorModuleSubject majorModuleSubject) {

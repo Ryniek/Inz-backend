@@ -27,7 +27,7 @@ public class MajorEffect {
     private EffectType type;
 
     @OneToMany(mappedBy = "majorEffect", cascade = CascadeType.PERSIST)
-    private Set<MajorEffectSubject> majorEffectSubjects = new HashSet<>();
+    private Set<MajorEffectModuleSubject> majorEffectModuleSubjects = new HashSet<>();
 
     @OneToMany(mappedBy = "majorEffect")
     private Set<MajorEffectSubjectIdea> majorEffectSubjectIdeas = new HashSet<>();
@@ -37,14 +37,6 @@ public class MajorEffect {
 
     @ManyToMany(mappedBy = "majorEffects", cascade = CascadeType.PERSIST)
     private Set<Major> majors = new HashSet<>();
-
-    @ManyToMany
-    @JoinTable(
-            name = "major_effect_subject_effect",
-            joinColumns = @JoinColumn(name = "major_effect_id", referencedColumnName = "id"),
-            inverseJoinColumns= @JoinColumn(name = "subject_effect_id", referencedColumnName = "id")
-    )
-    private Set<SubjectEffect> subjectEffects = new HashSet<>();
 
     //pomocnicze do Many to Many - dajemy gdzie chcemy ale zapisujemy przez zarzadzajaca
     public void addMajor(Major major) {
