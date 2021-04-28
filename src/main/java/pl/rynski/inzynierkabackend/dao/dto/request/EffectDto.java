@@ -30,11 +30,10 @@ public class EffectDto {
         return result;
     }
 
-    public static SubjectEffect fromDto(EffectDto dto, MajorModuleSubject majorModuleSubject) {
+    public static SubjectEffect fromDtoWithoutCode(EffectDto dto) {
         SubjectEffect result = new SubjectEffect();
         result.setContent(dto.getContent());
         result.setType(dto.getType());
-        majorModuleSubject.addSubjectEffect(result);
         return result;
     }
 }

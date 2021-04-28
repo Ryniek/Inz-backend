@@ -28,9 +28,6 @@ public class MajorModuleSubject {
     private Tutor supervisor;
 
     @OneToMany(mappedBy = "majorModuleSubject")
-    private Set<SubjectEffect> subjectEffects = new HashSet<>();
-
-    @OneToMany(mappedBy = "majorModuleSubject")
     private Set<MajorEffectModuleSubject> majorEffects = new HashSet<>();
 
     @OneToMany(mappedBy = "majorModuleSubject")
@@ -38,6 +35,14 @@ public class MajorModuleSubject {
 
     @OneToMany(mappedBy = "majorModuleSubject", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<MajorModuleSubjectDetails> majorModuleSubjectDetails = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "subject_effect_module_subject",
+            joinColumns = @JoinColumn(name = "major_module_subject_id", referencedColumnName = "id"),
+            inverseJoinColumns= @JoinColumn(name = "subject_effect_id", referencedColumnName = "id")
+    )
+    private Set<SubjectEffect> subjectEffects = new HashSet<>();
 
     //pomocnicze dajemy tam gdzie one to many
     public void addMajorModuleSubjectDetails(MajorModuleSubjectDetails details) {
@@ -50,14 +55,14 @@ public class MajorModuleSubject {
         details.setMajorModuleSubject(null);
     }
 
-    //pomocnicze dajemy tam gdzie one to many
+    //pomocnicze do Many to Many - dajemy gdzie chcemy ale zapisujemy przez zarzadzajaca
     public void addSubjectEffect(SubjectEffect subjectEffect) {
-        subjectEffects.add(subjectEffect);
-        subjectEffect.setMajorModuleSubject(this);
+        this.subjectEffects.add(subjectEffect);
+        subjectEffect.getMajorModuleSubjects().add(this);
     }
 
     public void removeSubjectEffect(SubjectEffect subjectEffect) {
-        subjectEffects.remove(subjectEffect);
-        subjectEffect.setMajorModuleSubject(null);
+        this.subjectEffects.remove(subjectEffect);
+        subjectEffect.getMajorModuleSubjects().remove(this);
     }
 }

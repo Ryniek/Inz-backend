@@ -89,17 +89,22 @@ public class SubjectIdea {
     @OneToMany(mappedBy = "subjectIdea", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<MajorEffectSubjectIdea> majorEffectSubjectIdeas = new HashSet<>();
 
-    @OneToMany(mappedBy = "subjectIdea", cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "subject_effect_subject_idea",
+            joinColumns = @JoinColumn(name = "subject_idea_id", referencedColumnName = "id"),
+            inverseJoinColumns= @JoinColumn(name = "subject_effect_id", referencedColumnName = "id")
+    )
     private Set<SubjectEffect> subjectEffects = new HashSet<>();
 
-    //pomocnicze dajemy tam gdzie one to many
+    //pomocnicze do Many to Many - dajemy gdzie chcemy ale zapisujemy przez zarzadzajaca
     public void addSubjectEffect(SubjectEffect subjectEffect) {
-        subjectEffects.add(subjectEffect);
-        subjectEffect.setSubjectIdea(this);
+        this.subjectEffects.add(subjectEffect);
+        subjectEffect.getSubjectIdeas().add(this);
     }
 
     public void removeSubjectEffect(SubjectEffect subjectEffect) {
-        subjectEffects.remove(subjectEffect);
-        subjectEffect.setSubjectIdea(null);
+        this.subjectEffects.remove(subjectEffect);
+        subjectEffect.getSubjectIdeas().remove(this);
     }
 }

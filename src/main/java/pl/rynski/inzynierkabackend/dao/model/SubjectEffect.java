@@ -24,11 +24,9 @@ public class SubjectEffect {
     @Enumerated(EnumType.STRING)
     private EffectType type;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "major_module_subject_id", referencedColumnName = "id")
-    private MajorModuleSubject majorModuleSubject;
+    @ManyToMany(mappedBy = "subjectEffects", cascade = CascadeType.PERSIST)
+    private Set<SubjectIdea> subjectIdeas = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subject_idea_id", referencedColumnName = "id")
-    private SubjectIdea subjectIdea;
+    @ManyToMany(mappedBy = "subjectEffects", cascade = CascadeType.PERSIST)
+    private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
 }

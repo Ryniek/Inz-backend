@@ -35,6 +35,7 @@ public class ModuleSubjectController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(moduleSubjectService.addSubjectDetailsToModuleSubject(majorModuleSubjectId, moduleSubjectDetailsDto));
     }
+
     @Operation(summary = "Delete Subject with all data(hours, ects etc.) from the module")
     @DeleteMapping("/{moduleSubjectId}")
     public ResponseEntity<?> deleteModuleSubject(@PathVariable Long moduleSubjectId) {
@@ -42,8 +43,8 @@ public class ModuleSubjectController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @Operation(summary = "Delete Subject with all data(hours, ects etc.) from the module")
-    @DeleteMapping("/details/{moduleSubjectId}")
+    @Operation(summary = "Delete specific Subject details from the module")
+    @DeleteMapping("/details/{moduleSubjectDetailsId}")
     public ResponseEntity<?> deleteModuleSubjectDetails(@PathVariable Long moduleSubjectDetailsId) {
         moduleSubjectService.deleteModuleSubjectDetails(moduleSubjectDetailsId);
         return ResponseEntity.status(HttpStatus.OK).build();

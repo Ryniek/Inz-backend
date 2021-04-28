@@ -22,7 +22,7 @@ public class ModuleSubjectDto {
         supervisor.addMajorModuleSubjectSupervisor(result);
         result.setMajorEffects(majorEffects);
         dto.getSubjectEffects().stream()
-                .forEach(subjectEffect -> result.addSubjectEffect(EffectDto.fromDto(subjectEffect, result)));
+                .forEach(subjectEffect -> result.addSubjectEffect(EffectDto.fromDtoWithoutCode(subjectEffect)));
         return result;
     }
 }

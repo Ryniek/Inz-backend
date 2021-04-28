@@ -39,11 +39,10 @@ public class NewSubjectIdeaDto {
         private String content;
         private EffectType type;
 
-        public static SubjectEffect fromDto(SubjectIdeaEffectDto dto, SubjectIdea subjectIdea) {
+        public static SubjectEffect fromDto(SubjectIdeaEffectDto dto) {
             SubjectEffect result = new SubjectEffect();
             result.setContent(dto.getContent());
             result.setType(dto.getType());
-            result.setSubjectIdea(subjectIdea);
             return result;
         }
     }
@@ -69,7 +68,7 @@ public class NewSubjectIdeaDto {
         if(!dto.getSubjectEffects().isEmpty()) {
             dto.getSubjectEffects().stream()
                     .forEach(subjectEffect ->
-                            result.addSubjectEffect(SubjectIdeaEffectDto.fromDto(subjectEffect, result)));
+                            result.addSubjectEffect(SubjectIdeaEffectDto.fromDto(subjectEffect)));
         }
         return result;
     }
