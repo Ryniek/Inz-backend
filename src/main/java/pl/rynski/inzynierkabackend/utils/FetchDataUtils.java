@@ -13,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FetchDataUtils {
     private final ModuleSubjectRepository moduleSubjectRepository;
+    private final ModuleSubjectDetailsRepository moduleSubjectDetailsRepository;
     private final MajorModuleRepository majorModuleRepository;
     private final TutorRepository tutorRepository;
     private final SubjectIdeaRepository subjectIdeaRepository;
@@ -83,5 +84,10 @@ public class FetchDataUtils {
     public MajorModuleSubject moduleSubjectById(Long moduleSubjectId) {
         return moduleSubjectRepository.findById(moduleSubjectId)
                 .orElseThrow(() -> new ResourceNotFoundException("MajorModuleSubject", "id", moduleSubjectId));
+    }
+
+    public MajorModuleSubjectDetails moduleSubjectDetailsById(Long moduleSubjectDetailsId) {
+        return moduleSubjectDetailsRepository.findById(moduleSubjectDetailsId)
+                .orElseThrow(() -> new ResourceNotFoundException("MajorModuleSubjectDetails", "id", moduleSubjectDetailsId));
     }
 }

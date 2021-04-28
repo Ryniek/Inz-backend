@@ -1,4 +1,4 @@
-package pl.rynski.inzynierkabackend.dao.dto.request;
+package pl.rynski.inzynierkabackend.dao.dto.request.ideas;
 
 import lombok.Data;
 import pl.rynski.inzynierkabackend.dao.model.*;
@@ -6,7 +6,7 @@ import pl.rynski.inzynierkabackend.utils.DateUtils;
 
 @Data
 public class DeleteIdeaDto {
-    private Long ideaId;
+    private Long elementId;
     private String ideaExplanation;
 
     public static ModuleIdea fromDto(DeleteIdeaDto dto, MajorModule majorModule) {
@@ -19,37 +19,23 @@ public class DeleteIdeaDto {
         return result;
     }
 
-    public static SubjectIdea fromDto(DeleteIdeaDto dto, MajorModuleSubject majorModuleSubject) {
+    public static SubjectIdea fromDto(DeleteIdeaDto dto, MajorModuleSubjectDetails majorModuleSubjectDetails) {
         SubjectIdea result = new SubjectIdea();
         result.setExisting(true);
         result.setToRemove(true);
         result.setSendingTime(DateUtils.getCurrentDateTime());
         result.setIdeaExplanation(dto.getIdeaExplanation());
-        majorModuleSubject.addSubjectIdea(result);
+        majorModuleSubjectDetails.addSubjectIdea(result);
         return result;
     }
 
-    public static EffectIdea fromDto(DeleteIdeaDto dto, MajorEffect majorEffect, Boolean forSubject) {
+    public static EffectIdea fromDto(DeleteIdeaDto dto, MajorEffect majorEffect) {
         EffectIdea result = new EffectIdea();
         result.setExisting(true);
         result.setToRemove(true);
         result.setSendingTime(DateUtils.getCurrentDateTime());
         result.setIdeaExplanation(dto.getIdeaExplanation());
-        result.setForSubject(forSubject);
-        result.setForMajor(!forSubject);
         majorEffect.addEffectIdea(result);
-        return result;
-    }
-
-    public static EffectIdea fromDto(DeleteIdeaDto dto, SubjectEffect subjectEffect, Boolean forSubject) {
-        EffectIdea result = new EffectIdea();
-        result.setExisting(true);
-        result.setToRemove(true);
-        result.setSendingTime(DateUtils.getCurrentDateTime());
-        result.setIdeaExplanation(dto.getIdeaExplanation());
-        result.setForSubject(forSubject);
-        result.setForMajor(!forSubject);
-        subjectEffect.addEffectIdea(result);
         return result;
     }
 }

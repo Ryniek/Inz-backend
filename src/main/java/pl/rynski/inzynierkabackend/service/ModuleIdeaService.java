@@ -6,6 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.rynski.inzynierkabackend.dao.dto.request.*;
+import pl.rynski.inzynierkabackend.dao.dto.request.ideas.ChangeModuleIdeaDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.ideas.DeleteIdeaDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.ideas.NewModuleIdeaDto;
+import pl.rynski.inzynierkabackend.dao.dto.request.ideas.NewSubjectIdeaDto;
 import pl.rynski.inzynierkabackend.dao.dto.response.ModuleIdeaResponse;
 import pl.rynski.inzynierkabackend.dao.model.*;
 import pl.rynski.inzynierkabackend.repository.ModuleIdeaRepository;
@@ -79,7 +83,7 @@ public class ModuleIdeaService {
     }
 
     public ModuleIdeaResponse addDeleteModuleIdea(DeleteIdeaDto dto) {
-        MajorModule majorModule = fetchDataUtils.majorModuleById(dto.getIdeaId());
+        MajorModule majorModule = fetchDataUtils.majorModuleById(dto.getElementId());
 
         ModuleIdea result = DeleteIdeaDto.fromDto(dto, majorModule);
         result.setUser(userDetailsService.getLoggedUser());
@@ -95,7 +99,8 @@ public class ModuleIdeaService {
         newSubjectDtos.stream().forEach(subject -> {
             Tutor supervisor = fetchDataUtils.tutorById(subject.getSupervisorId());
             Tutor subjectTutor = fetchDataUtils.tutorById(subject.getTutorId());
-            newSubjects.add(NewSubjectIdeaDto.fromDto(subject, null, supervisor, subjectTutor));
+
+            newSubjects.add(NewSubjectIdeaDto.fromDto(subject, null, supervisor, subjectTutor, new HashSet<>()));
         });
         return newSubjects;
     }

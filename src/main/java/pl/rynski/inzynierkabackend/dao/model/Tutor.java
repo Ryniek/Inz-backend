@@ -18,10 +18,10 @@ public class Tutor {
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "degree", nullable = false)
+    @Column(name = "degree")
     private String degree;
 
     @OneToMany(mappedBy = "tutor")
@@ -31,7 +31,7 @@ public class Tutor {
     private Set<MajorModuleSubject> majorModuleSubjectsSupervisor = new HashSet<>();
 
     @OneToMany(mappedBy = "tutor")
-    private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
+    private Set<MajorModuleSubjectDetails> majorModuleSubjectDetails = new HashSet<>();
 
     @OneToMany(mappedBy = "supervisor")
     private Set<SubjectIdea> subjectIdeasSupervisor = new HashSet<>();
@@ -57,14 +57,14 @@ public class Tutor {
     }
 
     //pomocnicze dajemy tam gdzie one to many
-    public void addMajorModuleSubject(MajorModuleSubject majorModuleSubject) {
-        majorModuleSubjects.add(majorModuleSubject);
-        majorModuleSubject.setTutor(this);
+    public void addMajorModuleSubjectDetails(MajorModuleSubjectDetails details) {
+        majorModuleSubjectDetails.add(details);
+        details.setTutor(this);
     }
 
-    public void removeMajorModuleSubject(MajorModuleSubject majorModuleSubject) {
-        majorModuleSubjects.remove(majorModuleSubject);
-        majorModuleSubject.setTutor(null);
+    public void removeMajorModuleSubjectDetails(MajorModuleSubjectDetails details) {
+        majorModuleSubjectDetails.remove(details);
+        details.setTutor(null);
     }
 
     //pomocnicze dajemy tam gdzie one to many

@@ -8,14 +8,14 @@ import pl.rynski.inzynierkabackend.dao.model.enums.StudyType;
 public class MajorShortResponse {
     private Long id;
     private String name;
-    private StudyType type;
+    private StudyType studyType;
     private String years;
 
     public static MajorShortResponse toResponse(Major major) {
         MajorShortResponse result = new MajorShortResponse();
         result.setId(major.getId());
         result.setName(major.getName());
-        result.setType(major.getStudyType());
+        result.setStudyType(major.getStudyType());
         result.setYears(major.getYears());
         return result;
     }

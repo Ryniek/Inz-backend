@@ -2,7 +2,6 @@ package pl.rynski.inzynierkabackend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.rynski.inzynierkabackend.dao.dto.request.MajorEffectDto;
 import pl.rynski.inzynierkabackend.dao.dto.request.SubjectDto;
 import pl.rynski.inzynierkabackend.dao.dto.response.SubjectResponse;
 import pl.rynski.inzynierkabackend.dao.model.*;
@@ -22,7 +21,6 @@ public class SubjectService {
 
     private final SubjectRepository subjectRepository;
     private final FetchDataUtils fetchDataUtils;
-    private final SubjectEffectRepository subjectEffectRepository;
 
     public List<SubjectResponse> getSubjectsByModule(Long moduleId) {
         Module module = fetchDataUtils.moduleById(moduleId);
@@ -40,21 +38,7 @@ public class SubjectService {
     }
 
     public SubjectResponse addSubject(SubjectDto dto) {
-        Set<MajorEffectSubject> majorEffects = new HashSet<>();
-        dto.getMajorEffects().forEach(effect -> {
-            majorEffects.add(createNewMajorEffect(effect));
-        });
-
-        List<SubjectEffect> subjectEffects = subjectEffectRepository.findAllById(dto.getSubjectEffects());
-
-        Subject result = SubjectDto.fromDto(dto, majorEffects, new HashSet<>(subjectEffects));
+        Subject result = SubjectDto.fromDto(dto);
         return SubjectResponse.toResponse(subjectRepository.save(result));
-    }
-
-    private MajorEffectSubject createNewMajorEffect(SubjectDto.MajorEffectDto effect) {
-        MajorEffectSubject majorEffectSubject = new MajorEffectSubject();
-        majorEffectSubject.setMajorEffect(fetchDataUtils.majorEffectById(effect.getMajorEffectId()));
-        majorEffectSubject.setConnectionStrength(effect.getConnectionStrength());
-        return majorEffectSubject;
     }
 }

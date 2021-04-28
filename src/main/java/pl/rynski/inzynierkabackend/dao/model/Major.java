@@ -42,7 +42,7 @@ public class Major {
     @OneToMany(mappedBy = "major")
     private Set<EffectIdea> effectIdeas = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "major_major_effect",
             joinColumns = @JoinColumn(name = "major_id", referencedColumnName = "id"),
@@ -59,5 +59,16 @@ public class Major {
     public void removeMajorModule(MajorModule majorModule) {
         majorModules.remove(majorModule);
         majorModule.setMajor(null);
+    }
+
+    //pomocnicze dajemy tam gdzie one to many
+    public void addEffectIdea(EffectIdea effectIdea) {
+        effectIdeas.add(effectIdea);
+        effectIdea.setMajor(this);
+    }
+
+    public void removeEffectIdea(EffectIdea effectIdea) {
+        effectIdeas.remove(effectIdea);
+        effectIdea.setMajor(null);
     }
 }

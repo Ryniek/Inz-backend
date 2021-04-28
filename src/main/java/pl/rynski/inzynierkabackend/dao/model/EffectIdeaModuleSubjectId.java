@@ -10,18 +10,18 @@ import java.util.Objects;
 @Getter
 @Setter
 @Embeddable
-public class EffectIdeaSubjectId implements Serializable {
+public class EffectIdeaModuleSubjectId implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long effectIdeaId;
-    private Long subjectId;
+    private Long majorModuleSubjectId;
 
-    public EffectIdeaSubjectId() {
+    public EffectIdeaModuleSubjectId() {
     }
 
-    public EffectIdeaSubjectId(Long effectIdeaId, Long subjectId) {
+    public EffectIdeaModuleSubjectId(Long effectIdeaId, Long majorModuleSubjectId) {
         super();
         this.effectIdeaId = effectIdeaId;
-        this.subjectId = subjectId;
+        this.majorModuleSubjectId = majorModuleSubjectId;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class EffectIdeaSubjectId implements Serializable {
         result = prime * result
                 + ((effectIdeaId == null) ? 0 : effectIdeaId.hashCode());
         result = prime * result
-                + ((subjectId == null) ? 0 : subjectId.hashCode());
+                + ((majorModuleSubjectId == null) ? 0 : majorModuleSubjectId.hashCode());
         return result;
     }
 
@@ -43,7 +43,7 @@ public class EffectIdeaSubjectId implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        EffectIdeaSubjectId other = (EffectIdeaSubjectId) obj;
-        return Objects.equals(getEffectIdeaId(), other.getEffectIdeaId()) && Objects.equals(getSubjectId(), other.getSubjectId());
+        EffectIdeaModuleSubjectId other = (EffectIdeaModuleSubjectId) obj;
+        return Objects.equals(getEffectIdeaId(), other.getEffectIdeaId()) && Objects.equals(getMajorModuleSubjectId(), other.getMajorModuleSubjectId());
     }
 }

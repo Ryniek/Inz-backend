@@ -15,12 +15,12 @@ public class EffectResponse {
     public static EffectResponse toResponse(SubjectEffect effect) {
         EffectResponse result = new EffectResponse();
         result.setId(effect.getId());
-        result.setCode(effect.getCode());
         result.setContent(effect.getContent());
         result.setType(effect.getType());
         return result;
     }
 
+    //TODO obczaic czy ta metoda uzywana, jak nie to zamienic klase na SubjectEffectResponse
     public static EffectResponse toResponse(MajorEffect effect) {
         EffectResponse result = new EffectResponse();
         result.setId(effect.getId());

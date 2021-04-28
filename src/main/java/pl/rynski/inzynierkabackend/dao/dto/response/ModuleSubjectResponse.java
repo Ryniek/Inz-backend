@@ -11,31 +11,33 @@ import java.util.stream.Collectors;
 @Data
 public class ModuleSubjectResponse {
     private Long id;
-    private Integer ects;
-    private Integer semester;
-    private TypeOfPassing typeOfPassing;
     private MajorShortResponse major;
     private ModuleShortResponse module;
     private SubjectResponse subject;
     private TutorResponse supervisor;
-    private TutorResponse tutor;
-    private ContactHoursResponse contactHours;
-    private NonContactHoursResponse nonContactHours;
-
+    private List<ModuleSubjectDetailsResponse> moduleSubjectDetails = new ArrayList<>();
+    private List<EffectResponse> subjectEffects = new ArrayList<>();
+    private List<MajorEffectResponse> majorEffects = new ArrayList<>();
 
     public static ModuleSubjectResponse toResponse(MajorModuleSubject moduleSubject) {
         ModuleSubjectResponse result = new ModuleSubjectResponse();
         result.setId(moduleSubject.getId());
-        result.setEcts(moduleSubject.getEcts());
-        result.setSemester(moduleSubject.getSemester());
-        result.setTypeOfPassing(moduleSubject.getTypeOfPassing());
         result.setMajor(MajorShortResponse.toResponse(moduleSubject.getMajorModule().getMajor()));
         result.setModule(ModuleShortResponse.toResponse(moduleSubject.getMajorModule().getModule()));
         result.setSubject(SubjectResponse.toResponse(moduleSubject.getSubject()));
         result.setSupervisor(TutorResponse.toResponse(moduleSubject.getSupervisor()));
-        result.setTutor(TutorResponse.toResponse(moduleSubject.getTutor()));
-        result.setContactHours(ContactHoursResponse.toResponse(moduleSubject.getContactHours()));
-        result.setNonContactHours(NonContactHoursResponse.toResponse(moduleSubject.getNonContactHours()));
+        result.setModuleSubjectDetails(moduleSubject
+                .getMajorModuleSubjectDetails().stream()
+                .map(ModuleSubjectDetailsResponse::toResponse)
+                .collect(Collectors.toList()));
+        result.setSubjectEffects(moduleSubject
+                .getSubjectEffects().stream()
+                .map(EffectResponse::toResponse)
+                .collect(Collectors.toList()));
+        result.setMajorEffects(moduleSubject
+                .getMajorEffects().stream()
+                .map(MajorEffectResponse::toResponse)
+                .collect(Collectors.toList()));
         return result;
     }
 }
