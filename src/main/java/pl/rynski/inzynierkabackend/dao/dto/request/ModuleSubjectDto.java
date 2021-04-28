@@ -20,6 +20,7 @@ public class ModuleSubjectDto {
         majorModule.addMajorModuleSubject(result);
         subject.addMajorModuleSubject(result);
         supervisor.addMajorModuleSubjectSupervisor(result);
+        majorEffects.forEach(majorEffect -> majorEffect.setMajorModuleSubject(result));
         result.setMajorEffects(majorEffects);
         dto.getSubjectEffects().stream()
                 .forEach(subjectEffect -> result.addSubjectEffect(EffectDto.fromDtoWithoutCode(subjectEffect)));

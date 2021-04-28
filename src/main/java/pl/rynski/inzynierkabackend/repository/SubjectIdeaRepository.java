@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface SubjectIdeaRepository extends PagingAndSortingRepository<SubjectIdea, Long> {
-    List<SubjectIdea> findAllByApprovedAndModuleIdeaIsNull(Boolean approved, Pageable pageable);
+    List<SubjectIdea> findAllByApproved(Boolean approved, Pageable pageable);
 }

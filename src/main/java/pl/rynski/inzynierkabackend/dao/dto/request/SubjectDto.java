@@ -1,12 +1,7 @@
 package pl.rynski.inzynierkabackend.dao.dto.request;
 
 import lombok.Data;
-import pl.rynski.inzynierkabackend.dao.model.MajorEffectModuleSubject;
 import pl.rynski.inzynierkabackend.dao.model.Subject;
-import pl.rynski.inzynierkabackend.dao.model.SubjectEffect;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 public class SubjectDto {

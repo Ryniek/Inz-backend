@@ -12,23 +12,21 @@ public class ChangeModuleIdeaDto {
     private String ideaExplanation;
     private Long tutorId;
     //TODO walidacja ze max 8 w obu listach ponizej lacznie
-    private Set<NewSubjectIdeaDto> newSubjects = new HashSet<>();
+    private Set<NewModuleIdeaDto.NewSubject> newSubjects = new HashSet<>();
     private Set<NewModuleIdeaDto.ExistingSubject> existingSubjects = new HashSet<>();
 
-    public static ModuleIdea fromDto(ChangeModuleIdeaDto dto, MajorModule majorModule, Tutor tutor, Set<SubjectIdea> subjectIdeas,  Set<ModuleIdeaSubject> existingSubjects) {
+    public static ModuleIdea fromDto(ChangeModuleIdeaDto dto, MajorModule majorModule, Tutor tutor, Set<ModuleIdeaNewSubject> newSubjects,  Set<ModuleIdeaExistingSubject> existingSubjects) {
         ModuleIdea result = new ModuleIdea();
         result.setExisting(true);
         result.setSendingTime(DateUtils.getCurrentDateTime());
         result.setIdeaExplanation(dto.getIdeaExplanation());
         majorModule.addModuleIdea(result);
         if(tutor != null) tutor.addModuleIdea(result);
-        if(!subjectIdeas.isEmpty()) {
-            result.setSubjectIdeas(subjectIdeas);
-            subjectIdeas.forEach(subjectIdea -> subjectIdea.setModuleIdea(result));
+        if(!newSubjects.isEmpty()) {
+            newSubjects.forEach(result::addNewSubject);
         }
         if(!existingSubjects.isEmpty()) {
-            result.setModuleIdeaSubjects(existingSubjects);
-            existingSubjects.forEach(effect -> effect.setModuleIdea(result));
+            existingSubjects.forEach(result::addExistingSubject);
         }
         return result;
     }

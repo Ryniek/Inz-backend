@@ -60,9 +60,31 @@ public class ModuleIdea {
 
     //Stworzone nowe przedmioty do modułu
     @OneToMany(mappedBy = "moduleIdea", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private Set<SubjectIdea> subjectIdeas = new HashSet<>();
+    private Set<ModuleIdeaNewSubject> newSubjects = new HashSet<>();
 
     //Wybrane istniejace przedmiotu do modułu
     @OneToMany(mappedBy = "moduleIdea", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    private Set<ModuleIdeaSubject> moduleIdeaSubjects = new HashSet<>();
+    private Set<ModuleIdeaExistingSubject> moduleIdeaExistingSubjects = new HashSet<>();
+
+    //pomocnicze dajemy tam gdzie one to many
+    public void addNewSubject(ModuleIdeaNewSubject newSubject) {
+        newSubjects.add(newSubject);
+        newSubject.setModuleIdea(this);
+    }
+
+    public void removeNewSubject(ModuleIdeaNewSubject newSubject) {
+        newSubjects.remove(newSubject);
+        newSubject.setModuleIdea(null);
+    }
+
+    //pomocnicze dajemy tam gdzie one to many
+    public void addExistingSubject(ModuleIdeaExistingSubject existingSubject) {
+        moduleIdeaExistingSubjects.add(existingSubject);
+        existingSubject.setModuleIdea(this);
+    }
+
+    public void removeExistingSubject(ModuleIdeaExistingSubject existingSubject) {
+        moduleIdeaExistingSubjects.remove(existingSubject);
+        existingSubject.setModuleIdea(null);
+    }
 }

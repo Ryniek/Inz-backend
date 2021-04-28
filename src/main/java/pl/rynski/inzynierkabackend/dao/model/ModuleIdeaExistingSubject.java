@@ -8,9 +8,9 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-public class ModuleIdeaSubject {
+public class ModuleIdeaExistingSubject {
     @EmbeddedId
-    private ModuleIdeaSubjectId id = new ModuleIdeaSubjectId();
+    private ModuleIdeaExistingSubjectId id = new ModuleIdeaExistingSubjectId();
 
     @ManyToOne
     @MapsId("moduleIdeaId")

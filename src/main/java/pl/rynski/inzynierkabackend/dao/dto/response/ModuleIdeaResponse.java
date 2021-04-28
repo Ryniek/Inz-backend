@@ -1,9 +1,7 @@
 package pl.rynski.inzynierkabackend.dao.dto.response;
 
 import lombok.Data;
-import pl.rynski.inzynierkabackend.dao.model.MajorModule;
-import pl.rynski.inzynierkabackend.dao.model.ModuleIdea;
-import pl.rynski.inzynierkabackend.dao.model.ModuleIdeaSubject;
+import pl.rynski.inzynierkabackend.dao.model.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,7 +23,7 @@ public class ModuleIdeaResponse {
     private UserResponse user;
     private TutorResponse tutor;
     private MajorModuleResponse majorModule;
-    private List<SubjectIdeaResponse> newSubjects = new ArrayList<>();
+    private List<SubjectIdeaShortResponse> newSubjects = new ArrayList<>();
     private List<ExistingSubject> existingSubjects = new ArrayList<>();
 
     @Data
@@ -52,6 +50,23 @@ public class ModuleIdeaResponse {
         }
     }
 
+    @Data
+    public static class SubjectIdeaShortResponse {
+        private Long id;
+        private String subjectName;
+        private TutorResponse tutor;
+        private Integer ects;
+
+        public static SubjectIdeaShortResponse toResponse(ModuleIdeaNewSubject moduleIdeaNewSubject) {
+            SubjectIdeaShortResponse result = new SubjectIdeaShortResponse();
+            result.setId(moduleIdeaNewSubject.getId());
+            result.setSubjectName(moduleIdeaNewSubject.getSubjectName());
+            result.setTutor(TutorResponse.toResponse(moduleIdeaNewSubject.getTutor()));
+            result.setEcts(moduleIdeaNewSubject.getEcts());
+            return result;
+        }
+    }
+
     public static ModuleIdeaResponse toResponse(ModuleIdea moduleIdea) {
         ModuleIdeaResponse result = new ModuleIdeaResponse();
         result.setId(moduleIdea.getId());
@@ -68,11 +83,11 @@ public class ModuleIdeaResponse {
         if(moduleIdea.getTutor() != null) result.setTutor(TutorResponse.toResponse(moduleIdea.getTutor()));
         if(moduleIdea.getMajorModule() != null) result.setMajorModule(MajorModuleResponse.toResponse(moduleIdea.getMajorModule()));
         result.setNewSubjects(moduleIdea
-                .getSubjectIdeas().stream()
-                .map(SubjectIdeaResponse::toResponse)
+                .getNewSubjects().stream()
+                .map(SubjectIdeaShortResponse::toResponse)
                 .collect(Collectors.toList()));
         result.setExistingSubjects(moduleIdea
-                .getModuleIdeaSubjects().stream()
+                .getModuleIdeaExistingSubjects().stream()
                 .map(ExistingSubject::toResponse)
                 .collect(Collectors.toList()));
         return result;

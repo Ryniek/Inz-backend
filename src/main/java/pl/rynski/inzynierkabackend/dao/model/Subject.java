@@ -25,7 +25,7 @@ public class Subject {
     private Set<MajorModuleSubject> majorModuleSubjects = new HashSet<>();
 
     @OneToMany(mappedBy = "subject")
-    private Set<ModuleIdeaSubject> moduleIdeaSubjects = new HashSet<>();
+    private Set<ModuleIdeaExistingSubject> moduleIdeaExistingSubjects = new HashSet<>();
 
     @ManyToMany(mappedBy = "subjects")
     private Set<Module> modules = new HashSet<>();

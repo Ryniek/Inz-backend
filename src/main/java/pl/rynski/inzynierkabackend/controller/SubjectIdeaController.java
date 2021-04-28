@@ -37,7 +37,7 @@ public class SubjectIdeaController {
     }
 
     @Operation(summary = "Add idea of changing existing subject")
-    @PostMapping("/change/{moduleSubjectId}")
+    @PostMapping("/change/{moduleSubjectDetailsId}")
     public ResponseEntity<?> addChangeSubjectIdea(@PathVariable Long moduleSubjectDetailsId, @RequestBody ChangeSubjectIdeaDto changeSubjectIdeaDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(subjectIdeaService.addChangeSubjectIdea(moduleSubjectDetailsId, changeSubjectIdeaDto));
     }

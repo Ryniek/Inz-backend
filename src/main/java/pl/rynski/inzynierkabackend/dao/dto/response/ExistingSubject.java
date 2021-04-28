@@ -1,7 +1,7 @@
 package pl.rynski.inzynierkabackend.dao.dto.response;
 
 import lombok.Data;
-import pl.rynski.inzynierkabackend.dao.model.ModuleIdeaSubject;
+import pl.rynski.inzynierkabackend.dao.model.ModuleIdeaExistingSubject;
 
 @Data
 public class ExistingSubject {
@@ -9,11 +9,11 @@ public class ExistingSubject {
     private TutorResponse tutor;
     private Integer ects;
 
-    public static ExistingSubject toResponse(ModuleIdeaSubject moduleIdeaSubject) {
+    public static ExistingSubject toResponse(ModuleIdeaExistingSubject moduleIdeaExistingSubject) {
         ExistingSubject result = new ExistingSubject();
-        result.setSubject(SubjectResponse.toResponse(moduleIdeaSubject.getSubject()));
-        result.setTutor(TutorResponse.toResponse(moduleIdeaSubject.getTutor()));
-        result.setEcts(moduleIdeaSubject.getEcts());
+        result.setSubject(SubjectResponse.toResponse(moduleIdeaExistingSubject.getSubject()));
+        result.setTutor(TutorResponse.toResponse(moduleIdeaExistingSubject.getTutor()));
+        result.setEcts(moduleIdeaExistingSubject.getEcts());
         return result;
     }
 }

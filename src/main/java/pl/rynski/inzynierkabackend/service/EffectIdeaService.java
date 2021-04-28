@@ -59,12 +59,14 @@ public class EffectIdeaService {
 
     public EffectIdeaResponse addChangeEffectIdea(Long effectId, ChangeEffectIdeaDto dto) {
         MajorEffect majorEffect = fetchDataUtils.majorEffectById(effectId);
+        Major major = fetchDataUtils.majorById(dto.getMajorId());
+
         Set<EffectIdeaModuleSubject> majorEffectSubjects = new HashSet<>();
         dto.getMajorEffectSubjects().forEach(subject -> {
             majorEffectSubjects.add(createMajorEffectSubject(subject));
         });
 
-        EffectIdea result = ChangeEffectIdeaDto.fromDto(dto, majorEffect, majorEffectSubjects);
+        EffectIdea result = ChangeEffectIdeaDto.fromDto(dto, majorEffect, major, majorEffectSubjects);
         result.setUser(userDetailsService.getLoggedUser());
         return EffectIdeaResponse.toResponse(effectIdeaRepository.save(result));
     }

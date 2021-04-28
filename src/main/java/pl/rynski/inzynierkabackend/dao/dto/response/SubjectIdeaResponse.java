@@ -7,7 +7,9 @@ import pl.rynski.inzynierkabackend.dao.model.enums.StudyType;
 import pl.rynski.inzynierkabackend.dao.model.enums.TypeOfPassing;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,6 +34,8 @@ public class SubjectIdeaResponse {
     private TutorResponse tutor;
     private UserResponse user;
     private ModuleSubjectDetailsResponse moduleSubjectDetails;
+    private List<MajorEffectResponse> majorEffects = new ArrayList<>();
+    private List<EffectResponse> subjectEffects = new ArrayList<>();
 
     @Data
     private static class MajorModuleResponse {
@@ -73,6 +77,16 @@ public class SubjectIdeaResponse {
         if(subjectIdea.getTutor() != null) result.setTutor(TutorResponse.toResponse(subjectIdea.getTutor()));
         if(subjectIdea.getUser() != null) result.setUser(UserResponse.toResponse(subjectIdea.getUser()));
         if(subjectIdea.getMajorModuleSubjectDetails() != null) result.setModuleSubjectDetails(ModuleSubjectDetailsResponse.toResponse(subjectIdea.getMajorModuleSubjectDetails()));
+        if(!subjectIdea.getMajorEffectSubjectIdeas().isEmpty()) {
+            result.setMajorEffects(subjectIdea.getMajorEffectSubjectIdeas().stream()
+                    .map(MajorEffectResponse::toResponse)
+                    .collect(Collectors.toList()));
+        }
+        if(!subjectIdea.getSubjectEffects().isEmpty()) {
+            result.setSubjectEffects(subjectIdea.getSubjectEffects().stream()
+                    .map(EffectResponse::toResponse)
+                    .collect(Collectors.toList()));
+        }
         return result;
     }
 }

@@ -63,6 +63,7 @@ public class NewSubjectIdeaDto {
         supervisor.addSubjectIdeaSupervisor(result);
         tutor.addSubjectIdea(result);
         if(!majorEffects.isEmpty()) {
+            majorEffects.forEach(majorEffect -> majorEffect.setSubjectIdea(result));
             result.setMajorEffectSubjectIdeas(majorEffects);
         }
         if(!dto.getSubjectEffects().isEmpty()) {

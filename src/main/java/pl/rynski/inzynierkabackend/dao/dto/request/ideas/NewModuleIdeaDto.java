@@ -17,8 +17,15 @@ public class NewModuleIdeaDto {
     private Long majorId;
     //TODO walidacja ze max 8 w obu listach ponizej lacznie
     //majorModuleId tutaj musi byc null
-    private Set<NewSubjectIdeaDto> newSubjects = new HashSet<>();
+    private Set<NewSubject> newSubjects = new HashSet<>();
     private Set<ExistingSubject> existingSubjects = new HashSet<>();
+
+    @Data
+    public static class NewSubject {
+        private String subjectName;
+        private Long tutorId;
+        private Integer ects;
+    }
 
     @Data
     public static class ExistingSubject {
@@ -27,7 +34,7 @@ public class NewModuleIdeaDto {
         private Integer ects;
     }
 
-    public static ModuleIdea fromDto(NewModuleIdeaDto dto, Tutor tutor, Major major, Set<SubjectIdea> subjectIdeas, Set<ModuleIdeaSubject> existingSubjects) {
+    public static ModuleIdea fromDto(NewModuleIdeaDto dto, Tutor tutor, Major major, Set<ModuleIdeaNewSubject> newSubjects, Set<ModuleIdeaExistingSubject> existingSubjects) {
         ModuleIdea result = new ModuleIdea();
         result.setModuleName(dto.getModuleName());
         result.setSendingTime(DateUtils.getCurrentDateTime());
@@ -36,14 +43,12 @@ public class NewModuleIdeaDto {
         result.setPotentialEmployers(dto.getPotentialEmployers());
         result.setMajor(major);
         tutor.addModuleIdea(result);
-        if(!subjectIdeas.isEmpty()) {
-            result.setSubjectIdeas(subjectIdeas);
-            subjectIdeas.forEach(subjectIdea -> subjectIdea.setModuleIdea(result));
+        if(!newSubjects.isEmpty()) {
+            newSubjects.forEach(result::addNewSubject);
         }
         //TODO tu sprawdzic czy not null i zrobic ta posredniczaca
         if(!existingSubjects.isEmpty()) {
-            result.setModuleIdeaSubjects(existingSubjects);
-            existingSubjects.forEach(effect -> effect.setModuleIdea(result));
+            existingSubjects.forEach(result::addExistingSubject);
         }
         return result;
     }

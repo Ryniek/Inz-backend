@@ -31,7 +31,7 @@ public class SubjectIdeaService {
 
     public List<SubjectIdeaResponse> getAllSubjectIdeas(Boolean approved, int page, int size) {
         Pageable sortedBySendingTime = PageRequest.of(page, size, Sort.by("sendingTime").descending());
-        List<SubjectIdea> subjects = subjectIdeaRepository.findAllByApprovedAndModuleIdeaIsNull(approved, sortedBySendingTime);
+        List<SubjectIdea> subjects = subjectIdeaRepository.findAllByApproved(approved, sortedBySendingTime);
         return subjects.stream().map(SubjectIdeaResponse::toResponse).collect(Collectors.toList());
     }
 

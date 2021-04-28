@@ -1,16 +1,10 @@
 package pl.rynski.inzynierkabackend.dao.dto.request.ideas;
 
 import lombok.Data;
-import pl.rynski.inzynierkabackend.dao.dto.request.MajorEffectConnectionDto;
 import pl.rynski.inzynierkabackend.dao.model.EffectIdea;
-import pl.rynski.inzynierkabackend.dao.model.EffectIdeaModuleSubject;
 import pl.rynski.inzynierkabackend.dao.model.Major;
-import pl.rynski.inzynierkabackend.dao.model.Subject;
 import pl.rynski.inzynierkabackend.dao.model.enums.EffectType;
 import pl.rynski.inzynierkabackend.utils.DateUtils;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 public class NewEffectIdeaDto {

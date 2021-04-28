@@ -9,7 +9,6 @@ import pl.rynski.inzynierkabackend.dao.dto.request.*;
 import pl.rynski.inzynierkabackend.dao.dto.request.ideas.ChangeModuleIdeaDto;
 import pl.rynski.inzynierkabackend.dao.dto.request.ideas.DeleteIdeaDto;
 import pl.rynski.inzynierkabackend.dao.dto.request.ideas.NewModuleIdeaDto;
-import pl.rynski.inzynierkabackend.dao.dto.request.ideas.NewSubjectIdeaDto;
 import pl.rynski.inzynierkabackend.dao.dto.response.ModuleIdeaResponse;
 import pl.rynski.inzynierkabackend.dao.model.*;
 import pl.rynski.inzynierkabackend.repository.ModuleIdeaRepository;
@@ -50,10 +49,14 @@ public class ModuleIdeaService {
     public ModuleIdeaResponse addNewModuleIdea(NewModuleIdeaDto dto) {
         Tutor tutor = fetchDataUtils.tutorById(dto.getTutorId());
         Major major = fetchDataUtils.majorById(dto.getMajorId());
-        Set<SubjectIdea> newSubjects = new HashSet<>();
+
+        Set<ModuleIdeaNewSubject> newSubjects = new HashSet<>();
+        dto.getNewSubjects().forEach(newSubject -> {
+            newSubjects.add(createNewSubject(newSubject));
+        });
         //TODO sprawdzic czy przedmiot byl juz przypisany wczesniej do danego modulu
         //TODO walidacja czy efekt jest dla przedmiotu
-        Set<ModuleIdeaSubject> existingSubjects = new HashSet<>();
+        Set<ModuleIdeaExistingSubject> existingSubjects = new HashSet<>();
         dto.getExistingSubjects().forEach(subject -> {
             existingSubjects.add(createNewExistingSubject(subject));
         });
@@ -68,10 +71,13 @@ public class ModuleIdeaService {
         Tutor tutor = null;
         if(dto.getTutorId() != null) tutor = fetchDataUtils.tutorById(dto.getTutorId());
 
-        Set<SubjectIdea> newSubjects = newSubjectDtoToSubjectIdea(dto.getNewSubjects());
+        Set<ModuleIdeaNewSubject> newSubjects = new HashSet<>();
+        dto.getNewSubjects().forEach(newSubject -> {
+            newSubjects.add(createNewSubject(newSubject));
+        });
         //TODO sprawdzic czy przedmiot byl juz przypisany wczesniej do danego modulu
         //TODO walidacja czy efekt jest dla przedmiotu
-        Set<ModuleIdeaSubject> existingSubjects = new HashSet<>();
+        Set<ModuleIdeaExistingSubject> existingSubjects = new HashSet<>();
         dto.getExistingSubjects().forEach(subject -> {
             existingSubjects.add(createNewExistingSubject(subject));
         });
@@ -94,22 +100,19 @@ public class ModuleIdeaService {
         moduleIdeaRepository.delete(fetchDataUtils.moduleIdeaById(moduleIdeaId));
     }
 
-    private Set<SubjectIdea> newSubjectDtoToSubjectIdea(Set<NewSubjectIdeaDto> newSubjectDtos) {
-        Set<SubjectIdea> newSubjects = new HashSet<>();
-        newSubjectDtos.stream().forEach(subject -> {
-            Tutor supervisor = fetchDataUtils.tutorById(subject.getSupervisorId());
-            Tutor subjectTutor = fetchDataUtils.tutorById(subject.getTutorId());
-
-            newSubjects.add(NewSubjectIdeaDto.fromDto(subject, null, supervisor, subjectTutor, new HashSet<>()));
-        });
-        return newSubjects;
-    }
-
-    private ModuleIdeaSubject createNewExistingSubject(NewModuleIdeaDto.ExistingSubject existingSubject) {
-        ModuleIdeaSubject singleSubject = new ModuleIdeaSubject();
+    private ModuleIdeaExistingSubject createNewExistingSubject(NewModuleIdeaDto.ExistingSubject existingSubject) {
+        ModuleIdeaExistingSubject singleSubject = new ModuleIdeaExistingSubject();
         singleSubject.setSubject(fetchDataUtils.subjectById(existingSubject.getSubjectId()));
         singleSubject.setTutor(fetchDataUtils.tutorById(existingSubject.getTutorId()));
         singleSubject.setEcts(existingSubject.getEcts());
         return singleSubject;
+    }
+
+    private ModuleIdeaNewSubject createNewSubject(NewModuleIdeaDto.NewSubject dto) {
+        ModuleIdeaNewSubject result = new ModuleIdeaNewSubject();
+        result.setSubjectName(dto.getSubjectName());
+        result.setTutor(fetchDataUtils.tutorById(dto.getTutorId()));
+        result.setEcts(dto.getEcts());
+        return result;
     }
 }

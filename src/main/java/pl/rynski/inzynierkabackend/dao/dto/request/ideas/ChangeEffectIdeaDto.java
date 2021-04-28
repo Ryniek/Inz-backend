@@ -12,18 +12,20 @@ import java.util.Set;
 public class ChangeEffectIdeaDto {
     private String content;
     private String ideaExplanation;
+    private Long majorId;
     private Set<MajorEffectConnectionDto> majorEffectSubjects = new HashSet<>();
 
-    public static EffectIdea fromDto(ChangeEffectIdeaDto dto, MajorEffect majorEffect, Set<EffectIdeaModuleSubject> effectSubjects) {
+    public static EffectIdea fromDto(ChangeEffectIdeaDto dto, MajorEffect majorEffect, Major major, Set<EffectIdeaModuleSubject> effectSubjects) {
         EffectIdea result = new EffectIdea();
         result.setExisting(true);
         result.setSendingTime(DateUtils.getCurrentDateTime());
         result.setContent(dto.getContent());
         result.setIdeaExplanation(dto.getIdeaExplanation());
         majorEffect.addEffectIdea(result);
+        result.setEffectIdeaModuleSubject(effectSubjects);
+        major.addEffectIdea(result);
         if(!effectSubjects.isEmpty()) {
-            result.setEffectIdeaModuleSubject(effectSubjects);
-            effectSubjects.forEach(effectIdeaSubject -> effectIdeaSubject.setEffectIdea(result));
+            effectSubjects.forEach(effectSubject -> effectSubject.setEffectIdea(result));
         }
         return result;
     }

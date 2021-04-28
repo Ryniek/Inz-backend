@@ -10,16 +10,16 @@ import java.util.Objects;
 @Getter
 @Setter
 @Embeddable
-public class ModuleIdeaSubjectId implements Serializable {
+public class ModuleIdeaExistingSubjectId implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long moduleIdeaId;
     private Long subjectId;
     private Long tutorId;
 
-    public ModuleIdeaSubjectId() {
+    public ModuleIdeaExistingSubjectId() {
     }
 
-    public ModuleIdeaSubjectId(Long moduleIdeaId, Long subjectId, Long tutorId) {
+    public ModuleIdeaExistingSubjectId(Long moduleIdeaId, Long subjectId, Long tutorId) {
         super();
         this.moduleIdeaId = moduleIdeaId;
         this.subjectId = subjectId;
@@ -47,7 +47,7 @@ public class ModuleIdeaSubjectId implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        ModuleIdeaSubjectId other = (ModuleIdeaSubjectId) obj;
+        ModuleIdeaExistingSubjectId other = (ModuleIdeaExistingSubjectId) obj;
         return Objects.equals(getSubjectId(), other.getSubjectId()) && Objects.equals(getModuleIdeaId(), other.getModuleIdeaId())&& Objects.equals(getTutorId(), other.getTutorId());
     }
 }

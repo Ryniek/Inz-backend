@@ -39,7 +39,7 @@ public class EffectIdea {
     @Enumerated(EnumType.STRING)
     private EffectType type;
 
-    //Dla jakiego kierunku/przedmiotu proponujemy utworzenie nowego efektu
+    //Dla jakiego kierunku/przedmiotu proponujemy utworzenie nowego efektu, dla jakiego kierunku proponujemy zmiane
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "major_id", referencedColumnName = "id")
     private Major major;
@@ -53,6 +53,6 @@ public class EffectIdea {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @OneToMany(mappedBy = "effectIdea", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "effectIdea", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<EffectIdeaModuleSubject> effectIdeaModuleSubject = new HashSet<>();
 }
